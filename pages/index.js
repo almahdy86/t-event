@@ -102,21 +102,21 @@ export default function Home() {
     }
   }
 
-  if (!uid) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <div className="text-center">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-tanfeethi-brown mb-2">
-            رابط غير صالح
-          </h2>
-          <p className="text-gray-600">
-            يرجى مسح رمز QR الموجود على السوار
-          </p>
-        </div>
-      </div>
-    )
-  }
+  // if (!uid) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center p-6">
+  //       <div className="text-center">
+  //         <div className="text-6xl mb-4">⚠️</div>
+  //         <h2 className="text-2xl font-bold text-tanfeethi-brown mb-2">
+  //           رابط غير صالح
+  //         </h2>
+  //         <p className="text-gray-600">
+  //           يرجى مسح رمز QR الموجود على السوار
+  //         </p>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
   if (step === 'loading') {
     return (
