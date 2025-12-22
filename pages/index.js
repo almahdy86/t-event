@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter()
   const { uid } = router.query
   
-  const [step, setStep] = useState('loading') // loading, register, redirect
+  const [step, setStep] = useState('loading')
   const [employee, setEmployee] = useState(null)
   const [formData, setFormData] = useState({
     fullName: '',
@@ -17,10 +17,23 @@ export default function Home() {
   const [error, setError] = useState('')
 
   useEffect(() => {
+    if (!router.isReady) return
+    
+    const storedEmployee = localStorage.getItem('tanfeethi_employee')
+    
+    if (storedEmployee) {
+      const emp = JSON.parse(storedEmployee)
+      setEmployee(emp)
+      router.push('/map')
+      return
+    }
+    
     if (uid) {
       checkEmployee(uid)
+    } else {
+      setStep('register')
     }
-  }, [uid])
+  }, [router.isReady, uid])
 
   const checkEmployee = async (userId) => {
     try {
@@ -28,19 +41,20 @@ export default function Home() {
       const data = await response.json()
 
       if (data.success) {
-        // الموظف مسجل مسبقاً
         setEmployee(data.employee)
         setStep('redirect')
-        
-        // حفظ في localStorage
         localStorage.setItem('tanfeethi_employee', JSON.stringify(data.employee))
         
-        // التوجيه إلى الخريطة بعد 2 ثانية
+        const lastPage = localStorage.getItem('tanfeethi_last_page')
+        
         setTimeout(() => {
-          router.push('/map')
+          if (lastPage && lastPage !== '/') {
+            router.push(lastPage)
+          } else {
+            router.push('/map')
+          }
         }, 2000)
       } else {
-        // موظف جديد
         setStep('register')
       }
     } catch (error) {
@@ -76,18 +90,14 @@ export default function Home() {
 
       if (data.success) {
         setEmployee(data.employee)
-        
-        // حفظ في localStorage
         localStorage.setItem('tanfeethi_employee', JSON.stringify(data.employee))
         
-        // اهتزاز الهاتف
         if (navigator.vibrate) {
           navigator.vibrate([100, 50, 100])
         }
         
         setStep('success')
         
-        // التوجيه بعد 3 ثوان
         setTimeout(() => {
           router.push('/map')
         }, 3000)
@@ -102,25 +112,9 @@ export default function Home() {
     }
   }
 
-  // if (!uid) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center p-6">
-  //       <div className="text-center">
-  //         <div className="text-6xl mb-4">⚠️</div>
-  //         <h2 className="text-2xl font-bold text-tanfeethi-brown mb-2">
-  //           رابط غير صالح
-  //         </h2>
-  //         <p className="text-gray-600">
-  //           يرجى مسح رمز QR الموجود على السوار
-  //         </p>
-  //       </div>
-  //     </div>
-  //   )
-  // }
-
   if (step === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-tanfeethi-cream to-white">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-tanfeethi-brown border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-tanfeethi-brown font-semibold">جارٍ التحميل...</p>
@@ -222,7 +216,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col p-6 bg-gradient-to-b from-tanfeethi-cream to-white">
-      {/* الشعار */}
       <div className="flex justify-center py-8">
         <div className="w-32 h-32 relative">
           <Image 
@@ -234,7 +227,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* نموذج التسجيل */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
