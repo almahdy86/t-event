@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "التطبيق التفاعلي لفعالية المدرج البشري - التنفيذي",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "server": "node server/index.js",
-    "dev:all": "concurrently \"npm run dev\" \"npm run server\""
+    "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
+    "qrcodes": "node scripts/generate-qrcodes.js"
   },
   "dependencies": {
     "next": "^14.0.4",
