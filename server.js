@@ -12,7 +12,7 @@ const fs = require('fs')
 const path = require('path')
 
 const dev = process.env.NODE_ENV !== 'production'
-const hostname = 'localhost'
+const hostname = '0.0.0.0'  // للعمل في Railway
 const port = process.env.PORT || 3000
 
 // تهيئة Next.js
