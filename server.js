@@ -67,21 +67,71 @@ app.prepare().then(() => {
   const onlineUsers = new Map()
 
   io.on('connection', (socket) => {
-    console.log('👤 User connected:', socket.id)
+    console.log('👤 User connected:', socket.id);
 
-    socket.on('employee:connect', (employeeData) => {
-      onlineUsers.set(socket.id, employeeData)
-      io.emit('users:online', onlineUsers.size)
-    })
+    socket.on('employee:connect', (data) => {
+      socket.join('employees'); // إدخال الموظف في غرفة خاصة بالإشعارات
+    });
 
-    socket.on('disconnect', () => {
-      onlineUsers.delete(socket.id)
-      io.emit('users:online', onlineUsers.size)
-    })
-  })
+    // استقبال إجابة الموظف في التحدي
+    socket.on('answer:submit', async (data) => {
+      const { questionId, employeeId, selectedAnswer } = data;
+      const questionResult = await pool.query('SELECT correct_answer FROM questions WHERE id = $1', [questionId]);
+      const isCorrect = selectedAnswer === questionResult.rows[0].correct_answer;
+      
+      // إرسال النتيجة للموظف فقط
+      socket.emit('answer:result', { isCorrect, correctAnswer: questionResult.rows[0].correct_answer });
+    });
+
+    // استقبال الإعجاب بصورة
+    socket.on('photo:like', async (data) => {
+      const { photoId } = data;
+      const result = await pool.query(
+        'UPDATE shared_photos SET likes_count = likes_count + 1 WHERE id = $1 RETURNING *',
+        [photoId]
+      );
+      // تحديث الإعجابات عند الجميع فوراً
+      io.emit('photo:likes:update', result.rows[0]);
+    });
+  });
 
   // ============ API Routes ============
+// جلب السؤال النشط لتحدي بلا أخطاء
+  server.get('/api/questions/active', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT * FROM questions WHERE is_active = true LIMIT 1');
+      res.json({ success: true, question: result.rows[0] });
+    } catch (error) {
+      res.status(500).json({ success: false });
+    }
+  });
 
+  // تغيير حالة الفعالية (تفعيل/تعطيل)
+  server.post('/api/admin/activity/toggle', async (req, res) => {
+    try {
+      const { activityName, isActive } = req.body;
+      await pool.query(
+        'UPDATE activity_status SET is_active = $1 WHERE activity_name = $2',
+        [isActive, activityName]
+      );
+      // إرسال تحديث لجميع المستخدمين عبر Socket
+      io.emit('activity:status:change', { activityName, isActive });
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ success: false });
+    }
+  });
+
+  // إرسال إشعار عام للموظفين
+  server.post('/api/admin/notification/send', async (req, res) => {
+    try {
+      const { title, message } = req.body;
+      io.emit('notification', { title, message });
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ success: false });
+    }
+  });
   // Employee - Get by UID
   server.get('/api/employee/:uid', async (req, res) => {
     try {
