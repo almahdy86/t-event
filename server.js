@@ -10,6 +10,8 @@ const multer = require('multer')
 const sharp = require('sharp')
 const fs = require('fs')
 const path = require('path')
+const cloudinary = require('cloudinary').v2
+const { CloudinaryStorage } = require('multer-storage-cloudinary')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = '0.0.0.0'  // للعمل في Railway
@@ -35,9 +37,25 @@ const pool = new Pool({
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 })
 
-// تهيئة Multer
+// تهيئة Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+// تهيئة Multer مع Cloudinary Storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 't-event',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+    transformation: [{ width: 800, height: 800, crop: 'limit', quality: 'auto' }]
+  }
+})
+
 const upload = multer({
-  storage: multer.memoryStorage(),
+  storage: storage,
   limits: { fileSize: 10 * 1024 * 1024 }
 })
 
@@ -306,7 +324,7 @@ app.prepare().then(() => {
     }
   })
 
-  // Photo Upload
+  // Photo Upload (with Cloudinary)
   server.post('/api/photo/upload', upload.single('photo'), async (req, res) => {
     try {
       const { employeeId, employeeNumber } = req.body;
@@ -320,17 +338,8 @@ app.prepare().then(() => {
         return res.status(400).json({ success: false, message: 'بيانات الموظف مفقودة' });
       }
 
-      // معالجة الصورة بواسطة Sharp
-      const filename = `photo-${employeeNumber}-${Date.now()}.jpg`;
-      const filepath = path.join(uploadsDir, filename);
-
-      await sharp(photoFile.buffer)
-        .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
-        .jpeg({ quality: 85 })
-        .toFile(filepath);
-
-      // حفظ في قاعدة البيانات
-      const imageUrl = `/uploads/${filename}`;
+      // Cloudinary already uploaded the file, get the URL
+      const imageUrl = photoFile.path; // Cloudinary URL
 
       const result = await pool.query(
         `INSERT INTO shared_photos (employee_id, employee_number, image_url, is_approved)
@@ -338,6 +347,8 @@ app.prepare().then(() => {
          RETURNING *`,
         [employeeId, employeeNumber, imageUrl]
       );
+
+      console.log('✅ Photo uploaded to Cloudinary:', imageUrl);
 
       res.json({
         success: true,
@@ -591,16 +602,25 @@ app.prepare().then(() => {
     try {
       const { id } = req.params
 
-      // Get image URL to delete file
+      // Get image URL to delete from Cloudinary
       const photoResult = await pool.query('SELECT image_url FROM shared_photos WHERE id = $1', [id])
 
       if (photoResult.rows.length > 0) {
         const imageUrl = photoResult.rows[0].image_url
-        const imagePath = path.join(__dirname, 'public', imageUrl)
 
-        // Delete file if exists
-        if (fs.existsSync(imagePath)) {
-          fs.unlinkSync(imagePath)
+        // Extract public_id from Cloudinary URL
+        if (imageUrl.includes('cloudinary.com')) {
+          try {
+            // URL format: https://res.cloudinary.com/{cloud_name}/image/upload/v{version}/{public_id}.jpg
+            const urlParts = imageUrl.split('/')
+            const fileWithExt = urlParts[urlParts.length - 1]
+            const publicId = 't-event/' + fileWithExt.split('.')[0]
+
+            await cloudinary.uploader.destroy(publicId)
+            console.log('✅ Deleted from Cloudinary:', publicId)
+          } catch (cloudError) {
+            console.error('⚠️ Could not delete from Cloudinary:', cloudError)
+          }
         }
       }
 
