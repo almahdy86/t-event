@@ -361,11 +361,18 @@ app.prepare().then(() => {
     try {
       const employeesCount = await pool.query('SELECT COUNT(*) FROM employees')
       const photosCount = await pool.query('SELECT COUNT(*) FROM shared_photos WHERE is_approved = true')
+      const pendingPhotos = await pool.query('SELECT COUNT(*) FROM shared_photos WHERE is_approved = false')
       const answersCount = await pool.query('SELECT COUNT(*) FROM answers')
-      
+
       res.json({
         success: true,
         stats: {
+          totalEmployees: parseInt(employeesCount.rows[0].count),
+          onlineCount: 0, // TODO: implement socket tracking
+          totalPhotos: parseInt(photosCount.rows[0].count),
+          pendingPhotos: parseInt(pendingPhotos.rows[0].count),
+          totalAnswers: parseInt(answersCount.rows[0].count),
+          correctAnswers: parseInt(answersCount.rows[0].count),
           employees: parseInt(employeesCount.rows[0].count),
           photos: parseInt(photosCount.rows[0].count),
           answers: parseInt(answersCount.rows[0].count)
@@ -373,6 +380,167 @@ app.prepare().then(() => {
       })
     } catch (error) {
       console.error('Error:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // ============ Questions Management APIs ============
+
+  // Get all questions
+  server.get('/api/admin/questions', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT * FROM questions ORDER BY created_at DESC')
+      res.json({ success: true, questions: result.rows })
+    } catch (error) {
+      console.error('Error fetching questions:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // Create new question
+  server.post('/api/admin/questions', async (req, res) => {
+    try {
+      const { question_text, options, correct_answer } = req.body
+
+      const result = await pool.query(
+        `INSERT INTO questions (question_text, options, correct_answer, is_active)
+         VALUES ($1, $2, $3, false)
+         RETURNING *`,
+        [question_text, JSON.stringify(options), correct_answer]
+      )
+
+      res.json({ success: true, question: result.rows[0] })
+    } catch (error) {
+      console.error('Error creating question:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // Update question
+  server.put('/api/admin/questions/:id', async (req, res) => {
+    try {
+      const { id } = req.params
+      const { question_text, options, correct_answer } = req.body
+
+      const result = await pool.query(
+        `UPDATE questions
+         SET question_text = $1, options = $2, correct_answer = $3
+         WHERE id = $4
+         RETURNING *`,
+        [question_text, JSON.stringify(options), correct_answer, id]
+      )
+
+      res.json({ success: true, question: result.rows[0] })
+    } catch (error) {
+      console.error('Error updating question:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // Toggle question active status
+  server.post('/api/admin/questions/:id/toggle', async (req, res) => {
+    try {
+      const { id } = req.params
+      const { is_active } = req.body
+
+      // إيقاف جميع الأسئلة الأخرى إذا كان التفعيل
+      if (is_active) {
+        await pool.query('UPDATE questions SET is_active = false WHERE id != $1', [id])
+      }
+
+      const result = await pool.query(
+        'UPDATE questions SET is_active = $1 WHERE id = $2 RETURNING *',
+        [is_active, id]
+      )
+
+      res.json({ success: true, question: result.rows[0] })
+    } catch (error) {
+      console.error('Error toggling question:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // Delete question
+  server.delete('/api/admin/questions/:id', async (req, res) => {
+    try {
+      const { id } = req.params
+      await pool.query('DELETE FROM questions WHERE id = $1', [id])
+      res.json({ success: true })
+    } catch (error) {
+      console.error('Error deleting question:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // ============ Photos Management APIs ============
+
+  // Get photos (filtered)
+  server.get('/api/admin/photos', async (req, res) => {
+    try {
+      const { filter = 'all' } = req.query
+
+      let query = `
+        SELECT sp.*, e.full_name, e.employee_number
+        FROM shared_photos sp
+        JOIN employees e ON sp.employee_id = e.id
+      `
+
+      if (filter === 'pending') {
+        query += ' WHERE sp.is_approved = false'
+      } else if (filter === 'approved') {
+        query += ' WHERE sp.is_approved = true'
+      }
+
+      query += ' ORDER BY sp.created_at DESC'
+
+      const result = await pool.query(query)
+      res.json({ success: true, photos: result.rows })
+    } catch (error) {
+      console.error('Error fetching photos:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // Approve/reject photo
+  server.post('/api/admin/photos/:id/approve', async (req, res) => {
+    try {
+      const { id } = req.params
+      const { is_approved } = req.body
+
+      const result = await pool.query(
+        'UPDATE shared_photos SET is_approved = $1 WHERE id = $2 RETURNING *',
+        [is_approved, id]
+      )
+
+      res.json({ success: true, photo: result.rows[0] })
+    } catch (error) {
+      console.error('Error approving photo:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // Delete photo
+  server.delete('/api/admin/photos/:id', async (req, res) => {
+    try {
+      const { id } = req.params
+
+      // Get image URL to delete file
+      const photoResult = await pool.query('SELECT image_url FROM shared_photos WHERE id = $1', [id])
+
+      if (photoResult.rows.length > 0) {
+        const imageUrl = photoResult.rows[0].image_url
+        const imagePath = path.join(__dirname, 'public', imageUrl)
+
+        // Delete file if exists
+        if (fs.existsSync(imagePath)) {
+          fs.unlinkSync(imagePath)
+        }
+      }
+
+      await pool.query('DELETE FROM shared_photos WHERE id = $1', [id])
+      res.json({ success: true })
+    } catch (error) {
+      console.error('Error deleting photo:', error)
       res.status(500).json({ success: false })
     }
   })

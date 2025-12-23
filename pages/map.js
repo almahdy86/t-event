@@ -238,7 +238,7 @@ export default function MapPage() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setShowGallery(true)}
+        onClick={() => router.push('/gallery')}
         className="fixed bottom-6 left-6 w-16 h-16 bg-tanfeethi-brown text-white rounded-full shadow-2xl flex items-center justify-center z-40 hover:bg-tanfeethi-brown-dark transition-colors"
       >
         <Camera size={28} />
