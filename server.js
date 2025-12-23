@@ -261,6 +261,50 @@ app.prepare().then(() => {
     }
   })
 
+  // Photo Upload
+  server.post('/api/photo/upload', upload.single('photo'), async (req, res) => {
+    try {
+      const { employeeId, employeeNumber } = req.body;
+      const photoFile = req.file;
+
+      if (!photoFile) {
+        return res.status(400).json({ success: false, message: 'لم يتم رفع صورة' });
+      }
+
+      if (!employeeId || !employeeNumber) {
+        return res.status(400).json({ success: false, message: 'بيانات الموظف مفقودة' });
+      }
+
+      // معالجة الصورة بواسطة Sharp
+      const filename = `photo-${employeeNumber}-${Date.now()}.jpg`;
+      const filepath = path.join(uploadsDir, filename);
+
+      await sharp(photoFile.buffer)
+        .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 85 })
+        .toFile(filepath);
+
+      // حفظ في قاعدة البيانات
+      const imageUrl = `/uploads/${filename}`;
+
+      const result = await pool.query(
+        `INSERT INTO shared_photos (employee_id, employee_number, image_url, is_approved)
+         VALUES ($1, $2, $3, false)
+         RETURNING *`,
+        [employeeId, employeeNumber, imageUrl]
+      );
+
+      res.json({
+        success: true,
+        photo: result.rows[0],
+        message: 'تم رفع الصورة بنجاح وفي انتظار الموافقة'
+      });
+    } catch (error) {
+      console.error('❌ Error uploading photo:', error);
+      res.status(500).json({ success: false, message: 'خطأ في رفع الصورة' });
+    }
+  });
+
   // Photos - Approved
   server.get('/api/photos/approved', async (req, res) => {
     try {
