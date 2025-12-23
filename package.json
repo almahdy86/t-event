@@ -8,7 +8,9 @@
     "start": "NODE_ENV=production node server.js",
     "server": "node server/index.js",
     "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
-    "qrcodes": "node scripts/generate-qrcodes.js"
+    "qrcodes": "node scripts/generate-qrcodes.js",
+    "activate": "node scripts/activate-activities.js",
+    "create-admin": "node scripts/create-admin.js"
   },
   "dependencies": {
     "next": "^14.0.4",

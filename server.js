@@ -75,23 +75,60 @@ app.prepare().then(() => {
 
     // استقبال إجابة الموظف في التحدي
     socket.on('answer:submit', async (data) => {
-      const { questionId, employeeId, selectedAnswer } = data;
-      const questionResult = await pool.query('SELECT correct_answer FROM questions WHERE id = $1', [questionId]);
-      const isCorrect = selectedAnswer === questionResult.rows[0].correct_answer;
-      
-      // إرسال النتيجة للموظف فقط
-      socket.emit('answer:result', { isCorrect, correctAnswer: questionResult.rows[0].correct_answer });
+      try {
+        const { questionId, employeeId, selectedAnswer } = data;
+
+        if (!questionId || !employeeId || selectedAnswer === undefined) {
+          socket.emit('error', { message: 'بيانات غير كاملة' });
+          return;
+        }
+
+        const questionResult = await pool.query(
+          'SELECT correct_answer FROM questions WHERE id = $1',
+          [questionId]
+        );
+
+        if (questionResult.rows.length === 0) {
+          socket.emit('error', { message: 'السؤال غير موجود' });
+          return;
+        }
+
+        const isCorrect = selectedAnswer === questionResult.rows[0].correct_answer;
+
+        // إرسال النتيجة للموظف فقط
+        socket.emit('answer:result', {
+          isCorrect,
+          correctAnswer: questionResult.rows[0].correct_answer
+        });
+      } catch (error) {
+        console.error('❌ Error in answer:submit:', error);
+        socket.emit('error', { message: 'حدث خطأ في معالجة الإجابة' });
+      }
     });
 
     // استقبال الإعجاب بصورة
     socket.on('photo:like', async (data) => {
-      const { photoId } = data;
-      const result = await pool.query(
-        'UPDATE shared_photos SET likes_count = likes_count + 1 WHERE id = $1 RETURNING *',
-        [photoId]
-      );
-      // تحديث الإعجابات عند الجميع فوراً
-      io.emit('photo:likes:update', result.rows[0]);
+      try {
+        const { photoId } = data;
+
+        if (!photoId) {
+          socket.emit('error', { message: 'معرف الصورة مفقود' });
+          return;
+        }
+
+        const result = await pool.query(
+          'UPDATE shared_photos SET likes_count = likes_count + 1 WHERE id = $1 RETURNING *',
+          [photoId]
+        );
+
+        if (result.rows.length > 0) {
+          // تحديث الإعجابات عند الجميع فوراً
+          io.emit('photo:likes:update', result.rows[0]);
+        }
+      } catch (error) {
+        console.error('❌ Error in photo:like:', error);
+        socket.emit('error', { message: 'حدث خطأ في الإعجاب بالصورة' });
+      }
     });
   });
 
@@ -215,15 +252,12 @@ app.prepare().then(() => {
   // Activities Status
   server.get('/api/activities/status', async (req, res) => {
     try {
-      const result = await pool.query('SELECT * FROM activity_status')
-      const activities = {}
-      result.rows.forEach(row => {
-        activities[row.activity_name] = row.is_active
-      })
-      res.json({ success: true, activities })
+      const result = await pool.query('SELECT * FROM activity_status ORDER BY id')
+      // إرجاع array بدلاً من object لتتوافق مع map.js
+      res.json({ success: true, activities: result.rows })
     } catch (error) {
-      console.error('Error:', error)
-      res.status(500).json({ success: false })
+      console.error('Error fetching activities:', error)
+      res.status(500).json({ success: false, error: error.message })
     }
   })
 
