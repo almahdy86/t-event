@@ -10,6 +10,7 @@ export default function GalleryPage() {
   const [photos, setPhotos] = useState([])
   const [socket, setSocket] = useState(null)
   const [selectedPhoto, setSelectedPhoto] = useState(null)
+  const [userLikes, setUserLikes] = useState(new Set()) // تتبع إعجابات المستخدم
 
   useEffect(() => {
     const storedEmployee = localStorage.getItem('tanfeethi_employee')
@@ -17,8 +18,9 @@ export default function GalleryPage() {
       router.push('/')
       return
     }
-    setEmployee(JSON.parse(storedEmployee))
-    fetchPhotos()
+    const emp = JSON.parse(storedEmployee)
+    setEmployee(emp)
+    fetchPhotos(emp.id)
 
     // Socket connection for real-time updates
     const newSocket = io()
@@ -28,17 +30,34 @@ export default function GalleryPage() {
       setPhotos(prev =>
         prev.map(p => p.id === updatedPhoto.id ? updatedPhoto : p)
       )
+
+      // تحديث حالة الإعجاب للمستخدم الحالي
+      if (updatedPhoto.employeeId === emp.id) {
+        setUserLikes(prev => {
+          const newLikes = new Set(prev)
+          if (updatedPhoto.isLiked) {
+            newLikes.add(updatedPhoto.id)
+          } else {
+            newLikes.delete(updatedPhoto.id)
+          }
+          return newLikes
+        })
+      }
     })
 
     return () => newSocket.close()
   }, [])
 
-  const fetchPhotos = async () => {
+  const fetchPhotos = async (employeeId) => {
     try {
-      const response = await fetch('/api/photos/approved')
+      const response = await fetch(`/api/photos/approved?employeeId=${employeeId}`)
       const data = await response.json()
       if (data.success) {
         setPhotos(data.photos)
+        // تحديث الإعجابات الخاصة بالمستخدم
+        if (data.userLikes) {
+          setUserLikes(new Set(data.userLikes))
+        }
       }
     } catch (error) {
       console.error('خطأ في جلب الصور:', error)
@@ -46,8 +65,19 @@ export default function GalleryPage() {
   }
 
   const likePhoto = (photoId) => {
-    if (socket) {
-      socket.emit('photo:like', { photoId })
+    if (socket && employee) {
+      socket.emit('photo:like', { photoId, employeeId: employee.id })
+
+      // تحديث فوري للواجهة
+      setUserLikes(prev => {
+        const newLikes = new Set(prev)
+        if (newLikes.has(photoId)) {
+          newLikes.delete(photoId)
+        } else {
+          newLikes.add(photoId)
+        }
+        return newLikes
+      })
 
       // Vibration feedback
       if (navigator.vibrate) {
@@ -100,6 +130,7 @@ export default function GalleryPage() {
                 key={photo.id}
                 photo={photo}
                 index={index}
+                isLiked={userLikes.has(photo.id)}
                 onLike={() => likePhoto(photo.id)}
                 onClick={() => setSelectedPhoto(photo)}
               />
@@ -141,6 +172,7 @@ export default function GalleryPage() {
                     <PhotoCard
                       photo={photo}
                       index={index}
+                      isLiked={userLikes.has(photo.id)}
                       onLike={() => likePhoto(photo.id)}
                       onClick={() => setSelectedPhoto(photo)}
                       isTopRanked
@@ -197,7 +229,7 @@ export default function GalleryPage() {
   )
 }
 
-function PhotoCard({ photo, index, onLike, onClick, isTopRanked = false }) {
+function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -229,9 +261,13 @@ function PhotoCard({ photo, index, onLike, onClick, isTopRanked = false }) {
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={onLike}
-          className="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
+          className={`w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg transition-all ${
+            isLiked
+              ? 'bg-gradient-to-r from-red-500 to-pink-500 text-white'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
         >
-          <Heart size={24} fill="currentColor" />
+          <Heart size={24} fill={isLiked ? 'currentColor' : 'none'} />
           <span className="text-xl">{photo.likes_count || 0}</span>
         </motion.button>
       </div>

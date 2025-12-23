@@ -280,10 +280,11 @@ export default function MapPage() {
 function GalleryGrid({ employeeId }) {
   const [photos, setPhotos] = useState([])
   const [loading, setLoading] = useState(true)
+  const [userLikes, setUserLikes] = useState(new Set())
 
   useEffect(() => {
     fetchPhotos()
-    
+
     // الاستماع للصور الجديدة
     if (socket) {
       socket.on('photo:approved', (photo) => {
@@ -291,21 +292,37 @@ function GalleryGrid({ employeeId }) {
       })
 
       socket.on('photo:likes:update', (updatedPhoto) => {
-        setPhotos(prev => 
+        setPhotos(prev =>
           prev.map(p => p.id === updatedPhoto.id ? updatedPhoto : p)
             .sort((a, b) => b.likes_count - a.likes_count)
         )
+
+        // تحديث حالة الإعجاب للمستخدم الحالي
+        if (updatedPhoto.employeeId === employeeId) {
+          setUserLikes(prev => {
+            const newLikes = new Set(prev)
+            if (updatedPhoto.isLiked) {
+              newLikes.add(updatedPhoto.id)
+            } else {
+              newLikes.delete(updatedPhoto.id)
+            }
+            return newLikes
+          })
+        }
       })
     }
   }, [])
 
   const fetchPhotos = async () => {
     try {
-      const response = await fetch('/api/photos/approved')
+      const response = await fetch(`/api/photos/approved?employeeId=${employeeId}`)
       const data = await response.json()
-      
+
       if (data.success) {
         setPhotos(data.photos)
+        if (data.userLikes) {
+          setUserLikes(new Set(data.userLikes))
+        }
       }
     } catch (error) {
       console.error('خطأ في جلب الصور:', error)
@@ -317,7 +334,18 @@ function GalleryGrid({ employeeId }) {
   const handleLike = async (photoId) => {
     if (socket) {
       socket.emit('photo:like', { photoId, employeeId })
-      
+
+      // تحديث فوري للواجهة
+      setUserLikes(prev => {
+        const newLikes = new Set(prev)
+        if (newLikes.has(photoId)) {
+          newLikes.delete(photoId)
+        } else {
+          newLikes.add(photoId)
+        }
+        return newLikes
+      })
+
       // اهتزاز خفيف
       if (navigator.vibrate) {
         navigator.vibrate(50)
@@ -371,9 +399,10 @@ function GalleryGrid({ employeeId }) {
               >
                 <Heart
                   size={20}
-                  className={photo.likes_count > 0 ? 'fill-red-500 text-red-500' : 'text-gray-400'}
+                  fill={userLikes.has(photo.id) ? 'currentColor' : 'none'}
+                  className={userLikes.has(photo.id) ? 'text-red-500' : 'text-gray-400'}
                 />
-                <span className="font-semibold">{photo.likes_count}</span>
+                <span className="font-semibold">{photo.likes_count || 0}</span>
               </button>
             </div>
           </div>

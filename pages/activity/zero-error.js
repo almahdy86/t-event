@@ -194,7 +194,7 @@ export default function ZeroErrorChallengePage() {
 
         {/* الخيارات */}
         <div className="space-y-4 flex-1">
-          {JSON.parse(question.options).map((option, index) => {
+          {(Array.isArray(question.options) ? question.options : JSON.parse(question.options)).map((option, index) => {
             const isSelected = selectedAnswer === index
             const isCorrect = result && index === result.correctAnswer
             const isWrong = result && isSelected && !result.isCorrect

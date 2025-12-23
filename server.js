@@ -106,24 +106,61 @@ app.prepare().then(() => {
       }
     });
 
-    // استقبال الإعجاب بصورة
+    // استقبال الإعجاب بصورة (مثل انستقرام)
     socket.on('photo:like', async (data) => {
       try {
-        const { photoId } = data;
+        const { photoId, employeeId } = data;
 
-        if (!photoId) {
-          socket.emit('error', { message: 'معرف الصورة مفقود' });
+        if (!photoId || !employeeId) {
+          socket.emit('error', { message: 'بيانات غير كاملة' });
           return;
         }
 
-        const result = await pool.query(
-          'UPDATE shared_photos SET likes_count = likes_count + 1 WHERE id = $1 RETURNING *',
+        // التحقق من وجود إعجاب سابق
+        const existingLike = await pool.query(
+          'SELECT * FROM photo_likes WHERE photo_id = $1 AND employee_id = $2',
+          [photoId, employeeId]
+        );
+
+        let isLiked = false;
+
+        if (existingLike.rows.length > 0) {
+          // إلغاء الإعجاب
+          await pool.query(
+            'DELETE FROM photo_likes WHERE photo_id = $1 AND employee_id = $2',
+            [photoId, employeeId]
+          );
+          await pool.query(
+            'UPDATE shared_photos SET likes_count = GREATEST(likes_count - 1, 0) WHERE id = $1',
+            [photoId]
+          );
+          isLiked = false;
+        } else {
+          // إضافة إعجاب
+          await pool.query(
+            'INSERT INTO photo_likes (photo_id, employee_id) VALUES ($1, $2)',
+            [photoId, employeeId]
+          );
+          await pool.query(
+            'UPDATE shared_photos SET likes_count = likes_count + 1 WHERE id = $1',
+            [photoId]
+          );
+          isLiked = true;
+        }
+
+        // جلب الصورة المحدثة
+        const photoResult = await pool.query(
+          'SELECT * FROM shared_photos WHERE id = $1',
           [photoId]
         );
 
-        if (result.rows.length > 0) {
-          // تحديث الإعجابات عند الجميع فوراً
-          io.emit('photo:likes:update', result.rows[0]);
+        if (photoResult.rows.length > 0) {
+          // إرسال التحديث للجميع
+          io.emit('photo:likes:update', {
+            ...photoResult.rows[0],
+            isLiked,
+            employeeId
+          });
         }
       } catch (error) {
         console.error('❌ Error in photo:like:', error);
@@ -137,8 +174,16 @@ app.prepare().then(() => {
   server.get('/api/questions/active', async (req, res) => {
     try {
       const result = await pool.query('SELECT * FROM questions WHERE is_active = true LIMIT 1');
-      res.json({ success: true, question: result.rows[0] });
+      if (result.rows.length > 0) {
+        const question = result.rows[0];
+        // Parse options if it's a string
+        question.options = typeof question.options === 'string' ? JSON.parse(question.options) : question.options;
+        res.json({ success: true, question });
+      } else {
+        res.json({ success: true, question: null });
+      }
     } catch (error) {
+      console.error('Error fetching active question:', error);
       res.status(500).json({ success: false });
     }
   });
@@ -308,6 +353,8 @@ app.prepare().then(() => {
   // Photos - Approved
   server.get('/api/photos/approved', async (req, res) => {
     try {
+      const { employeeId } = req.query
+
       const result = await pool.query(`
         SELECT sp.*, e.full_name, e.employee_number
         FROM shared_photos sp
@@ -315,7 +362,22 @@ app.prepare().then(() => {
         WHERE sp.is_approved = true
         ORDER BY sp.likes_count DESC, sp.created_at DESC
       `)
-      res.json({ success: true, photos: result.rows })
+
+      // إذا تم توفير employeeId، جلب إعجابات المستخدم
+      let userLikes = []
+      if (employeeId) {
+        const likesResult = await pool.query(
+          'SELECT photo_id FROM photo_likes WHERE employee_id = $1',
+          [employeeId]
+        )
+        userLikes = likesResult.rows.map(row => row.photo_id)
+      }
+
+      res.json({
+        success: true,
+        photos: result.rows,
+        userLikes
+      })
     } catch (error) {
       console.error('Error:', error)
       res.status(500).json({ success: false })
@@ -390,7 +452,12 @@ app.prepare().then(() => {
   server.get('/api/admin/questions', async (req, res) => {
     try {
       const result = await pool.query('SELECT * FROM questions ORDER BY created_at DESC')
-      res.json({ success: true, questions: result.rows })
+      // Parse options if it's a string
+      const questions = result.rows.map(q => ({
+        ...q,
+        options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options
+      }))
+      res.json({ success: true, questions })
     } catch (error) {
       console.error('Error fetching questions:', error)
       res.status(500).json({ success: false })
