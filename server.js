@@ -228,6 +228,27 @@ app.prepare().then(() => {
     }
   })
 
+  // Admin - Stats
+  server.get('/api/admin/stats', async (req, res) => {
+    try {
+      const employeesCount = await pool.query('SELECT COUNT(*) FROM employees')
+      const photosCount = await pool.query('SELECT COUNT(*) FROM shared_photos WHERE is_approved = true')
+      const answersCount = await pool.query('SELECT COUNT(*) FROM answers')
+      
+      res.json({
+        success: true,
+        stats: {
+          employees: parseInt(employeesCount.rows[0].count),
+          photos: parseInt(photosCount.rows[0].count),
+          answers: parseInt(answersCount.rows[0].count)
+        }
+      })
+    } catch (error) {
+      console.error('Error:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
   // Next.js handler (يجب أن يكون آخر شيء)
   server.all('*', (req, res) => {
     return handle(req, res)
