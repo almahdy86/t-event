@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
-import { Users } from 'lucide-react'
+import { Users, ArrowRight } from 'lucide-react'
 
 export default function FinalePage() {
   const router = useRouter()
@@ -31,31 +31,57 @@ export default function FinalePage() {
 
   if (!showNumber) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: [0, 1.2, 1] }}
-          transition={{ duration: 1 }}
-          className="text-center text-white"
-        >
-          <Users size={100} className="mx-auto mb-6" />
-          <h1 className="text-4xl font-bold">
-            حان وقت الصورة الجماعية! 📸
-          </h1>
-        </motion.div>
+      <div className="min-h-screen bg-gradient-to-br from-green-500 to-emerald-500 flex flex-col">
+        {/* زر الرجوع */}
+        <div className="p-4">
+          <button
+            onClick={() => router.push('/map')}
+            className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            <ArrowRight size={20} />
+            رجوع
+          </button>
+        </div>
+
+        <div className="flex-1 flex items-center justify-center">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: [0, 1.2, 1] }}
+            transition={{ duration: 1 }}
+            className="text-center text-white"
+          >
+            <Users size={100} className="mx-auto mb-6" />
+            <h1 className="text-4xl font-bold">
+              حان وقت الصورة الجماعية! 📸
+            </h1>
+          </motion.div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="fixed inset-0 bg-tanfeethi-turquoise flex flex-col items-center justify-center p-6 text-white overflow-hidden">
-      {/* الرقم الضخم */}
-      <motion.div
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: 'spring', duration: 1 }}
-        className="text-center"
-      >
+    <div className="fixed inset-0 bg-tanfeethi-turquoise flex flex-col text-white overflow-hidden">
+      {/* زر الرجوع */}
+      <div className="p-4 z-20">
+        <button
+          onClick={() => router.push('/map')}
+          className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors"
+        >
+          <ArrowRight size={20} />
+          رجوع
+        </button>
+      </div>
+
+      {/* المحتوى الرئيسي */}
+      <div className="flex-1 flex items-center justify-center p-6">
+        {/* الرقم الضخم */}
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: 'spring', duration: 1 }}
+          className="text-center"
+        >
         <motion.div
           animate={{
             scale: [1, 1.05, 1],
@@ -101,7 +127,8 @@ export default function FinalePage() {
         >
           📍 المنطقة المخصصة للتصوير
         </motion.div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* تأثيرات بصرية */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
