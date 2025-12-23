@@ -1,9 +1,21 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   reactStrictMode: true,
+//   images: {
+//     domains: ['localhost'],
+//   },
+// }
+
+// module.exports = nextConfig
+module.exports = {
   images: {
-    domains: ['localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 't-event-production.up.railway.app', // الدومين الخاص بك
+        port: '',
+        pathname: '/uploads/**',
+      },
+    ],
   },
 }
-
-module.exports = nextConfig

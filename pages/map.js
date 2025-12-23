@@ -37,7 +37,7 @@ export default function MapPage() {
   }, [])
 
   const socketInitializer = (emp) => {
-    socket = io('http://localhost:3001')
+    socket = io();
 
     socket.on('connect', () => {
       socket.emit('employee:connect', {

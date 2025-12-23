@@ -49,7 +49,7 @@ export default function ZeroErrorChallengePage() {
   }, [timeLeft, isAnswered, question])
 
   const socketInitializer = () => {
-    socket = io('http://localhost:3001')
+    socket = io();
 
     socket.on('question:active', (newQuestion) => {
       setQuestion(newQuestion)
