@@ -1,5 +1,5 @@
+-- 📋 نسخ هذا الكود كاملاً والصقه في Railway Query
 -- قاعدة بيانات فعالية التنفيذي
--- إنشاء الجداول الأساسية
 
 -- جدول الموظفين
 CREATE TABLE IF NOT EXISTS employees (
@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS employees (
     employee_number INTEGER UNIQUE NOT NULL,
     full_name VARCHAR(255) NOT NULL,
     job_title VARCHAR(255) NOT NULL,
+    fcm_token TEXT,
+    last_fcm_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP,
     is_online BOOLEAN DEFAULT FALSE
@@ -107,14 +109,10 @@ ON CONFLICT (key) DO NOTHING;
 -- إنشاء الفهارس لتحسين الأداء
 CREATE INDEX IF NOT EXISTS idx_employees_uid ON employees(uid);
 CREATE INDEX IF NOT EXISTS idx_employees_number ON employees(employee_number);
+CREATE INDEX IF NOT EXISTS idx_employees_fcm_token ON employees(fcm_token);
 CREATE INDEX IF NOT EXISTS idx_photos_approved ON shared_photos(is_approved);
 CREATE INDEX IF NOT EXISTS idx_photos_employee ON shared_photos(employee_id);
 CREATE INDEX IF NOT EXISTS idx_answers_correct ON answers(is_correct);
 CREATE INDEX IF NOT EXISTS idx_answers_employee ON answers(employee_id);
 
--- إضافة عمود FCM token للموظفين (إذا لم يكن موجوداً)
-ALTER TABLE employees ADD COLUMN IF NOT EXISTS fcm_token TEXT;
-ALTER TABLE employees ADD COLUMN IF NOT EXISTS last_fcm_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-
--- فهرس لتسريع البحث
-CREATE INDEX IF NOT EXISTS idx_employees_fcm_token ON employees(fcm_token);
+-- ✅ تم! الجداول جاهزة

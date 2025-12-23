@@ -20,8 +20,19 @@ const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
 // قاعدة البيانات
+const databaseUrl = process.env.DATABASE_URL || 
+  (process.env.DB_HOST 
+    ? `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+    : null)
+
+if (!databaseUrl) {
+  console.error('❌ DATABASE_URL not found! Please set it in environment variables.')
+  console.log('Available env vars:', Object.keys(process.env).filter(k => k.includes('DB')))
+}
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: databaseUrl,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 })
 
 // تهيئة Multer
@@ -94,7 +105,12 @@ app.prepare().then(() => {
   // Employee - Register
   server.post('/api/employee/register', async (req, res) => {
     try {
-      const { uid, fullName, jobTitle } = req.body
+      let { uid, fullName, jobTitle } = req.body
+
+      // إذا لم يكن هناك uid، نولد واحد تلقائياً
+      if (!uid) {
+        uid = 'EMP' + Date.now().toString().slice(-6)
+      }
 
       // التحقق من أن الـ UID غير مستخدم
       const existing = await pool.query(
