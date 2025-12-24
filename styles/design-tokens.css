@@ -1,30 +1,37 @@
 /* Design tokens for Tanfeethi identity (colors in RGB for flexible alpha) */
 :root {
-  /* Brand Colors */
-  --color-brand: #BF7B5E;
-  --color-brand-dark: #A25436;
-  --color-text-primary: #1C252C;
-  --color-text-secondary: #AAB6C6;
+  /* Brand Colors - Primary Palette */
+  --color-primary: #CE7B5B;        /* ذهبي وردي */
+  --color-secondary: #9C7DDE;      /* الخزامى */
+  --color-accent: #3D2031;         /* أرجواني ملكي */
+  --color-highlight: #234024;      /* أخضر سعودي */
+
+  /* Text Colors */
+  --color-text-primary: #000000;   /* أسود */
+  --color-text-light: #F3F0EE;     /* ترابي فاتح */
+
+  /* Accent Colors */
+  --color-gold: #AB8025;           /* ذهبي داكن */
 
   /* Primary palette (RGB format for alpha support) */
-  --tanfeethi-brown-rgb: 191,123,94;
+  --tanfeethi-brown-rgb: 206,123,91;
   --tanfeethi-brown: rgb(var(--tanfeethi-brown-rgb));
-  --tanfeethi-brown-light-rgb: 191,123,94;
+  --tanfeethi-brown-light-rgb: 206,123,91;
   --tanfeethi-brown-light: rgb(var(--tanfeethi-brown-light-rgb));
-  --tanfeethi-brown-dark-rgb: 162,84,54;
+  --tanfeethi-brown-dark-rgb: 61,32,49;
   --tanfeethi-brown-dark: rgb(var(--tanfeethi-brown-dark-rgb));
 
-  --tanfeethi-turquoise-rgb: 64,224,208;
+  --tanfeethi-turquoise-rgb: 35,64,36;
   --tanfeethi-turquoise: rgb(var(--tanfeethi-turquoise-rgb));
-  --tanfeethi-turquoise-light-rgb: 127,255,212;
+  --tanfeethi-turquoise-light-rgb: 156,125,222;
   --tanfeethi-turquoise-light: rgb(var(--tanfeethi-turquoise-light-rgb));
 
-  --tanfeethi-cream-rgb: 228,228,228;
+  --tanfeethi-cream-rgb: 243,240,238;
   --tanfeethi-cream: rgb(var(--tanfeethi-cream-rgb));
 
   /* Text / surfaces */
-  --foreground-rgb: 28,37,44;
-  --muted-rgb: 170,182,198;
+  --foreground-rgb: 0,0,0;
+  --muted-rgb: 156,125,222;
   --surface-rgb: 255,255,255;
 
   /* Shadows / geometry */

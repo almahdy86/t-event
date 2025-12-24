@@ -8,6 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          primary: '#CE7B5B',
+          secondary: '#9C7DDE',
+          accent: '#3D2031',
+          highlight: '#234024',
+          gold: '#AB8025',
+        },
         tanfeethi: {
           brown: 'rgb(var(--tanfeethi-brown-rgb) / <alpha-value>)',
           'brown-light': 'rgb(var(--tanfeethi-brown-light-rgb) / <alpha-value>)',
