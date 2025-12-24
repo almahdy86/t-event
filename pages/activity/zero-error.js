@@ -198,8 +198,8 @@ export default function ZeroErrorChallengePage() {
         <div className="space-y-4 flex-1">
           {(Array.isArray(question.options) ? question.options : JSON.parse(question.options)).map((option, index) => {
             const isSelected = selectedAnswer === index
-            const isCorrect = result && index === result.correctAnswer
-            const isWrong = result && isSelected && !result.isCorrect
+            const isCorrect = result && !result.error && index === result.correctAnswer
+            const isWrong = result && !result.error && isSelected && !result.isCorrect
 
             return (
               <motion.button
