@@ -10,7 +10,7 @@ export default function IdentityMirrorsPage() {
   const [step, setStep] = useState('intro') // intro, camera, preview, success
   const [photoData, setPhotoData] = useState(null)
   const [isUploading, setIsUploading] = useState(false)
-  const [cameraFacing, setCameraFacing] = useState('user') // user = front, environment = back
+  const [cameraFacing, setCameraFacing] = useState('environment') // user = front, environment = back
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
   const streamRef = useRef(null)
@@ -31,15 +31,19 @@ export default function IdentityMirrorsPage() {
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: cameraFacing },
+        video: {
+          facingMode: cameraFacing,
+          width: { ideal: 1920 },
+          height: { ideal: 1080 }
+        },
         audio: false
       })
-      
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream
         streamRef.current = stream
       }
-      
+
       setStep('camera')
     } catch (error) {
       console.error('خطأ في فتح الكاميرا:', error)

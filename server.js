@@ -397,6 +397,27 @@ app.prepare().then(() => {
     }
   })
 
+  // Photos - Public (للمعرض العام - بدون تسجيل دخول)
+  server.get('/api/photos/public', async (req, res) => {
+    try {
+      const result = await pool.query(`
+        SELECT sp.*, e.full_name, e.employee_number
+        FROM shared_photos sp
+        JOIN employees e ON sp.employee_id = e.id
+        WHERE sp.is_approved = true
+        ORDER BY sp.likes_count DESC, sp.created_at DESC
+      `)
+
+      res.json({
+        success: true,
+        photos: result.rows
+      })
+    } catch (error) {
+      console.error('Error:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
   // Admin Login
   server.post('/api/admin/login', async (req, res) => {
     try {
@@ -568,9 +589,8 @@ app.prepare().then(() => {
         FROM employees e
         LEFT JOIN answers a ON e.id = a.employee_id
         GROUP BY e.id, e.employee_number, e.full_name, e.job_title
-        HAVING COUNT(a.id) > 0
+        HAVING SUM(CASE WHEN a.is_correct THEN 1 ELSE 0 END) > 0
         ORDER BY correct_count DESC, total_answers ASC
-        LIMIT 50
       `)
 
       res.json({ success: true, leaderboard: result.rows })
