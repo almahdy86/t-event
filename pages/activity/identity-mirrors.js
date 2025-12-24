@@ -42,13 +42,10 @@ export default function IdentityMirrorsPage() {
       if (videoRef.current) {
         videoRef.current.srcObject = stream
         streamRef.current = stream
-
-        // انتظار تحميل الفيديو قبل عرضه
-        videoRef.current.onloadedmetadata = () => {
-          videoRef.current.play()
-          setStep('camera')
-        }
+        videoRef.current.play()
       }
+
+      setStep('camera')
     } catch (error) {
       console.error('خطأ في فتح الكاميرا:', error)
       alert('لا يمكن الوصول إلى الكاميرا. يرجى التحقق من الأذونات.')
