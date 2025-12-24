@@ -56,7 +56,7 @@ export default function PublicGalleryPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-tanfeethi-turquoise to-blue-500 py-6 px-2">
       {/* Header */}
-      <div className="max-w-7xl mx-auto mb-6">
+      <div className="w-full mb-6">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -99,7 +99,7 @@ export default function PublicGalleryPage() {
       </div>
 
       {/* Photos Grid */}
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         {photos.length === 0 ? (
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
