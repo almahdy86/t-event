@@ -102,10 +102,24 @@ app.prepare().then(() => {
     // استقبال إجابة الموظف في التحدي
     socket.on('answer:submit', async (data) => {
       try {
-        const { questionId, employeeId, selectedAnswer } = data;
+        const { questionId, employeeId, selectedAnswer, timeTaken } = data;
 
         if (!questionId || !employeeId || selectedAnswer === undefined) {
           socket.emit('error', { message: 'بيانات غير كاملة' });
+          return;
+        }
+
+        // التحقق من أن الموظف لم يجب على هذا السؤال من قبل
+        const existingAnswer = await pool.query(
+          'SELECT id FROM answers WHERE employee_id = $1 AND question_id = $2',
+          [employeeId, questionId]
+        );
+
+        if (existingAnswer.rows.length > 0) {
+          socket.emit('answer:result', {
+            error: 'already_answered',
+            message: 'لقد أجبت على هذا السؤال من قبل! 🚫'
+          });
           return;
         }
 
@@ -121,11 +135,22 @@ app.prepare().then(() => {
 
         const isCorrect = selectedAnswer === questionResult.rows[0].correct_answer;
 
+        // حفظ الإجابة في قاعدة البيانات
+        await pool.query(
+          'INSERT INTO answers (employee_id, question_id, selected_answer, is_correct, time_taken) VALUES ($1, $2, $3, $4, $5)',
+          [employeeId, questionId, selectedAnswer, isCorrect, timeTaken || 0]
+        );
+
+        console.log(`${isCorrect ? '✅' : '❌'} Employee ${employeeId} answered question ${questionId}: ${isCorrect ? 'Correct' : 'Wrong'}`);
+
         // إرسال النتيجة للموظف فقط
         socket.emit('answer:result', {
           isCorrect,
           correctAnswer: questionResult.rows[0].correct_answer
         });
+
+        // تحديث اللوحة العامة
+        io.emit('leaderboard:update');
       } catch (error) {
         console.error('❌ Error in answer:submit:', error);
         socket.emit('error', { message: 'حدث خطأ في معالجة الإجابة' });
@@ -476,22 +501,30 @@ app.prepare().then(() => {
       const answersCount = await pool.query('SELECT COUNT(*) FROM answers')
       const correctAnswersCount = await pool.query('SELECT COUNT(*) FROM answers WHERE is_correct = true')
 
+      const stats = {
+        totalEmployees: parseInt(employeesCount.rows[0].count),
+        onlineCount: onlineUsers.size,
+        totalPhotos: parseInt(photosCount.rows[0].count),
+        pendingPhotos: parseInt(pendingPhotos.rows[0].count),
+        totalAnswers: parseInt(answersCount.rows[0].count),
+        correctAnswers: parseInt(correctAnswersCount.rows[0].count),
+        employees: parseInt(employeesCount.rows[0].count),
+        photos: parseInt(photosCount.rows[0].count),
+        answers: parseInt(answersCount.rows[0].count)
+      }
+
+      console.log('📊 Stats:', {
+        totalAnswers: stats.totalAnswers,
+        correctAnswers: stats.correctAnswers,
+        onlineCount: stats.onlineCount
+      })
+
       res.json({
         success: true,
-        stats: {
-          totalEmployees: parseInt(employeesCount.rows[0].count),
-          onlineCount: onlineUsers.size,
-          totalPhotos: parseInt(photosCount.rows[0].count),
-          pendingPhotos: parseInt(pendingPhotos.rows[0].count),
-          totalAnswers: parseInt(answersCount.rows[0].count),
-          correctAnswers: parseInt(correctAnswersCount.rows[0].count),
-          employees: parseInt(employeesCount.rows[0].count),
-          photos: parseInt(photosCount.rows[0].count),
-          answers: parseInt(answersCount.rows[0].count)
-        }
+        stats
       })
     } catch (error) {
-      console.error('Error:', error)
+      console.error('❌ Error fetching stats:', error)
       res.status(500).json({ success: false })
     }
   })
@@ -603,15 +636,16 @@ app.prepare().then(() => {
           COUNT(a.id) as total_answers,
           SUM(CASE WHEN a.is_correct THEN 1 ELSE 0 END) as correct_count
         FROM employees e
-        INNER JOIN answers a ON e.id = a.employee_id
-        WHERE a.is_correct = true
+        LEFT JOIN answers a ON e.id = a.employee_id
         GROUP BY e.id, e.employee_number, e.full_name, e.job_title
+        HAVING SUM(CASE WHEN a.is_correct THEN 1 ELSE 0 END) > 0
         ORDER BY correct_count DESC
       `)
 
+      console.log(`✅ Lottery: Found ${result.rows.length} eligible employees`)
       res.json({ success: true, employees: result.rows })
     } catch (error) {
-      console.error('Error fetching eligible employees:', error)
+      console.error('❌ Error fetching eligible employees:', error)
       res.status(500).json({ success: false })
     }
   })

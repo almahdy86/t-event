@@ -63,10 +63,12 @@ export default function ZeroErrorChallengePage() {
     socket.on('answer:result', (data) => {
       setResult(data)
       setIsAnswered(true)
-      
+
       // اهتزاز حسب النتيجة
       if (navigator.vibrate) {
-        if (data.isCorrect) {
+        if (data.error === 'already_answered') {
+          navigator.vibrate([50, 50, 50, 50, 50])
+        } else if (data.isCorrect) {
           navigator.vibrate([100, 50, 100, 50, 100])
         } else {
           navigator.vibrate([200, 100, 200])
@@ -250,23 +252,31 @@ export default function ZeroErrorChallengePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
               className={`mt-6 p-6 rounded-2xl ${
-                result.isCorrect
+                result.error === 'already_answered'
+                  ? 'bg-orange-500'
+                  : result.isCorrect
                   ? 'bg-green-500'
                   : 'bg-red-500'
               } text-white text-center`}
             >
               <div className="text-5xl mb-3">
-                {result.isCorrect ? '🎉' : '😔'}
+                {result.error === 'already_answered'
+                  ? '🚫'
+                  : result.isCorrect ? '🎉' : '😔'}
               </div>
               <h3 className="text-2xl font-bold mb-2">
-                {result.isCorrect ? 'إجابة صحيحة!' : 'إجابة خاطئة'}
+                {result.error === 'already_answered'
+                  ? 'تنبيه!'
+                  : result.isCorrect ? 'إجابة صحيحة!' : 'إجابة خاطئة'}
               </h3>
               <p className="text-lg opacity-90">
-                {result.isCorrect
+                {result.error === 'already_answered'
+                  ? result.message || 'لقد أجبت على هذا السؤال من قبل!'
+                  : result.isCorrect
                   ? 'تم تسجيلك في قرعة الجوائز!'
                   : 'لا تقلق، هناك فرص أخرى!'}
               </p>
-              
+
               <button
                 onClick={() => router.push('/map')}
                 className="mt-6 bg-white text-gray-800 font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition-colors"
