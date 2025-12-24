@@ -102,7 +102,7 @@ app.prepare().then(() => {
     // استقبال إجابة الموظف في التحدي
     socket.on('answer:submit', async (data) => {
       try {
-        const { questionId, employeeId, selectedAnswer, timeTaken } = data;
+        const { questionId, employeeId, employeeNumber, selectedAnswer, timeTaken } = data;
 
         if (!questionId || !employeeId || selectedAnswer === undefined) {
           socket.emit('error', { message: 'بيانات غير كاملة' });
@@ -137,11 +137,11 @@ app.prepare().then(() => {
 
         // حفظ الإجابة في قاعدة البيانات
         await pool.query(
-          'INSERT INTO answers (employee_id, question_id, selected_answer, is_correct, time_taken) VALUES ($1, $2, $3, $4, $5)',
-          [employeeId, questionId, selectedAnswer, isCorrect, timeTaken || 0]
+          'INSERT INTO answers (employee_id, employee_number, question_id, selected_answer, is_correct, time_taken) VALUES ($1, $2, $3, $4, $5, $6)',
+          [employeeId, employeeNumber, questionId, selectedAnswer, isCorrect, timeTaken || 0]
         );
 
-        console.log(`${isCorrect ? '✅' : '❌'} Employee ${employeeId} answered question ${questionId}: ${isCorrect ? 'Correct' : 'Wrong'}`);
+        console.log(`${isCorrect ? '✅' : '❌'} Employee ${employeeNumber} answered question ${questionId}: ${isCorrect ? 'Correct' : 'Wrong'}`);
 
         // إرسال النتيجة للموظف فقط
         socket.emit('answer:result', {
