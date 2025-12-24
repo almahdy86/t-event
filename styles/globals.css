@@ -21,12 +21,8 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    rgb(var(--tanfeethi-cream-rgb)),
-    rgba(var(--tanfeethi-cream-rgb), 0.96)
-  );
+  color: #000000;
+  background: #F3F0EE;
   min-height: 100vh;
 }
 

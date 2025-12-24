@@ -116,10 +116,10 @@ export default function Home() {
 
   if (step === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-tanfeethi-cream to-white">
+      <div className="min-h-screen flex items-center justify-center" style={{background: '#F3F0EE'}}>
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-tanfeethi-brown border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-tanfeethi-brown font-semibold">جارٍ التحميل...</p>
+          <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-black font-semibold">جارٍ التحميل...</p>
         </div>
       </div>
     )
@@ -127,27 +127,27 @@ export default function Home() {
 
   if (step === 'redirect') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-b from-tanfeethi-cream to-white">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{background: '#F3F0EE'}}>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           className="text-center"
         >
-          <div className="w-32 h-32 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: '#234024'}}>
             <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold text-tanfeethi-brown mb-2">
+          <h2 className="text-3xl font-bold text-black mb-2">
             أهلاً بعودتك! 👋
           </h2>
-          <p className="text-xl text-gray-700 mb-4">
+          <p className="text-xl text-black mb-4">
             {employee?.full_name}
           </p>
-          <div className="inline-block bg-tanfeethi-turquoise text-white px-8 py-3 rounded-full text-2xl font-bold">
+          <div className="inline-block text-white px-8 py-3 rounded-full text-2xl font-bold" style={{background: '#9C7DDE'}}>
             #{employee?.employee_number}
           </div>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-black">
             جارٍ التوجيه...
           </p>
         </motion.div>
@@ -157,36 +157,36 @@ export default function Home() {
 
   if (step === 'success') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-b from-green-50 to-white">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{background: '#F3F0EE'}}>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', duration: 0.6 }}
           className="text-center"
         >
-          <div className="w-32 h-32 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
+          <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow" style={{background: '#234024'}}>
             <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-3xl font-bold text-tanfeethi-brown mb-4"
+            className="text-3xl font-bold text-black mb-4"
           >
             مرحباً بك في فعالية التنفيذي! 🎉
           </motion.h2>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="mb-6"
           >
-            <p className="text-xl text-gray-700 mb-2">{employee?.full_name}</p>
-            <p className="text-lg text-gray-600 mb-4">{employee?.job_title}</p>
+            <p className="text-xl text-black mb-2">{employee?.full_name}</p>
+            <p className="text-lg text-black mb-4">{employee?.job_title}</p>
           </motion.div>
 
           <motion.div
@@ -195,7 +195,7 @@ export default function Home() {
             transition={{ delay: 0.7, type: 'spring' }}
             className="mb-6"
           >
-            <div className="inline-block bg-tanfeethi-turquoise text-white px-12 py-6 rounded-2xl shadow-2xl">
+            <div className="inline-block text-white px-12 py-6 rounded-2xl shadow-2xl" style={{background: '#CE7B5B'}}>
               <p className="text-sm mb-2">رقمك في الفعالية</p>
               <p className="text-6xl font-bold">#{employee?.employee_number}</p>
             </div>
@@ -205,9 +205,9 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="text-gray-600"
+            className="text-black"
           >
-            احفظ هذا الرقم جيداً! 
+            احفظ هذا الرقم جيداً!
             <br />
             ستحتاجه في نهاية الفعالية
           </motion.p>
@@ -217,12 +217,12 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col p-6 bg-gradient-to-b from-tanfeethi-cream to-white">
+    <div className="min-h-screen flex flex-col p-6" style={{background: '#F3F0EE'}}>
       <div className="flex justify-center py-8">
         <div className="w-32 h-32 relative">
-          <Image 
-            src="/logo.png" 
-            alt="شعار التنفيذي" 
+          <Image
+            src="/logo.png"
+            alt="شعار التنفيذي"
             fill
             className="object-contain"
           />
@@ -235,44 +235,46 @@ export default function Home() {
         className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full"
       >
         <Card className="mb-8">
-          <h1 className="text-3xl font-bold text-tanfeethi-brown text-center mb-2">
+          <h1 className="text-3xl font-bold text-black text-center mb-2">
             أهلاً بك! 👋
           </h1>
-          <p className="text-center text-gray-600 mb-8">
+          <p className="text-center text-black mb-8">
             يرجى تأكيد بياناتك للمتابعة
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-tanfeethi-brown font-semibold mb-2">
+              <label className="block text-black font-semibold mb-2">
                 الاسم الثلاثي
               </label>
               <input
                 type="text"
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-tanfeethi-turquoise focus:outline-none text-lg transition-colors"
+                className="w-full px-4 py-4 border-2 rounded-xl focus:outline-none text-lg transition-colors text-black"
+                style={{borderColor: '#9C7DDE', background: 'white'}}
                 placeholder="أدخل اسمك الكامل"
                 disabled={isSubmitting}
               />
             </div>
 
             <div>
-              <label className="block text-tanfeethi-brown font-semibold mb-2">
+              <label className="block text-black font-semibold mb-2">
                 المسمى الوظيفي
               </label>
               <input
                 type="text"
                 value={formData.jobTitle}
                 onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-tanfeethi-turquoise focus:outline-none text-lg transition-colors"
+                className="w-full px-4 py-4 border-2 rounded-xl focus:outline-none text-lg transition-colors text-black"
+                style={{borderColor: '#9C7DDE', background: 'white'}}
                 placeholder="أدخل مسماك الوظيفي"
                 disabled={isSubmitting}
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl">
+              <div className="border px-4 py-3 rounded-xl text-black" style={{background: '#ffebee', borderColor: '#ef5350'}}>
                 {error}
               </div>
             )}
@@ -293,7 +295,7 @@ export default function Home() {
           </form>
         </Card>
 
-        <p className="text-center text-sm text-gray-500">
+        <p className="text-center text-sm text-black opacity-70">
           بمسح رمز QR، أنت توافق على المشاركة في الفعالية
         </p>
       </motion.div>
