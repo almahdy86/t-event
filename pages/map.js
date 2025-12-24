@@ -186,6 +186,33 @@ export default function MapPage() {
           خريطة الفعاليات 🗺️
         </motion.h2>
 
+        {/* زر خريطة الفعالية التفاعلية */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={() => router.push('/event-map')}
+          className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 active:scale-95"
+          style={{background: '#9C7DDE', color: 'white'}}
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center"
+                 style={{background: 'rgba(255,255,255,0.2)'}}>
+              <MapPin size={32} />
+            </div>
+
+            <div className="flex-1 text-right">
+              <h3 className="text-2xl font-bold mb-1">🗺️ خريطة الفعالية</h3>
+              <p className="text-sm opacity-90">
+                اعرض خريطة تفصيلية لجميع مواقع الفعالية
+              </p>
+            </div>
+
+            <div>
+              <MapPin size={32} className="animate-pulse" />
+            </div>
+          </div>
+        </motion.button>
+
         <div className="space-y-4">
           {activityCards.map((activity, index) => {
             const isActive = activities[activity.id]

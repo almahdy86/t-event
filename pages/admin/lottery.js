@@ -105,12 +105,15 @@ export default function LotteryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-500 py-8 px-4">
+    <div className="min-h-screen py-8 px-4" style={{background: 'linear-gradient(135deg, #234024 0%, #AB8025 100%)'}}>
       {/* Header */}
       <div className="max-w-4xl mx-auto mb-8">
         <button
           onClick={() => router.push('/admin/dashboard')}
-          className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors mb-6"
+          className="flex items-center gap-2 text-white px-4 py-2 rounded-lg transition-colors mb-6"
+          style={{background: 'rgba(255,255,255,0.2)'}}
+          onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.3)'}
+          onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
         >
           <ArrowRight size={20} />
           رجوع للوحة التحكم
@@ -121,7 +124,7 @@ export default function LotteryPage() {
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-8"
         >
-          <Sparkles className="w-16 h-16 text-yellow-300 mx-auto mb-4" />
+          <Sparkles className="w-16 h-16 mx-auto mb-4" style={{color: '#CE7B5B'}} />
           <h1 className="text-4xl font-black text-white mb-2">
             🎁 قرعة الفائزين
           </h1>
@@ -161,11 +164,22 @@ export default function LotteryPage() {
           <button
             onClick={startDraw}
             disabled={isDrawing || eligibleEmployees.length === 0}
-            className={`w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all ${
-              isDrawing || eligibleEmployees.length === 0
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-yellow-400 hover:bg-yellow-500 text-purple-900'
-            }`}
+            className="w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all"
+            style={{
+              background: isDrawing || eligibleEmployees.length === 0 ? '#9E9E9E' : '#CE7B5B',
+              color: 'white',
+              cursor: isDrawing || eligibleEmployees.length === 0 ? 'not-allowed' : 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              if (!isDrawing && eligibleEmployees.length > 0) {
+                e.target.style.background = '#AB8025'
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isDrawing && eligibleEmployees.length > 0) {
+                e.target.style.background = '#CE7B5B'
+              }
+            }}
           >
             {isDrawing ? '🎲 جارٍ السحب...' : '🎁 ابدأ القرعة'}
           </button>
@@ -190,13 +204,13 @@ export default function LotteryPage() {
               className="bg-white rounded-3xl p-12 text-center max-w-md"
             >
               {getRankIcon(currentDrawing.rank)}
-              <h2 className="text-3xl font-black text-purple-900 mt-4 mb-2">
+              <h2 className="text-3xl font-black mt-4 mb-2" style={{color: '#234024'}}>
                 {currentDrawing.prize}
               </h2>
-              <h3 className="text-5xl font-black text-tanfeethi-turquoise mb-4">
+              <h3 className="text-5xl font-black mb-4" style={{color: '#CE7B5B'}}>
                 {currentDrawing.full_name}
               </h3>
-              <div className="text-6xl font-black text-purple-900">
+              <div className="text-6xl font-black" style={{color: '#AB8025'}}>
                 #{currentDrawing.employee_number}
               </div>
             </motion.div>
@@ -212,7 +226,7 @@ export default function LotteryPage() {
             animate={{ y: 0, opacity: 1 }}
             className="bg-white rounded-3xl overflow-hidden shadow-2xl"
           >
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 px-6 py-4">
+            <div className="px-6 py-4" style={{background: 'linear-gradient(90deg, #AB8025 0%, #CE7B5B 100%)'}}>
               <h2 className="text-2xl font-black text-white flex items-center gap-2">
                 <Trophy className="w-6 h-6" />
                 الفائزون
@@ -226,25 +240,26 @@ export default function LotteryPage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-4"
+                  className="flex items-center gap-4 rounded-2xl p-4"
+                  style={{background: 'linear-gradient(90deg, #F3F0EE 0%, #E8DDD3 100%)'}}
                 >
                   <div className="flex-shrink-0">
                     {getRankIcon(winner.rank)}
                   </div>
 
                   <div className="flex-1">
-                    <div className="text-lg font-bold text-purple-900 mb-1">
+                    <div className="text-lg font-bold mb-1" style={{color: '#234024'}}>
                       {winner.prize}
                     </div>
-                    <div className="text-2xl font-black text-gray-800">
+                    <div className="text-2xl font-black" style={{color: '#000000'}}>
                       {winner.full_name}
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm" style={{color: '#666666'}}>
                       رقم {winner.employee_number} • {winner.correct_count} إجابة صحيحة
                     </div>
                   </div>
 
-                  <div className="text-4xl font-black text-tanfeethi-turquoise">
+                  <div className="text-4xl font-black" style={{color: '#CE7B5B'}}>
                     #{winner.employee_number}
                   </div>
                 </motion.div>
@@ -252,16 +267,22 @@ export default function LotteryPage() {
             </div>
 
             {!isDrawing && (
-              <div className="bg-gray-50 px-6 py-4 flex gap-4">
+              <div className="px-6 py-4 flex gap-4" style={{background: '#F3F0EE'}}>
                 <button
                   onClick={() => setWinners([])}
-                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl font-bold transition-all"
+                  className="flex-1 py-3 rounded-xl font-bold transition-all"
+                  style={{background: '#E0E0E0', color: '#000000'}}
+                  onMouseEnter={(e) => e.target.style.background = '#BDBDBD'}
+                  onMouseLeave={(e) => e.target.style.background = '#E0E0E0'}
                 >
                   إعادة القرعة
                 </button>
                 <button
                   onClick={() => window.print()}
-                  className="flex-1 bg-tanfeethi-turquoise hover:bg-opacity-90 text-white py-3 rounded-xl font-bold transition-all"
+                  className="flex-1 text-white py-3 rounded-xl font-bold transition-all"
+                  style={{background: '#234024'}}
+                  onMouseEnter={(e) => e.target.style.background = '#AB8025'}
+                  onMouseLeave={(e) => e.target.style.background = '#234024'}
                 >
                   طباعة النتائج
                 </button>

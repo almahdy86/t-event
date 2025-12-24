@@ -129,9 +129,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{background: '#F3F0EE'}}>
       {/* Header */}
-      <div className="bg-tanfeethi-brown text-white p-4 shadow-lg">
+      <div className="text-white p-4 shadow-lg" style={{background: '#234024'}}>
         <div className="container mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">لوحة التحكم - التنفيذي</h1>
@@ -139,7 +139,10 @@ export default function AdminDashboard() {
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+            style={{background: 'rgba(255,255,255,0.2)'}}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.3)'}
+            onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
           >
             <LogOut size={20} />
             تسجيل الخروج
@@ -180,7 +183,7 @@ export default function AdminDashboard() {
 
         {/* Activities Control */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-tanfeethi-brown mb-6">
+          <h2 className="text-2xl font-bold mb-6" style={{color: '#234024'}}>
             التحكم في الفعاليات
           </h2>
           

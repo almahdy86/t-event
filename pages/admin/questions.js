@@ -144,14 +144,17 @@ export default function QuestionsManagement() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{background: '#F3F0EE'}}>
       {/* Header */}
-      <div className="bg-tanfeethi-brown text-white p-4 shadow-lg">
+      <div className="text-white p-4 shadow-lg" style={{background: '#234024'}}>
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.push('/admin/dashboard')}
-              className="p-2 hover:bg-white/10 rounded-lg"
+              className="p-2 rounded-lg transition-colors"
+              style={{background: 'rgba(255,255,255,0.1)'}}
+              onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
+              onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
             >
               <ArrowRight size={24} />
             </button>
@@ -163,7 +166,10 @@ export default function QuestionsManagement() {
               setEditingQuestion(null)
               resetForm()
             }}
-            className="flex items-center gap-2 bg-white text-tanfeethi-brown px-4 py-2 rounded-lg font-bold hover:bg-opacity-90"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all"
+            style={{background: '#AB8025', color: 'white'}}
+            onMouseEnter={(e) => e.target.style.background = '#9C7DDE'}
+            onMouseLeave={(e) => e.target.style.background = '#AB8025'}
           >
             <Plus size={20} />
             سؤال جديد
@@ -188,7 +194,8 @@ export default function QuestionsManagement() {
                 <textarea
                   value={formData.question_text}
                   onChange={(e) => setFormData({ ...formData, question_text: e.target.value })}
-                  className="w-full p-3 border-2 rounded-lg focus:border-tanfeethi-brown outline-none"
+                  className="w-full p-3 border-2 rounded-lg outline-none"
+                  style={{borderColor: '#9C7DDE'}}
                   rows="3"
                   required
                 />
@@ -202,7 +209,8 @@ export default function QuestionsManagement() {
                       type="text"
                       value={formData[`option${num}`]}
                       onChange={(e) => setFormData({ ...formData, [`option${num}`]: e.target.value })}
-                      className="w-full p-3 border-2 rounded-lg focus:border-tanfeethi-brown outline-none"
+                      className="w-full p-3 border-2 rounded-lg outline-none"
+                      style={{borderColor: '#9C7DDE'}}
                       required
                     />
                   </div>
@@ -214,7 +222,8 @@ export default function QuestionsManagement() {
                 <select
                   value={formData.correct_answer}
                   onChange={(e) => setFormData({ ...formData, correct_answer: e.target.value })}
-                  className="w-full p-3 border-2 rounded-lg focus:border-tanfeethi-brown outline-none"
+                  className="w-full p-3 border-2 rounded-lg outline-none"
+                  style={{borderColor: '#9C7DDE'}}
                   required
                 >
                   <option value="0">الخيار 1</option>
@@ -227,7 +236,10 @@ export default function QuestionsManagement() {
               <div className="flex gap-3">
                 <button
                   type="submit"
-                  className="flex-1 bg-tanfeethi-brown text-white py-3 rounded-lg font-bold hover:bg-opacity-90"
+                  className="flex-1 text-white py-3 rounded-lg font-bold transition-all"
+                  style={{background: '#AB8025'}}
+                  onMouseEnter={(e) => e.target.style.background = '#9C7DDE'}
+                  onMouseLeave={(e) => e.target.style.background = '#AB8025'}
                 >
                   {editingQuestion ? 'حفظ التعديلات' : 'إضافة السؤال'}
                 </button>
@@ -238,7 +250,10 @@ export default function QuestionsManagement() {
                     setEditingQuestion(null)
                     resetForm()
                   }}
-                  className="px-6 bg-gray-200 text-gray-700 py-3 rounded-lg font-bold hover:bg-gray-300"
+                  className="px-6 py-3 rounded-lg font-bold transition-all"
+                  style={{background: '#E0E0E0', color: '#000000'}}
+                  onMouseEnter={(e) => e.target.style.background = '#BDBDBD'}
+                  onMouseLeave={(e) => e.target.style.background = '#E0E0E0'}
                 >
                   إلغاء
                 </button>
