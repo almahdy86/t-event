@@ -54,9 +54,9 @@ export default function PublicGalleryPage() {
     : photos
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-tanfeethi-turquoise to-blue-500 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-tanfeethi-turquoise to-blue-500 py-6 px-2">
       {/* Header */}
-      <div className="max-w-6xl mx-auto mb-8">
+      <div className="max-w-7xl mx-auto mb-6">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -99,7 +99,7 @@ export default function PublicGalleryPage() {
       </div>
 
       {/* Photos Grid */}
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {photos.length === 0 ? (
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -115,14 +115,14 @@ export default function PublicGalleryPage() {
             </p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {displayedPhotos.map((photo, index) => (
               <motion.div
                 key={photo.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
+                transition={{ delay: index * 0.03 }}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 onClick={() => setSelectedPhoto(photo)}
               >
                 {/* Photo */}
@@ -133,25 +133,25 @@ export default function PublicGalleryPage() {
                     className="w-full h-full object-cover"
                   />
                   {photo.likes_count > 0 && (
-                    <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
-                      <Heart className="w-4 h-4 fill-white" />
+                    <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full flex items-center gap-1 text-sm">
+                      <Heart className="w-3 h-3 fill-white" />
                       <span className="font-bold">{photo.likes_count}</span>
                     </div>
                   )}
                 </div>
 
                 {/* Info */}
-                <div className="p-4">
+                <div className="p-3">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-bold text-gray-800 text-lg">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-gray-800 text-sm truncate">
                         {photo.full_name}
                       </h3>
-                      <p className="text-gray-500 text-sm">
+                      <p className="text-gray-500 text-xs">
                         رقم {photo.employee_number}
                       </p>
                     </div>
-                    <Heart className="w-8 h-8 text-gray-300" />
+                    <Heart className="w-6 h-6 text-gray-300 flex-shrink-0" />
                   </div>
                 </div>
               </motion.div>
