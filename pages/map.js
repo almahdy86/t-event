@@ -95,28 +95,28 @@ export default function MapPage() {
       id: 'identity_mirrors',
       title: 'مرايا الهوية',
       icon: Camera,
-      color: 'from-purple-500 to-pink-500',
+      bgColor: '#9C7DDE',
       route: '/activity/identity-mirrors'
     },
     {
       id: 'zero_error_challenge',
       title: 'تحدي بلا أخطاء',
       icon: Brain,
-      color: 'from-blue-500 to-cyan-500',
+      bgColor: '#CE7B5B',
       route: '/activity/zero-error'
     },
     {
       id: 'art_of_hospitality',
       title: 'فن الإكرام',
       icon: Heart,
-      color: 'from-red-500 to-orange-500',
+      bgColor: '#AB8025',
       route: '/activity/hospitality'
     },
     {
       id: 'final_photo',
       title: 'الصورة الجماعية',
       icon: Users,
-      color: 'from-green-500 to-emerald-500',
+      bgColor: '#234024',
       route: '/finale'
     }
   ]
@@ -133,26 +133,26 @@ export default function MapPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-tanfeethi-cream to-white pb-20">
+    <div className="min-h-screen pb-20" style={{background: '#F3F0EE'}}>
       {/* Header ثابت */}
       <div className="bg-white shadow-lg sticky top-0 z-50">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 relative">
-              <Image 
-                src="/logo.png" 
-                alt="التنفيذي" 
+              <Image
+                src="/logo.png"
+                alt="التنفيذي"
                 fill
                 className="object-contain"
               />
             </div>
             <div>
-              <p className="font-bold text-tanfeethi-brown">{employee.full_name}</p>
-              <p className="text-sm text-gray-600">{employee.job_title}</p>
+              <p className="font-bold" style={{color: '#000000'}}>{employee.full_name}</p>
+              <p className="text-sm" style={{color: '#000000', opacity: 0.6}}>{employee.job_title}</p>
             </div>
           </div>
-          
-          <div className="bg-tanfeethi-turquoise text-white px-4 py-2 rounded-full font-bold text-xl">
+
+          <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#9C7DDE'}}>
             #{employee.employee_number}
           </div>
         </div>
@@ -167,7 +167,7 @@ export default function MapPage() {
             exit={{ opacity: 0, y: -100 }}
             className="fixed top-20 left-0 right-0 z-50 mx-4"
           >
-            <div className="bg-tanfeethi-turquoise text-white p-4 rounded-2xl shadow-2xl">
+            <div className="text-white p-4 rounded-2xl shadow-2xl" style={{background: '#234024'}}>
               <h3 className="font-bold text-lg mb-1">{notification.title}</h3>
               <p>{notification.message}</p>
             </div>
@@ -180,7 +180,8 @@ export default function MapPage() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold text-tanfeethi-brown text-center mb-8"
+          className="text-3xl font-bold text-center mb-8"
+          style={{color: '#000000'}}
         >
           خريطة الفعاليات 🗺️
         </motion.h2>
@@ -200,19 +201,20 @@ export default function MapPage() {
                 <button
                   onClick={() => isActive && router.push(activity.route)}
                   disabled={!isActive}
-                  className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${
-                    isActive
-                      ? `bg-gradient-to-r ${activity.color} text-white`
-                      : 'bg-gray-200 text-gray-400'
-                  } ${!isActive && 'opacity-50 cursor-not-allowed'}`}
+                  className="w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95"
+                  style={{
+                    background: isActive ? activity.bgColor : '#E0E0E0',
+                    color: isActive ? 'white' : '#9E9E9E',
+                    opacity: isActive ? 1 : 0.5,
+                    cursor: isActive ? 'pointer' : 'not-allowed'
+                  }}
                 >
                   <div className="flex items-center gap-4">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      isActive ? 'bg-white/20' : 'bg-gray-300'
-                    }`}>
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center"
+                         style={{background: isActive ? 'rgba(255,255,255,0.2)' : '#BDBDBD'}}>
                       <Icon size={32} />
                     </div>
-                    
+
                     <div className="flex-1 text-right">
                       <h3 className="text-xl font-bold mb-1">{activity.title}</h3>
                       <p className="text-sm opacity-90">
