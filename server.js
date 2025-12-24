@@ -10,8 +10,6 @@ const multer = require('multer')
 const sharp = require('sharp')
 const fs = require('fs')
 const path = require('path')
-const cloudinary = require('cloudinary').v2
-const { CloudinaryStorage } = require('multer-storage-cloudinary')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = '0.0.0.0'  // للعمل في Railway
@@ -37,26 +35,18 @@ const pool = new Pool({
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 })
 
-// تهيئة Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-})
-
-// تهيئة Multer مع Cloudinary Storage
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 't-event',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ width: 800, height: 800, crop: 'limit', quality: 'auto' }]
-  }
-})
-
+// تهيئة Multer للتخزين المحلي
 const upload = multer({
-  storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true)
+    } else {
+      cb(new Error('نوع الملف غير مسموح'))
+    }
+  }
 })
 
 // تجهيز Next.js
@@ -324,7 +314,7 @@ app.prepare().then(() => {
     }
   })
 
-  // Photo Upload (with Cloudinary)
+  // Photo Upload (التخزين المحلي)
   server.post('/api/photo/upload', upload.single('photo'), async (req, res) => {
     try {
       const { employeeId, employeeNumber } = req.body;
@@ -338,8 +328,17 @@ app.prepare().then(() => {
         return res.status(400).json({ success: false, message: 'بيانات الموظف مفقودة' });
       }
 
-      // Cloudinary already uploaded the file, get the URL
-      const imageUrl = photoFile.path; // Cloudinary URL
+      // إنشاء اسم فريد للملف
+      const filename = `photo-${employeeNumber}-${Date.now()}.jpg`;
+      const filepath = path.join(uploadsDir, filename);
+
+      // معالجة الصورة بـ Sharp (تصغير + ضغط)
+      await sharp(photoFile.buffer)
+        .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 85 })
+        .toFile(filepath);
+
+      const imageUrl = `/uploads/${filename}`;
 
       const result = await pool.query(
         `INSERT INTO shared_photos (employee_id, employee_number, image_url, is_approved)
@@ -348,7 +347,7 @@ app.prepare().then(() => {
         [employeeId, employeeNumber, imageUrl]
       );
 
-      console.log('✅ Photo uploaded to Cloudinary:', imageUrl);
+      console.log('✅ Photo uploaded:', filepath);
 
       res.json({
         success: true,
@@ -602,24 +601,24 @@ app.prepare().then(() => {
     try {
       const { id } = req.params
 
-      // Get image URL to delete from Cloudinary
+      // Get image URL to delete local file
       const photoResult = await pool.query('SELECT image_url FROM shared_photos WHERE id = $1', [id])
 
       if (photoResult.rows.length > 0) {
         const imageUrl = photoResult.rows[0].image_url
 
-        // Extract public_id from Cloudinary URL
-        if (imageUrl.includes('cloudinary.com')) {
+        // حذف الملف المحلي
+        if (imageUrl && imageUrl.startsWith('/uploads/')) {
           try {
-            // URL format: https://res.cloudinary.com/{cloud_name}/image/upload/v{version}/{public_id}.jpg
-            const urlParts = imageUrl.split('/')
-            const fileWithExt = urlParts[urlParts.length - 1]
-            const publicId = 't-event/' + fileWithExt.split('.')[0]
+            const filename = imageUrl.replace('/uploads/', '')
+            const filepath = path.join(uploadsDir, filename)
 
-            await cloudinary.uploader.destroy(publicId)
-            console.log('✅ Deleted from Cloudinary:', publicId)
-          } catch (cloudError) {
-            console.error('⚠️ Could not delete from Cloudinary:', cloudError)
+            if (fs.existsSync(filepath)) {
+              fs.unlinkSync(filepath)
+              console.log('✅ Deleted local file:', filepath)
+            }
+          } catch (fileError) {
+            console.error('⚠️ Could not delete local file:', fileError)
           }
         }
       }
