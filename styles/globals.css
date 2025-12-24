@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+@import './design-tokens.css';
 
 @tailwind base;
 @tailwind components;
@@ -23,8 +24,8 @@ body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
     to bottom,
-    #F5F1E8,
-    #E8DCC8
+    rgb(var(--tanfeethi-cream-rgb)),
+    rgba(var(--tanfeethi-cream-rgb), 0.96)
   );
   min-height: 100vh;
 }
@@ -101,12 +102,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8B6F47;
+  background: var(--tanfeethi-brown);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6B5539;
+  background: var(--tanfeethi-brown-dark);
 }
 
 /* تأثيرات اللمس */
@@ -132,3 +133,73 @@ body {
   width: 300px;
   height: 300px;
 }
+
+/* Accessible focus style */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Primary button helper */
+.btn-primary {
+  background-color: var(--tanfeethi-brown);
+  color: white;
+  height: var(--button-height);
+  padding: 0 16px;
+  border-radius: calc(var(--border-radius) - 4px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-primary:active { transform: translateY(1px); }
+
+/* Secondary and ghost buttons */
+.btn-secondary {
+  background: transparent;
+  color: var(--tanfeethi-brown);
+  border: 1px solid rgba(var(--tanfeethi-brown-rgb), 0.12);
+  height: var(--button-height);
+  padding: 0 14px;
+  border-radius: calc(var(--border-radius) - 6px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--tanfeethi-brown);
+  height: var(--button-height);
+  padding: 0 10px;
+}
+
+/* Card component */
+.card {
+  background: rgb(var(--surface-rgb));
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-1);
+  padding: 16px;
+  overflow: hidden;
+}
+.card-header { font-weight: 600; color: rgb(var(--foreground-rgb)); margin-bottom: 8px; }
+.card-body { color: rgb(var(--muted-rgb)); }
+.card-media { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
+
+/* High contrast support */
+@media (prefers-contrast: more) {
+  .btn-primary { box-shadow: none; }
+  .card { box-shadow: none; border: 1px solid rgba(0,0,0,0.12); }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in, .animate-slide-up, .animate-scale-in, .animate-pulse-glow {
+    animation-duration: 0.001ms !important;
+    transition: none !important;
+  }
+}
+
+/* Utility: ensure interactive targets meet touch size */
+.touch-target { min-height: var(--button-height); min-width: 44px; padding: 8px 12px; }
+

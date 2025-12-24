@@ -9,17 +9,17 @@ module.exports = {
     extend: {
       colors: {
         tanfeethi: {
-          brown: '#8B6F47',
-          'brown-light': '#B8956A',
-          'brown-dark': '#6B5539',
-          turquoise: '#40E0D0',
-          'turquoise-light': '#7FFFD4',
-          cream: '#F5F1E8',
+          brown: 'rgb(var(--tanfeethi-brown-rgb) / <alpha-value>)',
+          'brown-light': 'rgb(var(--tanfeethi-brown-light-rgb) / <alpha-value>)',
+          'brown-dark': 'rgb(var(--tanfeethi-brown-dark-rgb) / <alpha-value>)',
+          turquoise: 'rgb(var(--tanfeethi-turquoise-rgb) / <alpha-value>)',
+          'turquoise-light': 'rgb(var(--tanfeethi-turquoise-light-rgb) / <alpha-value>)',
+          cream: 'rgb(var(--tanfeethi-cream-rgb) / <alpha-value>)',
         },
       },
       fontFamily: {
         'dubai': ['Dubai', 'sans-serif'],
-        'arabic': ['Cairo', 'sans-serif'],
+        'arabic': ['Cairo', 'IBM Plex Sans Arabic', 'sans-serif'],
       },
     },
   },

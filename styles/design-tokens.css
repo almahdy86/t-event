@@ -1,0 +1,33 @@
+/* Design tokens for Tanfeethi identity (colors in RGB for flexible alpha) */
+:root {
+  /* Primary palette */
+  --tanfeethi-brown-rgb: 139,111,71;
+  --tanfeethi-brown: rgb(var(--tanfeethi-brown-rgb));
+  --tanfeethi-brown-light-rgb: 184,149,106;
+  --tanfeethi-brown-light: rgb(var(--tanfeethi-brown-light-rgb));
+  --tanfeethi-brown-dark-rgb: 107,85,57;
+  --tanfeethi-brown-dark: rgb(var(--tanfeethi-brown-dark-rgb));
+
+  --tanfeethi-turquoise-rgb: 64,224,208;
+  --tanfeethi-turquoise: rgb(var(--tanfeethi-turquoise-rgb));
+  --tanfeethi-turquoise-light-rgb: 127,255,212;
+  --tanfeethi-turquoise-light: rgb(var(--tanfeethi-turquoise-light-rgb));
+
+  --tanfeethi-cream-rgb: 245,241,232;
+  --tanfeethi-cream: rgb(var(--tanfeethi-cream-rgb));
+
+  /* Text / surfaces */
+  --foreground-rgb: 43,43,43;
+  --muted-rgb: 102,102,102;
+  --surface-rgb: 255,255,255;
+
+  /* Shadows / geometry */
+  --shadow-1: 0 6px 18px rgba(0,0,0,0.08);
+  --border-radius: 12px;
+  --focus-ring: rgba(var(--tanfeethi-turquoise-rgb), 0.18);
+  --button-height: 44px;
+}
+
+/* Small helpers for accessible contrast combos */
+.text-on-cream { color: rgb(var(--foreground-rgb)); }
+.muted { color: rgb(var(--muted-rgb)); }

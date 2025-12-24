@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import Button from '@/components/Button'
+import Card from '@/components/Card'
 
 export default function Home() {
   const router = useRouter()
@@ -232,7 +234,7 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full"
       >
-        <div className="bg-white rounded-3xl shadow-2xl p-8 mb-8">
+        <Card className="mb-8">
           <h1 className="text-3xl font-bold text-tanfeethi-brown text-center mb-2">
             أهلاً بك! 👋
           </h1>
@@ -275,11 +277,7 @@ export default function Home() {
               </div>
             )}
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-tanfeethi-brown hover:bg-tanfeethi-brown-dark text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:transform-none touch-effect shadow-lg"
-            >
+            <Button variant="primary" type="submit" disabled={isSubmitting} className="w-full justify-center">
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
                   <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
@@ -291,9 +289,9 @@ export default function Home() {
               ) : (
                 'تأكيد البيانات'
               )}
-            </button>
+            </Button>
           </form>
-        </div>
+        </Card>
 
         <p className="text-center text-sm text-gray-500">
           بمسح رمز QR، أنت توافق على المشاركة في الفعالية
