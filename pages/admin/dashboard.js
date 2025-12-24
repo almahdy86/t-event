@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
-import { 
-  Users, Image as ImageIcon, Brain, Settings, Bell, 
-  Activity, TrendingUp, CheckCircle, XCircle, LogOut 
+import {
+  Users, Image as ImageIcon, Brain, Settings, Bell,
+  Activity, TrendingUp, CheckCircle, XCircle, LogOut, Gift
 } from 'lucide-react'
 
 export default function AdminDashboard() {
@@ -216,7 +216,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <ActionCard
             title="إرسال إشعار"
             icon={<Bell size={40} />}
@@ -235,6 +235,12 @@ export default function AdminDashboard() {
             color="bg-orange-500"
             badge={stats.pendingPhotos}
             onClick={() => router.push('/admin/photos')}
+          />
+          <ActionCard
+            title="قرعة الفائزين"
+            icon={<Gift size={40} />}
+            color="bg-gradient-to-r from-yellow-400 to-orange-500"
+            onClick={() => router.push('/admin/lottery')}
           />
         </div>
       </div>

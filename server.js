@@ -81,7 +81,22 @@ app.prepare().then(() => {
     console.log('👤 User connected:', socket.id);
 
     socket.on('employee:connect', (data) => {
-      socket.join('employees'); // إدخال الموظف في غرفة خاصة بالإشعارات
+      if (data && data.employeeId) {
+        onlineUsers.set(socket.id, data.employeeId);
+        console.log(`✅ Employee ${data.employeeId} connected. Total online: ${onlineUsers.size}`);
+
+        // إرسال العدد المحدث للمشرفين
+        io.emit('online:count', { count: onlineUsers.size });
+      }
+      socket.join('employees');
+    });
+
+    socket.on('disconnect', () => {
+      onlineUsers.delete(socket.id);
+      console.log(`❌ User disconnected. Total online: ${onlineUsers.size}`);
+
+      // إرسال العدد المحدث للمشرفين
+      io.emit('online:count', { count: onlineUsers.size });
     });
 
     // استقبال إجابة الموظف في التحدي
@@ -459,16 +474,17 @@ app.prepare().then(() => {
       const photosCount = await pool.query('SELECT COUNT(*) FROM shared_photos WHERE is_approved = true')
       const pendingPhotos = await pool.query('SELECT COUNT(*) FROM shared_photos WHERE is_approved = false')
       const answersCount = await pool.query('SELECT COUNT(*) FROM answers')
+      const correctAnswersCount = await pool.query('SELECT COUNT(*) FROM answers WHERE is_correct = true')
 
       res.json({
         success: true,
         stats: {
           totalEmployees: parseInt(employeesCount.rows[0].count),
-          onlineCount: 0, // TODO: implement socket tracking
+          onlineCount: onlineUsers.size,
           totalPhotos: parseInt(photosCount.rows[0].count),
           pendingPhotos: parseInt(pendingPhotos.rows[0].count),
           totalAnswers: parseInt(answersCount.rows[0].count),
-          correctAnswers: parseInt(answersCount.rows[0].count),
+          correctAnswers: parseInt(correctAnswersCount.rows[0].count),
           employees: parseInt(employeesCount.rows[0].count),
           photos: parseInt(photosCount.rows[0].count),
           answers: parseInt(answersCount.rows[0].count)
@@ -569,6 +585,33 @@ app.prepare().then(() => {
       res.json({ success: true })
     } catch (error) {
       console.error('Error deleting question:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
+  // ============ Lottery API ============
+
+  // Get eligible employees for lottery (those with correct answers)
+  server.get('/api/admin/lottery/eligible', async (req, res) => {
+    try {
+      const result = await pool.query(`
+        SELECT
+          e.id as employee_id,
+          e.employee_number,
+          e.full_name,
+          e.job_title,
+          COUNT(a.id) as total_answers,
+          SUM(CASE WHEN a.is_correct THEN 1 ELSE 0 END) as correct_count
+        FROM employees e
+        INNER JOIN answers a ON e.id = a.employee_id
+        WHERE a.is_correct = true
+        GROUP BY e.id, e.employee_number, e.full_name, e.job_title
+        ORDER BY correct_count DESC
+      `)
+
+      res.json({ success: true, employees: result.rows })
+    } catch (error) {
+      console.error('Error fetching eligible employees:', error)
       res.status(500).json({ success: false })
     }
   })
