@@ -278,7 +278,7 @@ export default function IdentityMirrorsPage() {
               onClick={toggleCamera}
               className="text-white bg-white/20 px-4 py-2 rounded-full flex items-center gap-2"
             >
-              🔄 تبديل الكاميرا
+              🔄 فتح \ تبديل
             </button>
           </div>
 
