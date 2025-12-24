@@ -224,9 +224,31 @@ app.prepare().then(() => {
 // جلب السؤال النشط لتحدي بلا أخطاء
   server.get('/api/questions/active', async (req, res) => {
     try {
+      const { employeeId } = req.query;
+
       const result = await pool.query('SELECT * FROM questions WHERE is_active = true LIMIT 1');
+
       if (result.rows.length > 0) {
         const question = result.rows[0];
+
+        // التحقق إذا كان الموظف قد أجاب على هذا السؤال
+        if (employeeId) {
+          const answerCheck = await pool.query(
+            'SELECT id FROM answers WHERE employee_id = $1 AND question_id = $2',
+            [employeeId, question.id]
+          );
+
+          // إذا كان قد أجاب، لا نرسل السؤال
+          if (answerCheck.rows.length > 0) {
+            return res.json({
+              success: true,
+              question: null,
+              alreadyAnswered: true,
+              message: 'لقد أجبت على هذا السؤال بالفعل! انتظر السؤال التالي 🎯'
+            });
+          }
+        }
+
         // Parse options if it's a string
         question.options = typeof question.options === 'string' ? JSON.parse(question.options) : question.options;
         res.json({ success: true, question });
