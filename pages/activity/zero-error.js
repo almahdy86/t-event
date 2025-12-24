@@ -27,17 +27,13 @@ export default function ZeroErrorChallengePage() {
     // الاتصال بـ Socket
     socketInitializer()
 
+    // جلب السؤال النشط
+    fetchActiveQuestion()
+
     return () => {
       if (socket) socket.disconnect()
     }
   }, [])
-
-  useEffect(() => {
-    // جلب السؤال النشط بعد تحميل بيانات الموظف
-    if (employee) {
-      fetchActiveQuestion()
-    }
-  }, [employee])
 
   useEffect(() => {
     if (question && timeLeft > 0 && !isAnswered) {
@@ -55,29 +51,13 @@ export default function ZeroErrorChallengePage() {
   const socketInitializer = () => {
     socket = io();
 
-    socket.on('question:active', async (newQuestion) => {
-      // التحقق إذا كان الموظف قد أجاب على هذا السؤال
-      if (employee && newQuestion) {
-        try {
-          const response = await fetch(`/api/questions/active?employeeId=${employee.id}`)
-          const data = await response.json()
-
-          if (data.success && data.question && !data.alreadyAnswered) {
-            // لم يجب بعد - اعرض السؤال
-            setQuestion(data.question)
-            setTimeLeft(30)
-            setIsAnswered(false)
-            setResult(null)
-            setSelectedAnswer(null)
-            setStartTime(Date.now())
-          } else {
-            // قد أجاب - لا تعرض السؤال
-            setQuestion(null)
-          }
-        } catch (error) {
-          console.error('Error checking question:', error)
-        }
-      }
+    socket.on('question:active', (newQuestion) => {
+      setQuestion(newQuestion)
+      setTimeLeft(30)
+      setIsAnswered(false)
+      setResult(null)
+      setSelectedAnswer(null)
+      setStartTime(Date.now())
     })
 
     socket.on('answer:result', (data) => {
@@ -99,19 +79,12 @@ export default function ZeroErrorChallengePage() {
 
   const fetchActiveQuestion = async () => {
     try {
-      if (!employee) return
-
-      const response = await fetch(`/api/questions/active?employeeId=${employee.id}`)
+      const response = await fetch('/api/questions/active')
       const data = await response.json()
-
+      
       if (data.success && data.question) {
         setQuestion(data.question)
         setStartTime(Date.now())
-        setIsAnswered(false)
-        setResult(null)
-      } else if (data.alreadyAnswered) {
-        // الموظف قد أجاب على هذا السؤال - لا نعرض السؤال
-        setQuestion(null)
       }
     } catch (error) {
       console.error('خطأ في جلب السؤال:', error)
@@ -225,8 +198,8 @@ export default function ZeroErrorChallengePage() {
         <div className="space-y-4 flex-1">
           {(Array.isArray(question.options) ? question.options : JSON.parse(question.options)).map((option, index) => {
             const isSelected = selectedAnswer === index
-            const isCorrect = result && !result.error && index === result.correctAnswer
-            const isWrong = result && !result.error && isSelected && !result.isCorrect
+            const isCorrect = result && index === result.correctAnswer
+            const isWrong = result && isSelected && !result.isCorrect
 
             return (
               <motion.button
