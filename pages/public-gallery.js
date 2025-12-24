@@ -49,9 +49,22 @@ export default function PublicGalleryPage() {
     }
   }
 
-  const displayedPhotos = filter === 'top'
-    ? photos.filter(p => p.likes_count > 0).sort((a, b) => b.likes_count - a.likes_count).slice(0, 10)
-    : photos
+  // ترتيب الصور: الأكثر إعجاباً أولاً (6 صور) ثم الباقي بالترتيب الزمني
+  const getDisplayedPhotos = () => {
+    if (filter === 'top') {
+      return photos.filter(p => p.likes_count > 0).sort((a, b) => b.likes_count - a.likes_count).slice(0, 10)
+    }
+
+    // فصل الصور حسب الإعجابات
+    const sortedByLikes = [...photos].sort((a, b) => (b.likes_count || 0) - (a.likes_count || 0))
+    const top6 = sortedByLikes.slice(0, 6) // أفضل 6 صور
+    const top6Ids = new Set(top6.map(p => p.id))
+    const remaining = photos.filter(p => !top6Ids.has(p.id)) // باقي الصور بالترتيب الأصلي
+
+    return [...top6, ...remaining]
+  }
+
+  const displayedPhotos = getDisplayedPhotos()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-tanfeethi-turquoise to-blue-500 py-6 px-2">
@@ -122,7 +135,9 @@ export default function PublicGalleryPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.03 }}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer ${
+                  filter === 'all' && index < 6 ? 'ring-4 ring-yellow-400' : ''
+                }`}
                 onClick={() => setSelectedPhoto(photo)}
               >
                 {/* Photo */}
@@ -132,6 +147,12 @@ export default function PublicGalleryPage() {
                     alt={`صورة من ${photo.full_name}`}
                     className="w-full h-full object-cover"
                   />
+                  {/* أيقونة التاج للصور الأكثر إعجاباً */}
+                  {filter === 'all' && index < 6 && (
+                    <div className="absolute top-2 left-2 bg-yellow-400 text-yellow-900 px-2 py-1 rounded-full text-xs font-bold">
+                      👑 الأكثر إعجاباً
+                    </div>
+                  )}
                   {photo.likes_count > 0 && (
                     <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full flex items-center gap-1 text-sm">
                       <Heart className="w-3 h-3 fill-white" />
