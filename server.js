@@ -71,6 +71,9 @@ app.prepare().then(() => {
     fs.mkdirSync(uploadsDir, { recursive: true })
   }
 
+  // تقديم الصور الثابتة (Static Files)
+  server.use('/uploads', express.static(uploadsDir))
+
   // Socket.io handlers
   const onlineUsers = new Map()
 
