@@ -67,7 +67,7 @@ export default function PublicGalleryPage() {
   const displayedPhotos = getDisplayedPhotos()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-tanfeethi-turquoise to-blue-500 py-6 px-2">
+    <div className="min-h-screen py-6 px-2" style={{background: '#F3F0EE'}}>
       {/* Header */}
       <div className="w-full mb-6">
         <motion.div
@@ -75,11 +75,11 @@ export default function PublicGalleryPage() {
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-8"
         >
-          <Camera className="w-16 h-16 text-white mx-auto mb-4" />
-          <h1 className="text-4xl font-black text-white mb-2">
+          <Camera className="w-16 h-16 mx-auto mb-4" style={{color: '#CE7B5B'}} />
+          <h1 className="text-4xl font-black mb-2" style={{color: '#000000'}}>
             📸 معرض صور الفعالية
           </h1>
-          <p className="text-white/90 text-lg">
+          <p className="text-lg" style={{color: '#000000'}}>
             صور مشاركينا الرائعة
           </p>
         </motion.div>
@@ -88,22 +88,24 @@ export default function PublicGalleryPage() {
         <div className="flex gap-4 justify-center mb-6">
           <button
             onClick={() => setFilter('all')}
-            className={`px-6 py-3 rounded-xl font-bold transition-all ${
-              filter === 'all'
-                ? 'bg-white text-tanfeethi-turquoise shadow-lg'
-                : 'bg-white/20 text-white hover:bg-white/30'
-            }`}
+            className="px-6 py-3 rounded-xl font-bold transition-all"
+            style={{
+              background: filter === 'all' ? '#AB8025' : '#9C7DDE',
+              color: 'white',
+              boxShadow: filter === 'all' ? '0 4px 12px rgba(171,128,37,0.3)' : 'none'
+            }}
           >
             <Camera className="inline-block w-5 h-5 ml-2" />
             جميع الصور ({photos.length})
           </button>
           <button
             onClick={() => setFilter('top')}
-            className={`px-6 py-3 rounded-xl font-bold transition-all ${
-              filter === 'top'
-                ? 'bg-white text-tanfeethi-turquoise shadow-lg'
-                : 'bg-white/20 text-white hover:bg-white/30'
-            }`}
+            className="px-6 py-3 rounded-xl font-bold transition-all"
+            style={{
+              background: filter === 'top' ? '#AB8025' : '#9C7DDE',
+              color: 'white',
+              boxShadow: filter === 'top' ? '0 4px 12px rgba(171,128,37,0.3)' : 'none'
+            }}
           >
             <Trophy className="inline-block w-5 h-5 ml-2" />
             الأكثر إعجاباً
@@ -117,13 +119,13 @@ export default function PublicGalleryPage() {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white/10 backdrop-blur rounded-2xl p-12 text-center"
+            className="bg-white rounded-2xl p-12 text-center shadow-lg"
           >
-            <Camera className="w-16 h-16 text-white/50 mx-auto mb-4" />
-            <p className="text-white text-xl">
+            <Camera className="w-16 h-16 mx-auto mb-4" style={{color: '#9C7DDE'}} />
+            <p className="text-xl" style={{color: '#000000'}}>
               لا توجد صور بعد!
             </p>
-            <p className="text-white/70 mt-2">
+            <p className="mt-2" style={{color: '#000000', opacity: 0.7}}>
               كن أول من يشارك صورة 📸
             </p>
           </motion.div>
@@ -165,14 +167,14 @@ export default function PublicGalleryPage() {
                 <div className="p-3">
                   <div className="flex items-center justify-between">
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-gray-800 text-sm truncate">
+                      <h3 className="font-bold text-sm truncate" style={{color: '#000000'}}>
                         {photo.full_name}
                       </h3>
-                      <p className="text-gray-500 text-xs">
+                      <p className="text-xs" style={{color: '#000000', opacity: 0.6}}>
                         رقم {photo.employee_number}
                       </p>
                     </div>
-                    <Heart className="w-6 h-6 text-gray-300 flex-shrink-0" />
+                    <Heart className="w-6 h-6 flex-shrink-0" style={{color: '#CE7B5B', opacity: 0.3}} />
                   </div>
                 </div>
               </motion.div>
@@ -203,23 +205,24 @@ export default function PublicGalleryPage() {
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-800">
+                  <h3 className="text-2xl font-bold" style={{color: '#000000'}}>
                     {selectedPhoto.full_name}
                   </h3>
-                  <p className="text-gray-500">
+                  <p style={{color: '#000000', opacity: 0.6}}>
                     رقم {selectedPhoto.employee_number}
                   </p>
                 </div>
-                <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full">
-                  <Heart className="w-6 h-6 text-red-500 fill-red-500" />
-                  <span className="text-xl font-bold text-red-500">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{background: '#ffebee'}}>
+                  <Heart className="w-6 h-6 fill-red-500" style={{color: '#ef5350'}} />
+                  <span className="text-xl font-bold" style={{color: '#ef5350'}}>
                     {selectedPhoto.likes_count}
                   </span>
                 </div>
               </div>
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="w-full bg-tanfeethi-turquoise text-white py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all"
+                className="w-full text-white py-3 rounded-xl font-bold transition-all"
+                style={{background: '#CE7B5B'}}
               >
                 إغلاق
               </button>
@@ -229,11 +232,12 @@ export default function PublicGalleryPage() {
       )}
 
       {/* Live Update Indicator */}
-      <div className="fixed bottom-4 left-4 bg-white/10 backdrop-blur text-white px-4 py-2 rounded-full text-sm flex items-center gap-2">
+      <div className="fixed bottom-4 left-4 bg-white px-4 py-2 rounded-full text-sm flex items-center gap-2 shadow-lg" style={{color: '#000000'}}>
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-2 h-2 bg-green-400 rounded-full"
+          className="w-2 h-2 rounded-full"
+          style={{background: '#234024'}}
         />
         تحديث مباشر
       </div>

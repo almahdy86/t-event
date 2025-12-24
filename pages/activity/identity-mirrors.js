@@ -170,26 +170,27 @@ export default function IdentityMirrorsPage() {
 
   if (step === 'intro') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col">
-        <div className="p-4 flex items-center justify-between bg-white/10 backdrop-blur">
+      <div className="min-h-screen flex flex-col" style={{background: '#F3F0EE'}}>
+        <div className="p-4 flex items-center justify-between bg-white shadow">
           <button
             onClick={() => router.push('/map')}
-            className="text-white"
+            style={{color: '#000000'}}
           >
             ← رجوع
           </button>
-          <h1 className="text-white font-bold text-xl">مرايا الهوية</h1>
+          <h1 className="font-bold text-xl" style={{color: '#000000'}}>مرايا الهوية</h1>
           <div className="w-8"></div>
         </div>
 
-        <div className="flex-1 flex flex-col items-center justify-center p-6 text-white">
+        <div className="flex-1 flex flex-col items-center justify-center p-6">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring' }}
-            className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mb-8"
+            className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
+            style={{background: '#9C7DDE'}}
           >
-            <Camera size={64} />
+            <Camera size={64} color="white" />
           </motion.div>
 
           <motion.h2
@@ -197,6 +198,7 @@ export default function IdentityMirrorsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-4xl font-bold mb-4 text-center"
+            style={{color: '#000000'}}
           >
             التقط لحظتك! 📸
           </motion.h2>
@@ -205,7 +207,8 @@ export default function IdentityMirrorsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-xl text-center mb-8 opacity-90"
+            className="text-xl text-center mb-8"
+            style={{color: '#000000'}}
           >
             شارك لحظاتك المميزة مع زملائك
             <br />
@@ -216,10 +219,10 @@ export default function IdentityMirrorsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-white/20 rounded-2xl p-6 mb-8 w-full max-w-sm"
+            className="bg-white rounded-2xl p-6 mb-8 w-full max-w-sm shadow-lg"
           >
-            <h3 className="font-bold text-lg mb-3">📍 موقع الفعالية</h3>
-            <p className="opacity-90">القاعة الرئيسية - الجهة الشرقية</p>
+            <h3 className="font-bold text-lg mb-3" style={{color: '#CE7B5B'}}>📍 موقع الفعالية</h3>
+            <p style={{color: '#000000'}}>القاعة الرئيسية - الجهة الشرقية</p>
           </motion.div>
 
           <motion.button
@@ -228,7 +231,8 @@ export default function IdentityMirrorsPage() {
             transition={{ delay: 0.5 }}
             whileTap={{ scale: 0.95 }}
             onClick={startCamera}
-            className="bg-white text-purple-600 font-bold text-xl px-12 py-4 rounded-full shadow-2xl hover:bg-gray-100 transition-colors flex items-center gap-3"
+            className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-colors flex items-center gap-3"
+            style={{background: '#AB8025', color: 'white'}}
           >
             <Camera size={28} />
             ابدأ التصوير
@@ -239,7 +243,8 @@ export default function IdentityMirrorsPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
             onClick={() => router.push('/activity/zero-error')}
-            className="mt-6 text-white/80 hover:text-white flex items-center gap-2"
+            className="mt-6 flex items-center gap-2"
+            style={{color: '#3D2031'}}
           >
             التالي: تحدي بلا أخطاء
             <ArrowRight size={20} />
