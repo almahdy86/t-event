@@ -549,6 +549,34 @@ app.prepare().then(() => {
     }
   })
 
+  // ============ Leaderboard API ============
+
+  // Get leaderboard (top employees by correct answers)
+  server.get('/api/leaderboard', async (req, res) => {
+    try {
+      const result = await pool.query(`
+        SELECT
+          e.id as employee_id,
+          e.employee_number,
+          e.full_name,
+          e.job_title,
+          COUNT(a.id) as total_answers,
+          SUM(CASE WHEN a.is_correct THEN 1 ELSE 0 END) as correct_count
+        FROM employees e
+        LEFT JOIN answers a ON e.id = a.employee_id
+        GROUP BY e.id, e.employee_number, e.full_name, e.job_title
+        HAVING COUNT(a.id) > 0
+        ORDER BY correct_count DESC, total_answers ASC
+        LIMIT 50
+      `)
+
+      res.json({ success: true, leaderboard: result.rows })
+    } catch (error) {
+      console.error('Error fetching leaderboard:', error)
+      res.status(500).json({ success: false })
+    }
+  })
+
   // ============ Photos Management APIs ============
 
   // Get photos (filtered)
