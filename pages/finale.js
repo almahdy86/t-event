@@ -31,12 +31,13 @@ export default function FinalePage() {
 
   if (!showNumber) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-500 to-emerald-500 flex flex-col">
+      <div className="min-h-screen flex flex-col" style={{background: '#234024'}}>
         {/* زر الرجوع */}
         <div className="p-4">
           <button
             onClick={() => router.push('/map')}
-            className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+            style={{background: 'rgba(255,255,255,0.2)', color: 'white'}}
           >
             <ArrowRight size={20} />
             رجوع
@@ -61,12 +62,13 @@ export default function FinalePage() {
   }
 
   return (
-    <div className="fixed inset-0 bg-tanfeethi-turquoise flex flex-col text-white overflow-hidden">
+    <div className="fixed inset-0 flex flex-col text-white overflow-hidden" style={{background: '#234024'}}>
       {/* زر الرجوع */}
       <div className="p-4 z-20">
         <button
           onClick={() => router.push('/map')}
-          className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+          style={{background: 'rgba(255,255,255,0.2)'}}
         >
           <ArrowRight size={20} />
           رجوع
@@ -132,25 +134,31 @@ export default function FinalePage() {
 
       {/* تأثيرات بصرية */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-4 h-4 bg-white rounded-full opacity-20"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: -20
-            }}
-            animate={{
-              y: window.innerHeight + 20,
-              x: Math.random() * window.innerWidth
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Infinity,
-              delay: Math.random() * 2
-            }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          const randomX = Math.random() * 100
+          const randomDelay = Math.random() * 2
+          const randomDuration = Math.random() * 3 + 2
+
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-4 h-4 bg-white rounded-full opacity-20"
+              style={{
+                left: `${randomX}%`,
+                top: '-20px'
+              }}
+              animate={{
+                y: ['0vh', '100vh'],
+                x: [`${randomX}%`, `${Math.random() * 100}%`]
+              }}
+              transition={{
+                duration: randomDuration,
+                repeat: Infinity,
+                delay: randomDelay
+              }}
+            />
+          )
+        })}
       </div>
     </div>
   )
