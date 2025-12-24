@@ -713,9 +713,26 @@ app.prepare().then(() => {
       const { is_approved } = req.body
 
       const result = await pool.query(
-        'UPDATE shared_photos SET is_approved = $1 WHERE id = $2 RETURNING *',
+        `UPDATE shared_photos SET is_approved = $1 WHERE id = $2 RETURNING *`,
         [is_approved, id]
       )
+
+      // إذا تم اعتماد الصورة، أرسل إشعار فوري لجميع الشاشات
+      if (is_approved && result.rows.length > 0) {
+        // جلب معلومات الموظف مع الصورة
+        const photoWithEmployee = await pool.query(
+          `SELECT sp.*, e.full_name, e.employee_number
+           FROM shared_photos sp
+           JOIN employees e ON sp.employee_id = e.id
+           WHERE sp.id = $1`,
+          [id]
+        )
+
+        if (photoWithEmployee.rows.length > 0) {
+          console.log('✅ Photo approved, broadcasting to all clients:', photoWithEmployee.rows[0].id)
+          io.emit('photo:approved', photoWithEmployee.rows[0])
+        }
+      }
 
       res.json({ success: true, photo: result.rows[0] })
     } catch (error) {

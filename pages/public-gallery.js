@@ -16,14 +16,22 @@ export default function PublicGalleryPage() {
     const newSocket = io()
     setSocket(newSocket)
 
+    // تحديث عداد الإعجابات
     newSocket.on('photo:likes:update', (updatedPhoto) => {
       setPhotos(prev =>
         prev.map(p => p.id === updatedPhoto.id ? updatedPhoto : p)
       )
     })
 
+    // إضافة صورة معتمدة فوراً (تحديث فوري!)
+    newSocket.on('photo:approved', (approvedPhoto) => {
+      console.log('✅ New photo approved:', approvedPhoto)
+      setPhotos(prev => [approvedPhoto, ...prev])
+    })
+
+    // تحديث عام عند رفع صورة جديدة
     newSocket.on('photo:new', () => {
-      fetchPhotos() // تحديث عند رفع صورة جديدة
+      fetchPhotos()
     })
 
     return () => newSocket.close()

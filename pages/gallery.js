@@ -45,6 +45,12 @@ export default function GalleryPage() {
       }
     })
 
+    // إضافة صورة معتمدة فوراً (تحديث فوري!)
+    newSocket.on('photo:approved', (approvedPhoto) => {
+      console.log('✅ New photo approved:', approvedPhoto)
+      setPhotos(prev => [approvedPhoto, ...prev])
+    })
+
     return () => newSocket.close()
   }, [])
 
