@@ -387,6 +387,15 @@
         }
 
         // Resize handler
+        window.addEventListener('load', function() {
+        // استهداف الخريطة مباشرة
+            const map = document.getElementsByName('image-map')[0];
+            if (map) {
+            imageMapResize();
+            }
+            });
+
+        // تأكد من استدعاء المكتبة عند تغيير حجم النافذة أيضاً
         window.addEventListener('resize', function() {
             imageMapResize();
         });
