@@ -36,8 +36,8 @@ export default function EventMapPage() {
         }}
         ref={(el) => {
           if (el) {
-            // Start from bottom middle
-            el.scrollTop = el.scrollHeight - el.clientHeight;
+            // Start from middle-bottom (like the image shows)
+            el.scrollTop = (el.scrollHeight - el.clientHeight) * 0.65;
             el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
           }
         }}
