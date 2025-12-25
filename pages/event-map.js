@@ -133,7 +133,13 @@ export default function EventMapPage() {
         <h1 className="text-xl font-bold" style={{color: '#000000'}}>
           🗺️ خريطة الفعالية
         </h1>
-        <div className="w-16"></div>
+        <button
+          onClick={() => window.location.href = '/interactive-map.html'}
+          className="px-3 py-2 rounded-lg text-white font-bold text-sm transition-all hover:scale-105"
+          style={{background: '#9C7DDE'}}
+        >
+          خريطة HTML
+        </button>
       </div>
 
       {/* Map Container */}
