@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-tanfeethi-brown to-tanfeethi-brown-dark flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-tanfeethi-brown text-center mb-2">
+          <h1 className="text-3xl font-bold text-center mb-2" style={{color: '#AB8025'}}>
             لوحة التحكم
           </h1>
           <p className="text-center text-gray-600 mb-8">
@@ -71,7 +71,7 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-tanfeethi-brown font-semibold mb-2">
+              <label className="block font-semibold mb-2" style={{color: '#AB8025'}}>
                 اسم المستخدم
               </label>
               <div className="relative">
@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
             </div>
 
             <div>
-              <label className="block text-tanfeethi-brown font-semibold mb-2">
+              <label className="block font-semibold mb-2" style={{color: '#AB8025'}}>
                 كلمة المرور
               </label>
               <div className="relative">
@@ -115,7 +115,10 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-tanfeethi-brown hover:bg-tanfeethi-brown-dark text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:transform-none"
+              className="w-full text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:transform-none"
+              style={{background: '#AB8025'}}
+              onMouseEnter={(e) => e.target.style.background = '#8a6b1f'}
+              onMouseLeave={(e) => e.target.style.background = '#AB8025'}
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">

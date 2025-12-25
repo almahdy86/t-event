@@ -107,7 +107,7 @@ export default function GalleryPage() {
             >
               <ArrowRight size={24} />
             </button>
-            <h1 className="text-3xl font-bold flex items-center gap-3" style={{color: '#CE7B5B'}}>
+            <h1 className="text-3xl font-bold flex items-center gap-3 text-white">
               <Camera size={32} strokeWidth={2.5} />
               معرض الصور المشاركة
             </h1>
