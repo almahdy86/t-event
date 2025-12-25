@@ -53,10 +53,10 @@ export default function HospitalityPage() {
         <div className="bg-white/20 rounded-2xl p-6 mb-8 w-full max-w-sm">
           <div className="flex items-start gap-3 mb-4">
             <MapPin size={24} className="flex-shrink-0 mt-1" />
-            <div>
+            {/* <div>
               <h3 className="font-bold text-lg mb-2">موقع الفعالية</h3>
               <p className="opacity-90">المنطقة التفاعلية - الجانب الغربي من القاعة</p>
-            </div>
+            </div> */}
           </div>
 
           <div className="border-t border-white/20 pt-4">

@@ -221,8 +221,8 @@ export default function IdentityMirrorsPage() {
             transition={{ delay: 0.4 }}
             className="bg-white rounded-2xl p-6 mb-8 w-full max-w-sm shadow-lg"
           >
-            <h3 className="font-bold text-lg mb-3" style={{color: '#CE7B5B'}}>📍 موقع الفعالية</h3>
-            <p style={{color: '#000000'}}>القاعة الرئيسية - الجهة الشرقية</p>
+            {/* <h3 className="font-bold text-lg mb-3" style={{color: '#CE7B5B'}}>📍 موقع الفعالية</h3>
+            <p style={{color: '#000000'}}>القاعة الرئيسية - الجهة الشرقية</p> */}
           </motion.div>
 
           <motion.button
