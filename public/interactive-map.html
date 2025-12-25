@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -34,18 +34,12 @@
         .map-wrapper {
             position: relative;
             width: 100%;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
             padding: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .map-container {
-            position: relative;
-            width: 100%;
-            display: inline-block;
         }
 
         img {
@@ -55,116 +49,75 @@
             border-radius: 10px;
         }
 
-        /* نقاط تفاعلية */
-        .marker {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            transform: translate(-50%, -50%);
+        /* Area highlighting */
+        area {
             cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s;
+            outline: none;
         }
 
-        .marker:hover {
-            transform: translate(-50%, -50%) scale(1.2);
+        area:hover {
+            opacity: 0.8;
         }
 
-        .marker-pin {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.9);
             color: white;
-            font-size: 24px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            position: relative;
-        }
-
-        .marker-pin::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: inherit;
-            animation: pulse 2s infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scale(1.3);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0;
-            }
-        }
-
-        .marker-label {
-            position: absolute;
-            top: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.85);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: bold;
+            pointer-events: none;
+            z-index: 1000;
             white-space: nowrap;
             opacity: 0;
-            pointer-events: none;
             transition: opacity 0.3s;
-            z-index: 20;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
-        .marker:hover .marker-label {
+        .tooltip.show {
             opacity: 1;
         }
-
-        /* ألوان المناطق */
-        .color-purple { background: #9C7DDE; }
-        .color-orange { background: #CE7B5B; }
-        .color-gold { background: #AB8025; }
-        .color-green { background: #234024; }
 
         /* Legend */
         .legend {
             margin-top: 30px;
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
         .legend h3 {
             color: #000000;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 1.5rem;
+            border-bottom: 3px solid #9C7DDE;
+            padding-bottom: 10px;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 1.1rem;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .legend-item:hover {
+            background: #f8f8f8;
+            transform: translateX(-5px);
         }
 
         .legend-color {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            margin-left: 10px;
+            margin-left: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         /* Back button */
@@ -178,11 +131,33 @@
             font-weight: bold;
             margin-bottom: 20px;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(156, 125, 222, 0.3);
         }
 
         .back-btn:hover {
             background: #7d5ec4;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(156, 125, 222, 0.4);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #9C7DDE 0%, #CE7B5B 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .info-box h2 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            font-size: 1rem;
+            opacity: 0.95;
         }
 
         @media (max-width: 768px) {
@@ -198,14 +173,8 @@
                 padding: 10px;
             }
 
-            .marker {
-                width: 40px;
-                height: 40px;
-            }
-
-            .marker-label {
-                font-size: 12px;
-                top: 50px;
+            .legend-item {
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -216,101 +185,176 @@
 
         <h1>🗺️ خريطة الفعالية التفاعلية</h1>
 
+        <div class="info-box">
+            <h2>🎯 اضغط على أي منطقة في الخريطة</h2>
+            <p>الأنشطة التفاعلية ستنقلك مباشرة للصفحة المخصصة</p>
+        </div>
+
         <div class="map-wrapper">
-            <div class="map-container" id="mapContainer">
-                <img src="/event-map.jpg" alt="خريطة الفعالية" id="mapImage">
+            <!-- Image Map Generated by http://www.image-map.net/ -->
+            <img src="/event-map.jpg" usemap="#image-map" alt="خريطة الفعالية" id="mapImage">
 
-                <!-- المناطق التفاعلية -->
-                <!-- حسب الصورة المرفقة -->
+            <map name="image-map">
+                <area target="" alt="البوابة الخارجية والممر" title="البوابة الخارجية والممر"
+                      href="javascript:showInfo('البوابة الخارجية والممر')"
+                      coords="566,133,569,164,541,171,534,147"
+                      shape="poly"
+                      data-name="البوابة الخارجية والممر">
 
-                <!-- خدمة بلا أخطاء - أعلى يمين -->
-                <div class="marker" style="left: 85%; top: 10%;" onclick="navigateTo('/activity/zero-error')">
-                    <div class="marker-pin color-orange">📋</div>
-                    <div class="marker-label">تحدي بلا أخطاء</div>
-                </div>
+                <area target="" alt="الاستقبال" title="الاستقبال"
+                      href="javascript:showInfo('الاستقبال')"
+                      coords="559,232,553,254,538,248,541,223"
+                      shape="poly"
+                      data-name="الاستقبال">
 
-                <!-- فن الإكرام - يمين وسط علوي -->
-                <div class="marker" style="left: 88%; top: 24%;" onclick="navigateTo('/activity/hospitality')">
-                    <div class="marker-pin color-gold">💎</div>
-                    <div class="marker-label">فن الإكرام</div>
-                </div>
+                <area target="" alt="رحلة الحفاوة" title="رحلة الحفاوة"
+                      href="javascript:showInfo('رحلة الحفاوة')"
+                      coords="501,394,546,392,543,439,494,446"
+                      shape="poly"
+                      data-name="رحلة الحفاوة">
 
-                <!-- بصمة الضيافة - وسط أعلى -->
-                <div class="marker" style="left: 60%; top: 32%;" onclick="showInfo('بصمة الضيافة')">
-                    <div class="marker-pin color-purple">✨</div>
-                    <div class="marker-label">بصمة الضيافة</div>
-                </div>
+                <area target="" alt="جيم - جلسات" title="جيم - جلسات"
+                      href="javascript:showInfo('جيم - جلسات')"
+                      coords="393,474,393,577,226,589,239,489"
+                      shape="poly"
+                      data-name="جيم - جلسات">
 
-                <!-- رحلة الحفاوة - وسط -->
-                <div class="marker" style="left: 72%; top: 48%;" onclick="showInfo('رحلة الحفاوة')">
-                    <div class="marker-pin color-green">🏕️</div>
-                    <div class="marker-label">رحلة الحفاوة</div>
-                </div>
+                <area target="" alt="منطقة العشاء" title="منطقة العشاء"
+                      href="javascript:showInfo('منطقة العشاء')"
+                      coords="840,394,971,324,1042,364,920,422,872,453,840,436"
+                      shape="poly"
+                      data-name="منطقة العشاء">
 
-                <!-- جدار التصوير - وسط يسار -->
-                <div class="marker" style="left: 25%; top: 52%;" onclick="showInfo('جدار التصوير')">
-                    <div class="marker-pin color-gold">📸</div>
-                    <div class="marker-label">جدار التصوير</div>
-                </div>
+                <area target="" alt="تحدي بلا أخطاء" title="تحدي بلا أخطاء"
+                      href="javascript:navigateTo('/activity/zero-error')"
+                      coords="619,425,687,415,680,380,623,392"
+                      shape="poly"
+                      data-name="تحدي بلا أخطاء"
+                      class="interactive-area">
 
-                <!-- مرايا الهوية - أسفل يسار -->
-                <div class="marker" style="left: 18%; top: 68%;" onclick="navigateTo('/activity/identity-mirrors')">
-                    <div class="marker-pin color-purple">🪞</div>
-                    <div class="marker-label">مرايا الهوية</div>
-                </div>
+                <area target="" alt="فن الإكرام" title="فن الإكرام"
+                      href="javascript:navigateTo('/activity/hospitality')"
+                      coords="609,361,651,354,644,331,600,336"
+                      shape="poly"
+                      data-name="فن الإكرام"
+                      class="interactive-area">
 
-                <!-- الاستقبال - أسفل وسط -->
-                <div class="marker" style="left: 55%; top: 75%;" onclick="showInfo('الاستقبال')">
-                    <div class="marker-pin color-orange">🎫</div>
-                    <div class="marker-label">الاستقبال</div>
-                </div>
+                <area target="" alt="بصمة الضيافة" title="بصمة الضيافة"
+                      href="javascript:showInfo('بصمة الضيافة')"
+                      coords="599,295,609,275,644,282,635,305,607,300"
+                      shape="poly"
+                      data-name="بصمة الضيافة">
 
-                <!-- البوابة الخارجية والممر - أعلى يسار -->
-                <div class="marker" style="left: 45%; top: 8%;" onclick="showInfo('البوابة الخارجية والممر')">
-                    <div class="marker-pin color-green">🚪</div>
-                    <div class="marker-label">البوابة الخارجية والممر</div>
-                </div>
+                <area target="" alt="جدار التصوير" title="جدار التصوير"
+                      href="javascript:showInfo('جدار التصوير')"
+                      coords="646,234,672,223,699,228,672,242,649,244"
+                      shape="poly"
+                      data-name="جدار التصوير">
 
-                <!-- الصورة الجماعية والتدشين - يسار وسط -->
-                <div class="marker" style="left: 20%; top: 40%;" onclick="navigateTo('/finale')">
-                    <div class="marker-pin color-gold">📷</div>
-                    <div class="marker-label">الصورة الجماعية والتدشين</div>
-                </div>
+                <area target="" alt="الستيشن" title="الستيشن"
+                      href="javascript:showInfo('الستيشن')"
+                      coords="722,183,750,180,748,195,722,201"
+                      shape="poly"
+                      data-name="الستيشن">
 
-                <!-- اللوح الإرشادية - يسار أسفل -->
-                <div class="marker" style="left: 8%; top: 80%;" onclick="showInfo('اللوح الإرشادية')">
-                    <div class="marker-pin color-purple">ℹ️</div>
-                    <div class="marker-label">اللوح الإرشادية</div>
-                </div>
-            </div>
+                <area target="" alt="فرقة الاوركيسترا" title="فرقة الاوركيسترا"
+                      href="javascript:showInfo('فرقة الاوركيسترا')"
+                      coords="769,164,804,157,804,178,776,183"
+                      shape="poly"
+                      data-name="فرقة الاوركيسترا">
+
+                <area target="" alt="الصورة الجماعية والتدشين" title="الصورة الجماعية والتدشين"
+                      href="javascript:navigateTo('/finale')"
+                      coords="832,150,872,145,877,164,835,167"
+                      shape="poly"
+                      data-name="الصورة الجماعية والتدشين"
+                      class="interactive-area">
+
+                <area target="" alt="الشاشات" title="الشاشات"
+                      href="javascript:showInfo('الشاشات')"
+                      coords="924,174,960,207,924,214,901,178"
+                      shape="poly"
+                      data-name="الشاشات">
+
+                <area target="" alt="جلسات" title="جلسات"
+                      href="javascript:showInfo('جلسات')"
+                      coords="821,211,846,242,769,279,746,241,778,225"
+                      shape="poly"
+                      data-name="جلسات">
+
+                <area target="" alt="مرايا الهوية" title="مرايا الهوية"
+                      href="javascript:navigateTo('/activity/identity-mirrors')"
+                      coords="687,317,734,296,737,324,699,336"
+                      shape="poly"
+                      data-name="مرايا الهوية"
+                      class="interactive-area">
+            </map>
         </div>
 
         <div class="legend">
             <h3>دليل المواقع:</h3>
+
             <div class="legend-item">
-                <div class="legend-color color-purple"></div>
-                <span>🎯 أنشطة تفاعلية - اضغط للدخول</span>
+                <div class="legend-color" style="background: #9C7DDE;"></div>
+                <span><strong>🎯 أنشطة تفاعلية:</strong> مرايا الهوية، تحدي بلا أخطاء، فن الإكرام، الصورة الجماعية</span>
             </div>
+
             <div class="legend-item">
-                <div class="legend-color color-orange"></div>
-                <span>📍 مواقع رئيسية</span>
+                <div class="legend-color" style="background: #CE7B5B;"></div>
+                <span><strong>📍 مواقع رئيسية:</strong> البوابة، الاستقبال، جدار التصوير</span>
             </div>
+
             <div class="legend-item">
-                <div class="legend-color color-gold"></div>
-                <span>🍽️ مرافق الخدمات</span>
+                <div class="legend-color" style="background: #AB8025;"></div>
+                <span><strong>🍽️ مرافق الخدمات:</strong> منطقة العشاء، الستيشن</span>
             </div>
+
             <div class="legend-item">
-                <div class="legend-color color-green"></div>
-                <span>💺 مناطق الجلوس</span>
+                <div class="legend-color" style="background: #234024;"></div>
+                <span><strong>💺 مناطق الجلوس:</strong> جيم - جلسات، رحلة الحفاوة</span>
             </div>
-            <div class="legend-item" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
-                <span style="font-weight: bold; color: #9C7DDE;">💡 نصيحة:</span>
-                <span style="margin-right: 10px;">مرر الفأرة فوق النقاط لرؤية الأسماء</span>
+
+            <div class="legend-item" style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #eee; background: linear-gradient(135deg, rgba(156, 125, 222, 0.1) 0%, rgba(206, 123, 91, 0.1) 100%); border-right: 4px solid #9C7DDE;">
+                <div class="legend-color" style="background: linear-gradient(135deg, #9C7DDE 0%, #CE7B5B 100%);">💡</div>
+                <span><strong>نصيحة:</strong> مرر مؤشر الفأرة فوق المناطق لرؤية الأسماء • الأنشطة التفاعلية تنقلك للصفحة مباشرة</span>
             </div>
         </div>
     </div>
 
+    <!-- Tooltip element -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <!-- Image Map Resizer Library - للحفاظ على الإحداثيات عند تغيير حجم الشاشة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
+
     <script>
+        // Initialize image map resizer after image loads
+        window.addEventListener('load', function() {
+            imageMapResize();
+        });
+
+        // Tooltip functionality
+        const tooltip = document.getElementById('tooltip');
+        const areas = document.querySelectorAll('area');
+
+        areas.forEach(area => {
+            area.addEventListener('mouseenter', function(e) {
+                const name = this.getAttribute('data-name');
+                tooltip.textContent = name;
+                tooltip.classList.add('show');
+            });
+
+            area.addEventListener('mousemove', function(e) {
+                tooltip.style.left = (e.pageX + 15) + 'px';
+                tooltip.style.top = (e.pageY - 40) + 'px';
+            });
+
+            area.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('show');
+            });
+        });
+
+        // Navigation function
         function navigateTo(url) {
             if (navigator.vibrate) {
                 navigator.vibrate(50);
@@ -318,16 +362,33 @@
             window.location.href = url;
         }
 
+        // Info function
         function showInfo(name) {
             if (navigator.vibrate) {
                 navigator.vibrate(50);
             }
-            alert('الموقع: ' + name + '\n\nهذا موقع إرشادي في الفعالية');
+
+            const infoMessages = {
+                'البوابة الخارجية والممر': 'مدخل الفعالية الرئيسي - نقطة استقبال الضيوف',
+                'الاستقبال': 'منطقة تسجيل الحضور والترحيب بالضيوف',
+                'رحلة الحفاوة': 'تجربة الضيافة السعودية الأصيلة',
+                'جيم - جلسات': 'منطقة الجلسات والحوار المفتوح',
+                'منطقة العشاء': 'منطقة تناول الطعام والمرطبات',
+                'بصمة الضيافة': 'منطقة التفاعل مع تجارب الضيافة',
+                'جدار التصوير': 'جدار التصوير التذكاري للفعالية',
+                'الستيشن': 'محطة الخدمات والدعم',
+                'فرقة الاوركيسترا': 'منصة العروض الموسيقية الحية',
+                'الشاشات': 'شاشات العرض الرئيسية للفعالية',
+                'جلسات': 'مناطق الجلوس والاستراحة'
+            };
+
+            const message = infoMessages[name] || 'موقع في الفعالية';
+            alert('📍 ' + name + '\n\n' + message);
         }
 
-        // تحديث موضع النقاط عند تغيير حجم الشاشة
+        // Resize handler
         window.addEventListener('resize', function() {
-            // الموضع نسبي ويتكيف تلقائياً
+            imageMapResize();
         });
     </script>
 </body>
