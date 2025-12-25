@@ -212,7 +212,7 @@ export default function EventMapPage() {
           ))}
           </div>
         </div>
-      </div>
+      
 
       {/* Location Details Modal */}
       <AnimatePresence>
