@@ -203,7 +203,7 @@ export default function MapPage() {
             <div className="flex-1 text-right">
               <h3 className="text-2xl font-bold mb-1">🗺️ خريطة الفعالية</h3>
               <p className="text-sm opacity-90">
-                اعرض خريطة تفصيلية لجميع مواقع الفعالية
+                 خريطة تفصيلية لجميع مواقع الفعالية
               </p>
             </div>
 
