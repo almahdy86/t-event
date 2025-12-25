@@ -7,116 +7,116 @@ export default function EventMapPage() {
   const router = useRouter()
   const [selectedLocation, setSelectedLocation] = useState(null)
 
-//   const locations = [
-//   {
-//     id: 'signin-sessions',
-//     name: 'سين جيم جلسات',
-//     coords: { x: 1649, y: 386 },
-//     color: '#9C7DDE',
-//     description: 'منطقة الجلسات والحوار المفتوح'
-//   },
-//   {
-//     id: 'main-gate',
-//     name: 'البوابة الخارجية والممر',
-//     coords: { x: 895, y: 775 },
-//     color: '#CE7B5B',
-//     description: 'مدخل الفعالية الرئيسي'
-//   },
-//   {
-//     id: 'reception',
-//     name: 'الاستقبال',
-//     coords: { x: 1053, y: 649 },
-//     color: '#AB8025',
-//     description: 'منطقة استقبال الضيوف'
-//   },
-//   {
-//     id: 'hospitality-journey',
-//     name: 'رحلة الحفاوة',
-//     coords: { x: 1310, y: 426 },
-//     color: '#234024',
-//     description: 'تجربة الضيافة السعودية'
-//   },
-//   {
-//     id: 'zero-error',
-//     name: 'خدمة بلا أخطاء',
-//     coords: { x: 1138, y: 355 },
-//     color: '#CE7B5B',
-//     description: 'تحدي الخدمة بلا أخطاء',
-//     activity: true
-//   },
-//   {
-//     id: 'art-of-hospitality',
-//     name: 'فن الإكرام',
-//     coords: { x: 1129, y: 407 },
-//     color: '#AB8025',
-//     description: 'ورشة فن الإكرام',
-//     activity: true
-//   },
-//   {
-//     id: 'hospitality-mark',
-//     name: 'بصمة الضيافة',
-//     coords: { x: 1054, y: 462 },
-//     color: '#CE7B5B',
-//     description: 'منطقة التفاعل مع الضيافة'
-//   },
-//   {
-//     id: 'identity-mirrors',
-//     name: 'مرايا الهوية الحرفيين',
-//     coords: { x: 982, y: 372 },
-//     color: '#9C7DDE',
-//     description: 'ركن التصوير والهوية',
-//     activity: true
-//   },
-//   {
-//     id: 'photo-wall',
-//     name: 'جدار التصوير',
-//     coords: { x: 848, y: 527 },
-//     color: '#AB8025',
-//     description: 'جدار التصوير التذكاري'
-//   },
-//   {
-//     id: 'signage', // الستيشن في الكود الجديد
-//     name: 'اللوح الإرشادية',
-//     coords: { x: 720, y: 518 },
-//     color: '#9C7DDE',
-//     description: 'لوحات إرشادية للتوجيه'
-//   },
-//   {
-//     id: 'music-stage', // فرقة الاوركسترا
-//     name: 'منصة الموسيقى (الكورال)',
-//     coords: { x: 605, y: 496 },
-//     color: '#9C7DDE',
-//     description: 'منصة العروض الموسيقية'
-//   },
-//   {
-//     id: 'launch-area', // الصورة الجماعية والتدشين
-//     name: 'منطقة التدشين',
-//     coords: { x: 484, y: 449 },
-//     color: '#234024',
-//     description: 'منطقة تدشين الفعالية'
-//   },
-//   {
-//     id: 'screen', // الشاشات
-//     name: 'الشاشة',
-//     coords: { x: 508, y: 366 },
-//     color: '#CE7B5B',
-//     description: 'شاشة العرض الرئيسية'
-//   },
-//   {
-//     id: 'tent-sessions', // جلسات
-//     name: 'الخيمة - جلسات',
-//     coords: { x: 666, y: 409 },
-//     color: '#234024',
-//     description: 'خيمة الجلسات الجانبية'
-//   },
-//   {
-//     id: 'dinner-area',
-//     name: 'منطقة العشاء',
-//     coords: { x: 825, y: 204 },
-//     color: '#AB8025',
-//     description: 'منطقة تناول العشاء'
-//   }
-// ];
+  const locations = [
+    {
+      id: 'signin-sessions',
+      name: 'سين جيم جلسات',
+      coords: { x: 1630, y: 259 }, // أعلى اليمين
+      color: '#9C7DDE',
+      description: 'منطقة الجلسات والحوار المفتوح'
+    },
+    {
+      id: 'main-gate',
+      name: 'البوابة الخارجية والممر',
+      coords: { x: 940, y: 540 }, // أسفل الوسط
+      color: '#CE7B5B',
+      description: 'مدخل الفعالية الرئيسي'
+    },
+    {
+      id: 'reception',
+      name: 'الاستقبال',
+      coords: { x: 1036, y: 486 }, // يمين الوسط
+      color: '#AB8025',
+      description: 'منطقة استقبال الضيوف'
+    },
+    {
+      id: 'hospitality-journey',
+      name: 'رحلة الحفاوة',
+      coords: { x: 1075, y: 410 }, // يمين الوسط
+      color: '#234024',
+      description: 'تجربة الضيافة السعودية'
+    },
+    {
+      id: 'signage',
+      name: 'اللوح الإرشادية',
+      coords: { x: 825, y: 453 }, // وسط الخريطة
+      color: '#9C7DDE',
+      description: 'لوحات إرشادية للتوجيه'
+    },
+    {
+      id: 'hospitality-mark',
+      name: 'بصمة الضيافة',
+      coords: { x: 1056, y: 324 }, // يمين أعلى الوسط
+      color: '#CE7B5B',
+      description: 'منطقة التفاعل مع الضيافة'
+    },
+    {
+      id: 'art-of-hospitality',
+      name: 'فن الإكرام',
+      coords: { x: 1152, y: 270 }, // يمين أعلى
+      color: '#AB8025',
+      description: 'ورشة فن الإكرام',
+      activity: true
+    },
+    {
+      id: 'zero-error',
+      name: 'خدمة بلا أخطاء',
+      coords: { x: 979, y: 237 }, // وسط أعلى
+      color: '#CE7B5B',
+      description: 'تحدي الخدمة بلا أخطاء',
+      activity: true
+    },
+    {
+      id: 'identity-mirrors',
+      name: 'مرايا الهوية الحرفيين',
+      coords: { x: 825, y: 248 }, // وسط أعلى
+      color: '#9C7DDE',
+      description: 'ركن التصوير والهوية',
+      activity: true
+    },
+    {
+      id: 'tent-sessions',
+      name: 'الخيمة - جلسات',
+      coords: { x: 672, y: 280 }, // يسار الوسط
+      color: '#234024',
+      description: 'خيمة الجلسات الجانبية'
+    },
+    {
+      id: 'photo-wall',
+      name: 'جدار التصوير',
+      coords: { x: 864, y: 399 }, // وسط
+      color: '#AB8025',
+      description: 'جدار التصوير التذكاري'
+    },
+    {
+      id: 'music-stage',
+      name: 'منصة الموسيقى (الكورال)',
+      coords: { x: 557, y: 356 }, // يسار الوسط
+      color: '#9C7DDE',
+      description: 'منصة العروض الموسيقية'
+    },
+    {
+      id: 'screen',
+      name: 'الشاشة',
+      coords: { x: 499, y: 237 }, // يسار أعلى
+      color: '#CE7B5B',
+      description: 'شاشة العرض الرئيسية'
+    },
+    {
+      id: 'dinner-area',
+      name: 'منطقة العشاء',
+      coords: { x: 902, y: 140 }, // أعلى الوسط
+      color: '#AB8025',
+      description: 'منطقة تناول العشاء'
+    },
+    {
+      id: 'launch-area',
+      name: 'منطقة التدشين',
+      coords: { x: 576, y: 248 }, // يسار أعلى
+      color: '#234024',
+      description: 'منطقة تدشين الفعالية'
+    }
+  ]
 
   return (
     <div className="min-h-screen relative overflow-hidden" style={{background: '#F3F0EE'}}>
@@ -145,14 +145,15 @@ export default function EventMapPage() {
       {/* Map Container */}
       <div className="relative w-full h-[calc(100vh-72px)] overflow-auto bg-gradient-to-br from-gray-900 to-gray-800">
         <div className="inline-block min-w-full min-h-full p-8">
-          <div className="relative mx-auto shadow-2xl" style={{width: '1920px', height: '1080px'}}>
-    <img
-      src="/event-map.jpg"
-      className="absolute inset-0 w-full h-full select-none"
-      draggable={false}
-    />
-    {/* رندر النقاط هنا */}
-</div>
+          <div className="relative mx-auto shadow-2xl rounded-xl overflow-hidden" style={{width: '1920px', height: '1080px'}}>
+            {/* Background Image */}
+            <img
+              src="/event-map.jpg"
+              alt="خريطة الفعالية"
+              className="absolute inset-0 select-none"
+              style={{width: '1920px', height: '1080px', objectFit: 'cover'}}
+              draggable={false}
+            />
 
           {/* Interactive Points */}
           {locations.map((location) => (
@@ -212,7 +213,7 @@ export default function EventMapPage() {
           ))}
           </div>
         </div>
-      
+      </div>
 
       {/* Location Details Modal */}
       <AnimatePresence>
@@ -281,7 +282,7 @@ export default function EventMapPage() {
       </AnimatePresence>
 
       {/* Legend */}
-      {/* <div className="fixed bottom-6 right-6 bg-white rounded-2xl shadow-2xl p-5 max-w-sm border-2" style={{borderColor: '#AB8025'}}>
+      <div className="fixed bottom-6 right-6 bg-white rounded-2xl shadow-2xl p-5 max-w-sm border-2" style={{borderColor: '#AB8025'}}>
         <h3 className="font-bold mb-4 text-lg flex items-center gap-2" style={{color: '#000000'}}>
           <span>🎯</span>
           <span>دليل الخريطة</span>
@@ -309,7 +310,7 @@ export default function EventMapPage() {
             💡 اضغط على أي نقطة لعرض التفاصيل
           </p>
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }
