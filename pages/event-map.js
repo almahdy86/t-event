@@ -11,49 +11,49 @@ export default function EventMapPage() {
     {
       id: 'signin-sessions',
       name: 'سين جيم جلسات',
-      coords: { x: 85, y: 24 },
+      coords: { x: 1630, y: 259 }, // أعلى اليمين
       color: '#9C7DDE',
       description: 'منطقة الجلسات والحوار المفتوح'
     },
     {
       id: 'main-gate',
       name: 'البوابة الخارجية والممر',
-      coords: { x: 49, y: 50 },
+      coords: { x: 940, y: 540 }, // أسفل الوسط
       color: '#CE7B5B',
       description: 'مدخل الفعالية الرئيسي'
     },
     {
       id: 'reception',
       name: 'الاستقبال',
-      coords: { x: 54, y: 45 },
+      coords: { x: 1036, y: 486 }, // يمين الوسط
       color: '#AB8025',
       description: 'منطقة استقبال الضيوف'
     },
     {
       id: 'hospitality-journey',
       name: 'رحلة الحفاوة',
-      coords: { x: 56, y: 38 },
+      coords: { x: 1075, y: 410 }, // يمين الوسط
       color: '#234024',
       description: 'تجربة الضيافة السعودية'
     },
     {
       id: 'signage',
       name: 'اللوح الإرشادية',
-      coords: { x: 43, y: 42 },
+      coords: { x: 825, y: 453 }, // وسط الخريطة
       color: '#9C7DDE',
       description: 'لوحات إرشادية للتوجيه'
     },
     {
       id: 'hospitality-mark',
       name: 'بصمة الضيافة',
-      coords: { x: 55, y: 30 },
+      coords: { x: 1056, y: 324 }, // يمين أعلى الوسط
       color: '#CE7B5B',
       description: 'منطقة التفاعل مع الضيافة'
     },
     {
       id: 'art-of-hospitality',
       name: 'فن الإكرام',
-      coords: { x: 60, y: 25 },
+      coords: { x: 1152, y: 270 }, // يمين أعلى
       color: '#AB8025',
       description: 'ورشة فن الإكرام',
       activity: true
@@ -61,7 +61,7 @@ export default function EventMapPage() {
     {
       id: 'zero-error',
       name: 'خدمة بلا أخطاء',
-      coords: { x: 51, y: 22 },
+      coords: { x: 979, y: 237 }, // وسط أعلى
       color: '#CE7B5B',
       description: 'تحدي الخدمة بلا أخطاء',
       activity: true
@@ -69,7 +69,7 @@ export default function EventMapPage() {
     {
       id: 'identity-mirrors',
       name: 'مرايا الهوية الحرفيين',
-      coords: { x: 43, y: 23 },
+      coords: { x: 825, y: 248 }, // وسط أعلى
       color: '#9C7DDE',
       description: 'ركن التصوير والهوية',
       activity: true
@@ -77,42 +77,42 @@ export default function EventMapPage() {
     {
       id: 'tent-sessions',
       name: 'الخيمة - جلسات',
-      coords: { x: 35, y: 26 },
+      coords: { x: 672, y: 280 }, // يسار الوسط
       color: '#234024',
       description: 'خيمة الجلسات الجانبية'
     },
     {
       id: 'photo-wall',
       name: 'جدار التصوير',
-      coords: { x: 45, y: 37 },
+      coords: { x: 864, y: 399 }, // وسط
       color: '#AB8025',
       description: 'جدار التصوير التذكاري'
     },
     {
       id: 'music-stage',
       name: 'منصة الموسيقى (الكورال)',
-      coords: { x: 29, y: 33 },
+      coords: { x: 557, y: 356 }, // يسار الوسط
       color: '#9C7DDE',
       description: 'منصة العروض الموسيقية'
     },
     {
       id: 'screen',
       name: 'الشاشة',
-      coords: { x: 26, y: 22 },
+      coords: { x: 499, y: 237 }, // يسار أعلى
       color: '#CE7B5B',
       description: 'شاشة العرض الرئيسية'
     },
     {
       id: 'dinner-area',
       name: 'منطقة العشاء',
-      coords: { x: 47, y: 13 },
+      coords: { x: 902, y: 140 }, // أعلى الوسط
       color: '#AB8025',
       description: 'منطقة تناول العشاء'
     },
     {
       id: 'launch-area',
       name: 'منطقة التدشين',
-      coords: { x: 30, y: 23 },
+      coords: { x: 576, y: 248 }, // يسار أعلى
       color: '#234024',
       description: 'منطقة تدشين الفعالية'
     }
@@ -143,14 +143,17 @@ export default function EventMapPage() {
       </div>
 
       {/* Map Container */}
-      <div className="relative w-full h-[calc(100vh-72px)] overflow-auto">
-        <div className="relative min-w-[1920px] min-h-[1080px] w-full h-full">
-          {/* Background Image */}
-          <img
-            src="/event-map.jpg"
-            alt="خريطة الفعالية"
-            className="w-full h-full object-contain"
-          />
+      <div className="relative w-full h-[calc(100vh-72px)] overflow-auto bg-gradient-to-br from-gray-900 to-gray-800">
+        <div className="inline-block min-w-full min-h-full p-8">
+          <div className="relative mx-auto shadow-2xl rounded-xl overflow-hidden" style={{width: '1920px', height: '1080px'}}>
+            {/* Background Image */}
+            <img
+              src="/event-map.jpg"
+              alt="خريطة الفعالية"
+              className="absolute inset-0 select-none"
+              style={{width: '1920px', height: '1080px', objectFit: 'cover'}}
+              draggable={false}
+            />
 
           {/* Interactive Points */}
           {locations.map((location) => (
@@ -158,8 +161,8 @@ export default function EventMapPage() {
               key={location.id}
               className="absolute cursor-pointer"
               style={{
-                left: `${location.coords.x}%`,
-                top: `${location.coords.y}%`,
+                left: `${location.coords.x}px`,
+                top: `${location.coords.y}px`,
                 transform: 'translate(-50%, -50%)'
               }}
               initial={{ scale: 0 }}
@@ -188,26 +191,27 @@ export default function EventMapPage() {
 
               {/* Main Pin */}
               <div
-                className="relative w-12 h-12 rounded-full shadow-lg flex items-center justify-center"
+                className="relative w-14 h-14 rounded-full shadow-xl flex items-center justify-center border-4 border-white"
                 style={{background: location.color}}
               >
-                <MapPin size={24} color="white" />
+                <MapPin size={28} color="white" strokeWidth={2.5} />
                 {location.activity && (
-                  <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full" style={{background: '#AB8025'}}>
-                    <span className="text-white text-xs">!</span>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center shadow-lg border-2 border-white" style={{background: '#AB8025'}}>
+                    <span className="text-white text-xs font-bold">!</span>
                   </div>
                 )}
               </div>
 
               {/* Label */}
               <div
-                className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white px-3 py-1 rounded-full shadow-md whitespace-nowrap text-sm font-bold"
-                style={{color: '#000000'}}
+                className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded-xl shadow-lg whitespace-nowrap text-sm font-bold border-2"
+                style={{color: '#000000', borderColor: location.color}}
               >
                 {location.name}
               </div>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
 
@@ -278,27 +282,33 @@ export default function EventMapPage() {
       </AnimatePresence>
 
       {/* Legend */}
-      <div className="fixed bottom-4 right-4 bg-white rounded-2xl shadow-lg p-4 max-w-xs">
-        <h3 className="font-bold mb-3" style={{color: '#000000'}}>
-          دليل الألوان:
+      <div className="fixed bottom-6 right-6 bg-white rounded-2xl shadow-2xl p-5 max-w-sm border-2" style={{borderColor: '#AB8025'}}>
+        <h3 className="font-bold mb-4 text-lg flex items-center gap-2" style={{color: '#000000'}}>
+          <span>🎯</span>
+          <span>دليل الخريطة</span>
         </h3>
-        <div className="space-y-2 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full" style={{background: '#9C7DDE'}}></div>
-            <span style={{color: '#000000'}}>منطقة خدمات</span>
+        <div className="space-y-3 text-sm">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all hover:bg-gray-50">
+            <div className="w-5 h-5 rounded-full shadow-md" style={{background: '#9C7DDE'}}></div>
+            <span className="font-medium" style={{color: '#000000'}}>منطقة خدمات وأنشطة</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full" style={{background: '#CE7B5B'}}></div>
-            <span style={{color: '#000000'}}>أنشطة رئيسية</span>
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all hover:bg-gray-50">
+            <div className="w-5 h-5 rounded-full shadow-md" style={{background: '#CE7B5B'}}></div>
+            <span className="font-medium" style={{color: '#000000'}}>أنشطة رئيسية</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full" style={{background: '#AB8025'}}></div>
-            <span style={{color: '#000000'}}>مرافق عامة</span>
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all hover:bg-gray-50">
+            <div className="w-5 h-5 rounded-full shadow-md" style={{background: '#AB8025'}}></div>
+            <span className="font-medium" style={{color: '#000000'}}>مرافق عامة</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full" style={{background: '#234024'}}></div>
-            <span style={{color: '#000000'}}>جلسات خاصة</span>
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all hover:bg-gray-50">
+            <div className="w-5 h-5 rounded-full shadow-md" style={{background: '#234024'}}></div>
+            <span className="font-medium" style={{color: '#000000'}}>جلسات خاصة</span>
           </div>
+        </div>
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <p className="text-xs" style={{color: '#666'}}>
+            💡 اضغط على أي نقطة لعرض التفاصيل
+          </p>
         </div>
       </div>
     </div>
