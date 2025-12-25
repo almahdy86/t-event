@@ -29,8 +29,20 @@ export default function EventMapPage() {
       </div>
 
       {/* Map Container - Scrollable */}
-      <div className="relative w-full h-[calc(100vh-72px)] overflow-auto bg-gradient-to-br from-gray-900 to-gray-800">
-        <div className="inline-block min-w-full min-h-full p-8">
+      <div
+        className="relative w-full h-[calc(100vh-72px)] overflow-auto bg-gradient-to-br from-gray-900 to-gray-800"
+        style={{
+          scrollBehavior: 'smooth'
+        }}
+        ref={(el) => {
+          if (el) {
+            // Start from bottom middle
+            el.scrollTop = el.scrollHeight - el.clientHeight;
+            el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+          }
+        }}
+      >
+        <div className="inline-block min-w-full min-h-full p-2">
           <div className="relative mx-auto shadow-2xl rounded-xl overflow-hidden" style={{width: '1920px', height: '1080px'}}>
             {/* Map Image */}
             <img
