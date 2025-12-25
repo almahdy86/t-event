@@ -147,7 +147,7 @@ export default function EventMapPage() {
         <div className="relative min-w-[1920px] min-h-[1080px] w-full h-full">
           {/* Background Image */}
           <img
-            src="/cb1365106706767.5f96842616976 (1).jpg"
+            src="/event-map.jpg"
             alt="خريطة الفعالية"
             className="w-full h-full object-contain"
           />
