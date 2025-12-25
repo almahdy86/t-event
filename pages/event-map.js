@@ -314,3 +314,18 @@ export default function EventMapPage() {
     </div>
   )
 }
+
+// أضف هذا التابع داخل المكون
+const handleMapClick = (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = Math.round(e.clientX - rect.left);
+  const y = Math.round(e.clientY - rect.top);
+  console.log(`Coords: x: ${x}, y: ${y}`);
+};
+
+// وفي كود الـ JSX، أضف الـ onClick للحاوية التي تحتوي الصورة
+<div 
+  className="relative mx-auto ..." 
+  style={{width: '1920px', height: '1080px'}}
+  onClick={handleMapClick} // <--- أضف هذا السطر
+></div>
