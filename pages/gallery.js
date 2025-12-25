@@ -97,25 +97,25 @@ export default function GalleryPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="text-white p-6 shadow-lg sticky top-0 z-10" style={{background: '#234024'}}>
+      <div className="p-6 shadow-lg sticky top-0 z-10" style={{background: '#AB8025'}}>
         <div className="container mx-auto">
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={() => router.push('/map')}
-              className="p-2 rounded-lg transition-colors"
+              className="p-2 rounded-lg transition-colors text-white"
               style={{background: 'rgba(255,255,255,0.2)'}}
             >
               <ArrowRight size={24} />
             </button>
-            <h1 className="text-3xl font-bold flex items-center gap-3">
+            <h1 className="text-3xl font-bold flex items-center gap-3" style={{color: '#CE7B5B'}}>
               <Camera size={32} strokeWidth={2.5} />
               معرض الصور المشاركة
             </h1>
             <div className="w-10" />
           </div>
 
-          <div className="rounded-xl p-4" style={{background: 'rgba(255,255,255,0.15)'}}>
-            <p className="text-center text-lg font-semibold">
+          <div className="rounded-xl p-4" style={{background: '#CE7B5B'}}>
+            <p className="text-center text-lg font-semibold" style={{color: '#000000'}}>
               شاهد وأعجب بصور زملائك! 📸✨
             </p>
           </div>

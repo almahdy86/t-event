@@ -95,14 +95,14 @@ export default function MapPage() {
       id: 'identity_mirrors',
       title: 'مرايا الهوية',
       icon: Camera,
-      bgColor: '#9C7DDE',
+      bgColor: '#AB8025',
       route: '/activity/identity-mirrors'
     },
     {
       id: 'zero_error_challenge',
       title: 'تحدي بلا أخطاء',
       icon: Brain,
-      bgColor: '#CE7B5B',
+      bgColor: '#AB8025',
       route: '/activity/zero-error'
     },
     {
@@ -116,7 +116,7 @@ export default function MapPage() {
       id: 'final_photo',
       title: 'الصورة الجماعية',
       icon: Users,
-      bgColor: '#234024',
+      bgColor: '#AB8025',
       route: '/finale'
     }
   ]
@@ -152,7 +152,7 @@ export default function MapPage() {
             </div>
           </div>
 
-          <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#9C7DDE'}}>
+          <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#AB8025'}}>
             #{employee.employee_number}
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function MapPage() {
           animate={{ opacity: 1, y: 0 }}
           onClick={() => router.push('/event-map')}
           className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 active:scale-95"
-          style={{background: '#9C7DDE', color: 'white'}}
+          style={{background: '#AB8025', color: 'white'}}
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full flex items-center justify-center"

@@ -31,7 +31,7 @@ export default function FinalePage() {
 
   if (!showNumber) {
     return (
-      <div className="min-h-screen flex flex-col" style={{background: '#234024'}}>
+      <div className="min-h-screen flex flex-col" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
         {/* زر الرجوع */}
         <div className="p-4">
           <button
@@ -62,7 +62,7 @@ export default function FinalePage() {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col text-white overflow-hidden" style={{background: '#234024'}}>
+    <div className="fixed inset-0 flex flex-col text-white overflow-hidden" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
       {/* زر الرجوع */}
       <div className="p-4 z-20">
         <button

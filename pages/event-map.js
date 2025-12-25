@@ -136,7 +136,7 @@ export default function EventMapPage() {
         <button
           onClick={() => window.location.href = '/interactive-map.html'}
           className="px-3 py-2 rounded-lg text-white font-bold text-sm transition-all hover:scale-105"
-          style={{background: '#9C7DDE'}}
+          style={{background: '#AB8025'}}
         >
           خريطة HTML
         </button>

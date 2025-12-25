@@ -113,8 +113,8 @@ export default function ZeroErrorChallengePage() {
 
   if (!question) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-500 to-cyan-500 flex flex-col">
-        <div className="p-4 flex items-center justify-between bg-white/10 backdrop-blur">
+      <div className="min-h-screen flex flex-col" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
+        <div className="p-4 flex items-center justify-between" style={{background: 'rgba(171,128,37,0.3)', backdropFilter: 'blur(10px)'}}>
           <button
             onClick={() => router.push('/map')}
             className="text-white"
@@ -162,9 +162,9 @@ export default function ZeroErrorChallengePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-cyan-500 flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
       {/* Header */}
-      <div className="p-4 flex items-center justify-between bg-white/10 backdrop-blur">
+      <div className="p-4 flex items-center justify-between" style={{background: 'rgba(171,128,37,0.3)', backdropFilter: 'blur(10px)'}}>
         <div className="flex items-center gap-2 text-white">
           <Clock size={24} />
           <span className="text-2xl font-bold">

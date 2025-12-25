@@ -188,7 +188,7 @@ export default function IdentityMirrorsPage() {
             animate={{ scale: 1 }}
             transition={{ type: 'spring' }}
             className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
-            style={{background: '#9C7DDE'}}
+            style={{background: '#AB8025'}}
           >
             <Camera size={64} color="white" />
           </motion.div>
@@ -343,7 +343,7 @@ export default function IdentityMirrorsPage() {
 
   if (step === 'success') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-500 to-emerald-500 flex flex-col items-center justify-center p-6 text-white">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-white" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -377,7 +377,8 @@ export default function IdentityMirrorsPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
           onClick={() => router.push('/map')}
-          className="bg-white text-green-600 font-bold text-xl px-12 py-4 rounded-full shadow-2xl hover:bg-gray-100 transition-colors"
+          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl hover:opacity-90 transition-all"
+          style={{background: 'white', color: '#AB8025'}}
         >
           العودة للخريطة
         </motion.button>

@@ -19,8 +19,8 @@ export default function HospitalityPage() {
   if (!employee) return null
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-500 to-orange-500 flex flex-col">
-      <div className="p-4 flex items-center justify-between bg-white/10 backdrop-blur">
+    <div className="min-h-screen flex flex-col" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
+      <div className="p-4 flex items-center justify-between" style={{background: 'rgba(171,128,37,0.3)', backdropFilter: 'blur(10px)'}}>
         <button
           onClick={() => router.push('/map')}
           className="text-white"
@@ -73,7 +73,8 @@ export default function HospitalityPage() {
         <motion.button
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push('/map')}
-          className="bg-white text-red-600 font-bold text-xl px-12 py-4 rounded-full shadow-2xl hover:bg-gray-100 transition-colors"
+          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl hover:opacity-90 transition-all"
+          style={{background: 'white', color: '#AB8025'}}
         >
           عودة للخريطة
         </motion.button>
