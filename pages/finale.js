@@ -31,7 +31,15 @@ export default function FinalePage() {
 
   if (!showNumber) {
     return (
-      <div className="min-h-screen flex flex-col" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
+      <div
+        className="min-h-screen flex flex-col"
+        style={{
+          backgroundImage: 'url(/bg/BG%2003.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         {/* زر الرجوع */}
         <div className="p-4">
           <button
@@ -62,7 +70,15 @@ export default function FinalePage() {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col text-white overflow-hidden" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
+    <div
+      className="fixed inset-0 flex flex-col text-white overflow-hidden"
+      style={{
+        backgroundImage: 'url(/bg/BG%2003.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
       {/* زر الرجوع */}
       <div className="p-4 z-20">
         <button

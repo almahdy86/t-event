@@ -170,7 +170,15 @@ export default function IdentityMirrorsPage() {
 
   if (step === 'intro') {
     return (
-      <div className="min-h-screen flex flex-col" style={{background: '#F3F0EE'}}>
+      <div
+        className="min-h-screen flex flex-col"
+        style={{
+          backgroundImage: 'url(/bg/BG%2003.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="p-4 flex items-center justify-between bg-white shadow">
           <button
             onClick={() => router.push('/map')}

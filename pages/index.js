@@ -219,7 +219,15 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col p-6" style={{background: '#F3F0EE'}}>
+    <div
+      className="min-h-screen flex flex-col p-6"
+      style={{
+        backgroundImage: 'url(/bg/BG%2001.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
       <div className="flex justify-center py-8">
         <div className="w-32 h-32 relative">
           <Image

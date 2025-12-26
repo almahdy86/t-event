@@ -193,7 +193,16 @@ export default function MapPage() {
   }
 
   return (
-    <div className="min-h-screen pb-20" style={{background: '#F3F0EE'}}>
+    <div
+      className="min-h-screen pb-20"
+      style={{
+        backgroundImage: 'url(/bg/BG%2002.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       {/* Header ثابت */}
       <div className="bg-white shadow-lg sticky top-0 z-50">
         <div className="flex items-center justify-between p-4">
