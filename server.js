@@ -824,6 +824,15 @@ app.prepare().then(() => {
     try {
       const { id } = req.params
 
+      // جلب بيانات الموظف قبل الحذف
+      const employeeResult = await pool.query('SELECT * FROM employees WHERE id = $1', [id])
+
+      if (employeeResult.rowCount === 0) {
+        return res.status(404).json({ success: false, message: 'الموظف غير موجود' })
+      }
+
+      const employee = employeeResult.rows[0]
+
       // حذف بيانات الموظف بالترتيب الصحيح (foreign key constraints)
       // 1. حذف الإجابات
       await pool.query('DELETE FROM answers WHERE employee_id = $1', [id])
@@ -832,15 +841,41 @@ app.prepare().then(() => {
       await pool.query('DELETE FROM shared_photos WHERE employee_id = $1', [id])
 
       // 3. حذف الموظف نفسه
-      const result = await pool.query('DELETE FROM employees WHERE id = $1 RETURNING *', [id])
+      await pool.query('DELETE FROM employees WHERE id = $1', [id])
 
-      if (result.rowCount === 0) {
-        return res.status(404).json({ success: false, message: 'الموظف غير موجود' })
-      }
+      // إرسال إشعار للموظف بأنه تم حذفه
+      io.emit('employee:deleted', {
+        employeeId: employee.id,
+        employeeNumber: employee.employee_number,
+        message: `عزيزي ${employee.full_name}،\n\nتم حذف حسابك من النظام بواسطة الإدارة.\n\nجميع بياناتك تم مسحها نهائياً.\n\nسيتم تسجيل خروجك الآن.`
+      })
+
+      console.log(`🗑️ Employee ${employee.full_name} (#${employee.employee_number}) deleted by admin`)
 
       res.json({ success: true, message: 'تم حذف الموظف بنجاح' })
     } catch (error) {
       console.error('Error deleting employee:', error)
+      res.status(500).json({ success: false, message: error.message })
+    }
+  })
+
+  // Employee Self-Delete - حذف بيانات الموظف بنفسه
+  server.delete('/api/employee/delete/:id', async (req, res) => {
+    try {
+      const { id } = req.params
+
+      console.log(`🗑️ Employee ${id} requested self-deletion`)
+
+      // حذف بيانات الموظف بالترتيب الصحيح
+      await pool.query('DELETE FROM answers WHERE employee_id = $1', [id])
+      await pool.query('DELETE FROM shared_photos WHERE employee_id = $1', [id])
+      await pool.query('DELETE FROM employees WHERE id = $1', [id])
+
+      console.log(`✅ Employee ${id} data deleted successfully`)
+
+      res.json({ success: true, message: 'تم حذف البيانات بنجاح' })
+    } catch (error) {
+      console.error('Error in employee self-deletion:', error)
       res.status(500).json({ success: false, message: error.message })
     }
   })

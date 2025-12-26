@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, Camera, Brain, Heart, Users } from 'lucide-react'
+import { MapPin, Camera, Brain, Heart, Users, LogOut } from 'lucide-react'
 import io from 'socket.io-client'
 
 let socket
@@ -55,7 +55,7 @@ export default function MapPage() {
 
     socket.on('notification', (data) => {
       setNotification(data)
-      
+
       // اهتزاز
       if (navigator.vibrate) {
         navigator.vibrate([200, 100, 200])
@@ -71,13 +71,31 @@ export default function MapPage() {
         }, 2000)
       }
     })
+
+    // الاستماع لحدث حذف الموظف من الإدارة
+    socket.on('employee:deleted', (data) => {
+      // التحقق إذا كان الموظف المحذوف هو المستخدم الحالي
+      if (data.employeeId === emp.id || data.employeeNumber === emp.employee_number) {
+        console.log('🚨 Account deleted by admin')
+
+        // عرض الرسالة
+        alert(data.message)
+
+        // مسح البيانات المحلية
+        localStorage.removeItem('tanfeethi_employee')
+        localStorage.removeItem('tanfeethi_last_page')
+
+        // إعادة التوجيه للصفحة الرئيسية
+        window.location.href = '/'
+      }
+    })
   }
 
   const fetchActivities = async () => {
     try {
       const response = await fetch('/api/activities/status')
       const data = await response.json()
-      
+
       if (data.success) {
         const statusMap = {}
         data.activities.forEach(activity => {
@@ -87,6 +105,48 @@ export default function MapPage() {
       }
     } catch (error) {
       console.error('خطأ في جلب الفعاليات:', error)
+    }
+  }
+
+  const handleLogout = () => {
+    const confirmLogout = confirm(
+      '⚠️ تحذير هام!\n\n' +
+      'عند تسجيل الخروج، سيتم مسح جميع بياناتك نهائياً من النظام:\n' +
+      '• الصور التي قمت برفعها\n' +
+      '• إجاباتك في التحديات\n' +
+      '• جميع بياناتك الشخصية\n\n' +
+      'هل أنت متأكد من رغبتك في تسجيل الخروج؟'
+    )
+
+    if (confirmLogout) {
+      const doubleConfirm = confirm(
+        '⚠️ تأكيد نهائي!\n\n' +
+        'هذا القرار لا يمكن التراجع عنه.\n' +
+        'سيتم حذف جميع بياناتك نهائياً.\n\n' +
+        'هل تريد المتابعة؟'
+      )
+
+      if (doubleConfirm) {
+        // مسح البيانات المحلية
+        localStorage.removeItem('tanfeethi_employee')
+        localStorage.removeItem('tanfeethi_last_page')
+
+        // إرسال طلب لحذف البيانات من السيرفر
+        deleteEmployeeData()
+
+        // إعادة التوجيه للصفحة الرئيسية
+        router.push('/')
+      }
+    }
+  }
+
+  const deleteEmployeeData = async () => {
+    try {
+      await fetch(`/api/employee/delete/${employee.id}`, {
+        method: 'DELETE'
+      })
+    } catch (error) {
+      console.error('خطأ في حذف البيانات:', error)
     }
   }
 
@@ -152,8 +212,18 @@ export default function MapPage() {
             </div>
           </div>
 
-          <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#AB8025'}}>
-            #{employee.employee_number}
+          <div className="flex items-center gap-2">
+            <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#AB8025'}}>
+              #{employee.employee_number}
+            </div>
+            <button
+              onClick={handleLogout}
+              className="p-2 rounded-full transition-all hover:scale-110"
+              style={{background: '#d32f2f'}}
+              title="تسجيل الخروج"
+            >
+              <LogOut size={20} className="text-white" />
+            </button>
           </div>
         </div>
       </div>

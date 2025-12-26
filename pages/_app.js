@@ -23,6 +23,8 @@ export default function App({ Component, pageProps }) {
       // مسح بيانات المستخدم المحلية
       localStorage.removeItem('employee_uid')
       localStorage.removeItem('employee_data')
+      localStorage.removeItem('tanfeethi_employee')
+      localStorage.removeItem('tanfeethi_last_page')
       localStorage.removeItem('admin_token')
       localStorage.removeItem('admin_info')
 
@@ -31,6 +33,32 @@ export default function App({ Component, pageProps }) {
 
       // إعادة التوجيه للصفحة الرئيسية
       window.location.href = '/'
+    })
+
+    // الاستماع لحدث حذف موظف محدد
+    socket.on('employee:deleted', (data) => {
+      console.log('🚨 Employee deletion event received')
+
+      // جلب بيانات الموظف الحالي
+      const employeeData = localStorage.getItem('tanfeethi_employee')
+      if (employeeData) {
+        const employee = JSON.parse(employeeData)
+
+        // التحقق إذا كان الموظف المحذوف هو المستخدم الحالي
+        if (data.employeeId === employee.id || data.employeeNumber === employee.employee_number) {
+          console.log('🗑️ Current user account deleted by admin')
+
+          // عرض الرسالة
+          alert(data.message)
+
+          // مسح البيانات المحلية
+          localStorage.removeItem('tanfeethi_employee')
+          localStorage.removeItem('tanfeethi_last_page')
+
+          // إعادة التوجيه للصفحة الرئيسية
+          window.location.href = '/'
+        }
+      }
     })
 
     return () => {
