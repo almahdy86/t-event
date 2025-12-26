@@ -271,7 +271,7 @@ export default function MapPage() {
             </div>
 
             <div className="flex-1 text-right">
-              <h3 className="text-2xl font-bold mb-1">🗺️ خريطة الفعالية</h3>
+              <h3 className="text-2xl font-bold mb-1"> خريطة الفعالية</h3>
               <p className="text-sm" style={{opacity: 0.8}}>
                 خريطة تفصيلية لجميع مواقع الفعالية
               </p>

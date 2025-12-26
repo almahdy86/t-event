@@ -242,7 +242,7 @@ export default function IdentityMirrorsPage() {
             transition={{ delay: 0.6 }}
             onClick={() => router.push('/activity/zero-error')}
             className="mt-6 flex items-center gap-2"
-            style={{color: '#3D2031'}}
+            style={{color: '#f9f5f7ff'}}
           >
             التالي: تحدي بلا أخطاء
             <ArrowRight size={20} />
