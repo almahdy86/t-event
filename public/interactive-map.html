@@ -424,69 +424,63 @@
         // });
 
         // الوظيفة المسؤولة عن التمرير للأسفل والمنتصف
-        function scrollToBottomCenter() {
-            const mapContainer = document.getElementById('mapContainer');
+     
+        const mapContainer = document.getElementById('mapContainer');
+        const mapImage = document.getElementById('mapImage');
+        const tooltip = document.getElementById('tooltip');
 
-            if (mapContainer) {
-                // حساب التمرير العمودي (65% من الأسفل)
-                const scrollHeight = mapContainer.scrollHeight;
-                const clientHeight = mapContainer.clientHeight;
+        // وظيفة التمرير للأسفل والمنتصف
+        function scrollToFocusArea() {
+            if (!mapContainer) return;
 
-                // حساب التمرير الأفقي للمنتصف
-                const scrollWidth = mapContainer.scrollWidth;
-                const clientWidth = mapContainer.clientWidth;
+            const scrollHeight = mapContainer.scrollHeight;
+            const clientHeight = mapContainer.clientHeight;
+            const scrollWidth = mapContainer.scrollWidth;
+            const clientWidth = mapContainer.clientWidth;
 
-                // التمرير للمنتصف أفقياً
-                const leftPosition = (scrollWidth - clientWidth) / 2;
-                // 65% من الأسفل عمودياً
-                const topPosition = (scrollHeight - clientHeight) * 0.65;
+            // في وضع RTL: التمرير الأفقي 0 يكون في أقصى اليمين. 
+            // لتحقيق "المنتصف" نحتاج لتحريك السكرول بمقدار نصف المساحة المتاحة.
+            const horizontalCenter = (scrollWidth - clientWidth) / 2;
+            
+            // للذهاب للأسفل تماماً
+            const bottomPosition = scrollHeight - clientHeight;
 
-                console.log('Scroll Info:', {
-                    scrollHeight,
-                    clientHeight,
-                    scrollWidth,
-                    clientWidth,
-                    topPosition,
-                    leftPosition
-                });
-
-                mapContainer.scrollTo({
-                    top: topPosition,
-                    left: leftPosition,
-                    behavior: 'auto'
-                });
-
-                console.log('Scrolled to:', mapContainer.scrollTop, mapContainer.scrollLeft);
-            }
+            mapContainer.scrollTo({
+                top: bottomPosition,
+                left: horizontalCenter, 
+                behavior: 'smooth'
+            });
         }
 
-        // تنفيذ فوري
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM Ready');
-
-            const mapImage = document.getElementById('mapImage');
-            const mapContainer = document.getElementById('mapContainer');
-
-            if (mapImage && mapContainer) {
-                // عند تحميل الصورة
-                mapImage.addEventListener('load', function() {
-                    console.log('Image loaded, scrolling...');
-                    setTimeout(scrollToBottomCenter, 100);
-                });
-
-                // إذا كانت الصورة محملة بالفعل
-                if (mapImage.complete) {
-                    console.log('Image already loaded, scrolling now...');
-                    setTimeout(scrollToBottomCenter, 100);
-                }
-            }
-        });
-
-        // استدعاء عند تحميل الصفحة كاملة
+        // تشغيل الوظائف عند التحميل
         window.addEventListener('load', function() {
-            console.log('Page fully loaded, scrolling...');
-            setTimeout(scrollToBottomCenter, 300);
+            // 1. تشغيل مكتبة تغيير الحجم
+            imageMapResize();
+            
+            // 2. التمرير بعد وقت قصير لضمان اكتمال الحسابات
+            setTimeout(scrollToFocusArea, 300);
         });
+
+        // تفعيل الـ Tooltips
+        const areas = document.querySelectorAll('area');
+        areas.forEach(area => {
+            area.addEventListener('mouseenter', function(e) {
+                tooltip.textContent = this.getAttribute('data-name');
+                tooltip.classList.add('show');
+            });
+            area.addEventListener('mousemove', function(e) {
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY - 40) + 'px';
+            });
+            area.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+        });
+
+        function navigateTo(url) { window.location.href = url; }
+        
+        function showInfo(name) { alert('📍 ' + name); }
+
+        // إعادة التمركز عند تغيير حجم النافذة
+        window.addEventListener('resize', scrollToFocusArea);
     </script>
 </body>
 </html>
