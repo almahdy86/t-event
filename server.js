@@ -854,7 +854,7 @@ app.prepare().then(() => {
       console.log('✓ Deactivated all questions')
 
       // 7. تعطيل جميع الأنشطة
-      await pool.query('UPDATE activities SET is_active = false')
+      await pool.query('UPDATE activity_status SET is_active = false')
       console.log('✓ Deactivated all activities')
 
       console.log('✅ Data reset completed successfully!')
