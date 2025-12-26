@@ -422,6 +422,27 @@
         window.addEventListener('resize', function() {
             imageMapResize();
         });
+
+        // الوظيفة المسؤولة عن التمرير للأسفل والمنتصف
+        function scrollToBottomCenter() {
+            // حساب أقصى تمدد للأسفل
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight;
+            
+            // حساب التمرير الأفقي للمنتصف (مع مراعاة اتجاه RTL)
+            const scrollWidth = document.documentElement.scrollWidth;
+            const clientWidth = document.documentElement.clientWidth;
+            
+            // في حالة RTL، التمرير للمنتصف يكون نصف الفرق بين عرض المحتوى وعرض الشاشة
+            const leftPosition = (scrollWidth - clientWidth) / 2;
+            const topPosition = scrollHeight - clientHeight;
+
+            window.scrollTo({
+                top: topPosition,
+                left: leftPosition,
+                behavior: 'smooth' // 'smooth' للتمرير السلس أو 'auto' للانتقال اللحظي
+            });
+        }
     </script>
 </body>
 </html>
