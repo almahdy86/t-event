@@ -804,6 +804,47 @@ app.prepare().then(() => {
     }
   })
 
+  // Get All Employees - جلب جميع الموظفين
+  server.get('/api/admin/employees', async (req, res) => {
+    try {
+      const result = await pool.query(`
+        SELECT id, uid, full_name, job_title, employee_number, created_at
+        FROM employees
+        ORDER BY employee_number ASC
+      `)
+      res.json({ success: true, employees: result.rows })
+    } catch (error) {
+      console.error('Error fetching employees:', error)
+      res.status(500).json({ success: false, message: error.message })
+    }
+  })
+
+  // Delete Employee - حذف موظف
+  server.delete('/api/admin/employees/:id', async (req, res) => {
+    try {
+      const { id } = req.params
+
+      // حذف بيانات الموظف بالترتيب الصحيح (foreign key constraints)
+      // 1. حذف الإجابات
+      await pool.query('DELETE FROM answers WHERE employee_id = $1', [id])
+
+      // 2. حذف الصور المشتركة
+      await pool.query('DELETE FROM shared_photos WHERE employee_id = $1', [id])
+
+      // 3. حذف الموظف نفسه
+      const result = await pool.query('DELETE FROM employees WHERE id = $1 RETURNING *', [id])
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({ success: false, message: 'الموظف غير موجود' })
+      }
+
+      res.json({ success: true, message: 'تم حذف الموظف بنجاح' })
+    } catch (error) {
+      console.error('Error deleting employee:', error)
+      res.status(500).json({ success: false, message: error.message })
+    }
+  })
+
   // Reset All Data - مسح جميع البيانات
   server.post('/api/admin/reset-all-data', async (req, res) => {
     try {
@@ -880,6 +921,12 @@ app.prepare().then(() => {
       }
 
       console.log('✅ Data reset completed successfully!')
+
+      // إرسال إشعار لجميع المستخدمين المتصلين بتسجيل الخروج
+      io.emit('force:logout', {
+        message: 'تم إعادة تعيين النظام. يرجى تسجيل الدخول مرة أخرى.'
+      })
+      console.log('📤 Sent force logout signal to all connected users')
 
       res.json({
         success: true,

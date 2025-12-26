@@ -221,6 +221,13 @@ export default function AdminDashboard() {
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
           <ActionCard
+            title="إدارة الموظفين"
+            icon={<Users size={40} />}
+            color="bg-emerald-500"
+            badge={stats.totalEmployees}
+            onClick={() => router.push('/admin/employees')}
+          />
+          <ActionCard
             title="إرسال إشعار"
             icon={<Bell size={40} />}
             color="bg-blue-500"
@@ -239,6 +246,10 @@ export default function AdminDashboard() {
             badge={stats.pendingPhotos}
             onClick={() => router.push('/admin/photos')}
           />
+        </div>
+
+        {/* Secondary Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <ActionCard
             title="قرعة الفائزين"
             icon={<Gift size={40} />}
