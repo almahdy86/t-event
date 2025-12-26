@@ -115,9 +115,9 @@ export default function GalleryPage() {
           </div>
 
           <div className="rounded-xl p-4" style={{background: '#CE7B5B'}}>
-            <p className="text-center text-lg font-semibold" style={{color: '#000000'}}>
-              شاهد وأعجب بصور زملائك! 📸✨
-            </p>
+            {/* <p className="text-center text-lg font-semibold" style={{color: '#000000'}}>
+              شاهد وأعجب بصور زملائك! 
+            </p> */}
           </div>
         </div>
       </div>
