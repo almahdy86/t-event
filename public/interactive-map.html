@@ -350,78 +350,78 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
 
     <script>
-        // Initialize image map resizer after image loads
-        window.addEventListener('load', function() {
-            imageMapResize();
-        });
+        // // Initialize image map resizer after image loads
+        // window.addEventListener('load', function() {
+        //     imageMapResize();
+        // });
 
-        // Tooltip functionality
-        const tooltip = document.getElementById('tooltip');
-        const areas = document.querySelectorAll('area');
+        // // Tooltip functionality
+        // const tooltip = document.getElementById('tooltip');
+        // const areas = document.querySelectorAll('area');
 
-        areas.forEach(area => {
-            area.addEventListener('mouseenter', function(e) {
-                const name = this.getAttribute('data-name');
-                tooltip.textContent = name;
-                tooltip.classList.add('show');
-            });
+        // areas.forEach(area => {
+        //     area.addEventListener('mouseenter', function(e) {
+        //         const name = this.getAttribute('data-name');
+        //         tooltip.textContent = name;
+        //         tooltip.classList.add('show');
+        //     });
 
-            area.addEventListener('mousemove', function(e) {
-                tooltip.style.left = (e.pageX + 15) + 'px';
-                tooltip.style.top = (e.pageY - 40) + 'px';
-            });
+        //     area.addEventListener('mousemove', function(e) {
+        //         tooltip.style.left = (e.pageX + 15) + 'px';
+        //         tooltip.style.top = (e.pageY - 40) + 'px';
+        //     });
 
-            area.addEventListener('mouseleave', function() {
-                tooltip.classList.remove('show');
-            });
-        });
+        //     area.addEventListener('mouseleave', function() {
+        //         tooltip.classList.remove('show');
+        //     });
+        // });
 
-        // Navigation function
-        function navigateTo(url) {
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-            window.location.href = url;
-        }
+        // // Navigation function
+        // function navigateTo(url) {
+        //     if (navigator.vibrate) {
+        //         navigator.vibrate(50);
+        //     }
+        //     window.location.href = url;
+        // }
 
-        // Info function
-        function showInfo(name) {
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
+        // // Info function
+        // function showInfo(name) {
+        //     if (navigator.vibrate) {
+        //         navigator.vibrate(50);
+        //     }
 
-            const infoMessages = {
-                'سين جيم جلسات': 'منطقة الجلسات والحوار المفتوح',
-                'منطقة العشاء': 'منطقة تناول الطعام والمرطبات',
-                'البوابة الخارجية والممر': 'مدخل الفعالية الرئيسي - نقطة استقبال الضيوف',
-                'الاستقبال': 'منطقة تسجيل الحضور والترحيب بالضيوف',
-                'رحلة الحفاوة': 'تجربة الضيافة السعودية الأصيلة',
-                'بصمة الضيافة': 'منطقة التفاعل مع تجارب الضيافة',
-                'جدار التصوير': 'جدار التصوير التذكاري للفعالية',
-                'الستيشن': 'محطة الخدمات والدعم',
-                'فرقة الاوركيسترا': 'منصة العروض الموسيقية الحية',
-                'اللوح الإرشادية': 'لوحات إرشادية للتوجيه في الفعالية',
-                'الخيمة - جلسات': 'خيمة الجلسات الجانبية',
-                'منصة التدشين': 'منصة تدشين الفعالية'
-            };
+        //     const infoMessages = {
+        //         'سين جيم جلسات': 'منطقة الجلسات والحوار المفتوح',
+        //         'منطقة العشاء': 'منطقة تناول الطعام والمرطبات',
+        //         'البوابة الخارجية والممر': 'مدخل الفعالية الرئيسي - نقطة استقبال الضيوف',
+        //         'الاستقبال': 'منطقة تسجيل الحضور والترحيب بالضيوف',
+        //         'رحلة الحفاوة': 'تجربة الضيافة السعودية الأصيلة',
+        //         'بصمة الضيافة': 'منطقة التفاعل مع تجارب الضيافة',
+        //         'جدار التصوير': 'جدار التصوير التذكاري للفعالية',
+        //         'الستيشن': 'محطة الخدمات والدعم',
+        //         'فرقة الاوركيسترا': 'منصة العروض الموسيقية الحية',
+        //         'اللوح الإرشادية': 'لوحات إرشادية للتوجيه في الفعالية',
+        //         'الخيمة - جلسات': 'خيمة الجلسات الجانبية',
+        //         'منصة التدشين': 'منصة تدشين الفعالية'
+        //     };
 
-            const message = infoMessages[name] || 'موقع في الفعالية';
-            alert('📍 ' + name + '\n\n' + message);
-        }
+        //     const message = infoMessages[name] || 'موقع في الفعالية';
+        //     alert('📍 ' + name + '\n\n' + message);
+        // }
 
-        // Resize handler
-        window.addEventListener('load', function() {
-        // استهداف الخريطة مباشرة
-            const map = document.getElementsByName('image-map')[0];
-            if (map) {
-            imageMapResize();
-            }
-            });
+        // // Resize handler
+        // window.addEventListener('load', function() {
+        // // استهداف الخريطة مباشرة
+        //     const map = document.getElementsByName('image-map')[0];
+        //     if (map) {
+        //     imageMapResize();
+        //     }
+        //     });
 
-        // تأكد من استدعاء المكتبة عند تغيير حجم النافذة أيضاً
-        window.addEventListener('resize', function() {
-            imageMapResize();
-        });
+        // // تأكد من استدعاء المكتبة عند تغيير حجم النافذة أيضاً
+        // window.addEventListener('resize', function() {
+        //     imageMapResize();
+        // });
 
         // الوظيفة المسؤولة عن التمرير للأسفل والمنتصف
         function scrollToBottomCenter() {
