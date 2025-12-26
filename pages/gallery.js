@@ -108,17 +108,17 @@ export default function GalleryPage() {
               <ArrowRight size={24} />
             </button>
             <h1 className="text-3xl font-bold flex items-center gap-3 text-white">
-              <Camera size={32} strokeWidth={2.5} />
+              {/* <Camera size={32} strokeWidth={2.5} /> */}
               معرض الصور المشاركة
             </h1>
             <div className="w-10" />
           </div>
 
-          <div className="rounded-xl p-4" style={{background: '#CE7B5B'}}>
+          {/* <div className="rounded-xl p-4" style={{background: '#CE7B5B'}}>
             {/* <p className="text-center text-lg font-semibold" style={{color: '#000000'}}>
               شاهد وأعجب بصور زملائك! 
-            </p> */}
-          </div>
+            </p> 
+          </div> */}
         </div>
       </div>
 
