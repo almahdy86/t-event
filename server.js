@@ -288,7 +288,7 @@ app.prepare().then(() => {
   // Employee - Register
   server.post('/api/employee/register', async (req, res) => {
     try {
-      let { uid, fullName, jobTitle } = req.body
+      let { uid, fullName, jobTitle, employeeType } = req.body
 
       // إذا لم يكن هناك uid، نولد واحد تلقائياً
       if (!uid) {
@@ -302,29 +302,51 @@ app.prepare().then(() => {
       )
 
       if (existing.rows.length > 0) {
-        return res.json({ 
-          success: false, 
-          message: 'هذا الرمز مستخدم مسبقاً' 
+        return res.json({
+          success: false,
+          message: 'هذا الرمز مستخدم مسبقاً'
         })
       }
 
-      // البحث عن أول رقم متاح من 1-200
+      // تحديد نطاق الأرقام حسب نوع الحضور
+      let minNum, maxNum
+      switch(employeeType) {
+        case 'مجلس_الإدارة':
+          minNum = 1
+          maxNum = 20
+          break
+        case 'موظف':
+          minNum = 31
+          maxNum = 400
+          break
+        case 'ضيف':
+          minNum = 401
+          maxNum = 440
+          break
+        default:
+          return res.json({
+            success: false,
+            message: 'نوع الحضور غير صحيح'
+          })
+      }
+
+      // البحث عن أول رقم متاح في النطاق المحدد
       const numbersResult = await pool.query(`
         WITH RECURSIVE numbers AS (
-          SELECT 1 AS num
+          SELECT $1::integer AS num
           UNION ALL
-          SELECT num + 1 FROM numbers WHERE num < 200
+          SELECT num + 1 FROM numbers WHERE num < $2::integer
         )
         SELECT num FROM numbers
         WHERE num NOT IN (SELECT employee_number FROM employees)
         ORDER BY num
         LIMIT 1
-      `)
+      `, [minNum, maxNum])
 
       if (numbersResult.rows.length === 0) {
         return res.json({
           success: false,
-          message: 'عذراً، لقد اكتمل العدد المسموح'
+          message: `عذراً، لقد اكتمل عدد ${employeeType === 'مجلس_الإدارة' ? 'مجلس الإدارة' : employeeType === 'موظف' ? 'الموظفين' : 'الضيوف'}`
         })
       }
 
@@ -332,8 +354,8 @@ app.prepare().then(() => {
 
       // التسجيل
       const result = await pool.query(
-        `INSERT INTO employees (uid, employee_number, full_name, job_title) 
-         VALUES ($1, $2, $3, $4) 
+        `INSERT INTO employees (uid, employee_number, full_name, job_title)
+         VALUES ($1, $2, $3, $4)
          RETURNING *`,
         [uid, employeeNumber, fullName, jobTitle]
       )
@@ -779,6 +801,56 @@ app.prepare().then(() => {
     } catch (error) {
       console.error('Error deleting photo:', error)
       res.status(500).json({ success: false })
+    }
+  })
+
+  // Reset All Data - مسح جميع البيانات
+  server.post('/api/admin/reset-all-data', async (req, res) => {
+    try {
+      console.log('⚠️ Starting data reset...')
+
+      // مسح جميع البيانات (باستثناء المسؤولين)
+      await pool.query('DELETE FROM lottery_winners')
+      console.log('✓ Deleted lottery winners')
+
+      await pool.query('DELETE FROM answers')
+      console.log('✓ Deleted answers')
+
+      await pool.query('DELETE FROM shared_photos')
+      console.log('✓ Deleted shared photos')
+
+      // مسح الملفات المحلية
+      const files = fs.readdirSync(uploadsDir)
+      files.forEach(file => {
+        try {
+          fs.unlinkSync(path.join(uploadsDir, file))
+        } catch (err) {
+          console.error('Error deleting file:', file, err)
+        }
+      })
+      console.log('✓ Deleted uploaded files')
+
+      await pool.query('DELETE FROM employees')
+      console.log('✓ Deleted employees')
+
+      await pool.query('UPDATE questions SET is_active = false')
+      console.log('✓ Deactivated all questions')
+
+      await pool.query('UPDATE activities SET is_active = false')
+      console.log('✓ Deactivated all activities')
+
+      console.log('✅ Data reset completed successfully!')
+
+      res.json({
+        success: true,
+        message: 'تم مسح جميع البيانات بنجاح'
+      })
+    } catch (error) {
+      console.error('❌ Error resetting data:', error)
+      res.status(500).json({
+        success: false,
+        message: 'حدث خطأ أثناء مسح البيانات'
+      })
     }
   })
 

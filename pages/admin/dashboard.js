@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
 import {
   Users, Image as ImageIcon, Brain, Settings, Bell,
-  Activity, TrendingUp, CheckCircle, XCircle, LogOut, Gift
+  Activity, TrendingUp, CheckCircle, XCircle, LogOut, Gift, Trash2
 } from 'lucide-react'
 
 export default function AdminDashboard() {
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
           <ActionCard
             title="إرسال إشعار"
             icon={<Bell size={40} />}
@@ -245,6 +245,23 @@ export default function AdminDashboard() {
             color="bg-gradient-to-r from-yellow-400 to-orange-500"
             onClick={() => router.push('/admin/lottery')}
           />
+        </div>
+
+        {/* Danger Zone */}
+        <div className="bg-red-50 border-2 border-red-300 rounded-2xl p-6">
+          <h3 className="text-xl font-bold text-red-700 mb-4 flex items-center gap-2">
+            ⚠️ منطقة الخطر
+          </h3>
+          <p className="text-red-600 mb-4">
+            استخدم هذه الأدوات بحذر شديد - العمليات لا يمكن التراجع عنها
+          </p>
+          <button
+            onClick={() => router.push('/admin/reset-data')}
+            className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2"
+          >
+            <Trash2 size={20} />
+            مسح جميع البيانات (تحضير للفعالية)
+          </button>
         </div>
       </div>
     </div>

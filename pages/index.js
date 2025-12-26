@@ -13,7 +13,8 @@ export default function Home() {
   const [employee, setEmployee] = useState(null)
   const [formData, setFormData] = useState({
     fullName: '',
-    jobTitle: ''
+    jobTitle: '',
+    employeeType: '' // مجلس_الإدارة, موظف, ضيف
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -68,8 +69,8 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    if (!formData.fullName.trim() || !formData.jobTitle.trim()) {
+
+    if (!formData.fullName.trim() || !formData.employeeType) {
       setError('يرجى ملء جميع الحقول')
       return
     }
@@ -84,7 +85,8 @@ export default function Home() {
         body: JSON.stringify({
           uid,
           fullName: formData.fullName,
-          jobTitle: formData.jobTitle
+          jobTitle: formData.jobTitle,
+          employeeType: formData.employeeType
         })
       })
 
@@ -260,17 +262,21 @@ export default function Home() {
 
             <div>
               <label className="block text-black font-semibold mb-2">
-                المسمى الوظيفي
+                نوع الحضور *
               </label>
-              <input
-                type="text"
-                value={formData.jobTitle}
-                onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
+              <select
+                value={formData.employeeType}
+                onChange={(e) => setFormData({ ...formData, employeeType: e.target.value, jobTitle: e.target.value })}
                 className="w-full px-4 py-4 border-2 rounded-xl focus:outline-none text-lg transition-colors text-black"
                 style={{borderColor: '#9C7DDE', background: 'white'}}
-                placeholder="أدخل مسماك الوظيفي"
                 disabled={isSubmitting}
-              />
+                required
+              >
+                <option value="">اختر نوع الحضور</option>
+                <option value="مجلس_الإدارة">مجلس الإدارة (أرقام 1-20)</option>
+                <option value="موظف">موظف (أرقام 31-400)</option>
+                <option value="ضيف">ضيف (أرقام 401-440)</option>
+              </select>
             </div>
 
             {error && (
