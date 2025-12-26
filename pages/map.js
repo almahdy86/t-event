@@ -196,7 +196,7 @@ export default function MapPage() {
     <div
       className="min-h-screen pb-20"
       style={{
-        backgroundImage: 'url(/bg/BG%2002.png)',
+        backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -204,7 +204,7 @@ export default function MapPage() {
       }}
     >
       {/* Header ثابت */}
-      <div className="bg-white shadow-lg sticky top-0 z-50">
+      <div className="shadow-lg sticky top-0 z-50" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 relative">
@@ -216,13 +216,13 @@ export default function MapPage() {
               />
             </div>
             <div>
-              <p className="font-bold" style={{color: '#000000'}}>{employee.full_name}</p>
-              <p className="text-sm" style={{color: '#000000', opacity: 0.6}}>{employee.job_title}</p>
+              <p className="font-bold" style={{color: 'white'}}>{employee.full_name}</p>
+              <p className="text-sm" style={{color: 'rgba(255,255,255,0.6)'}}>{employee.job_title}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#AB8025'}}>
+            <div className="text-black px-4 py-2 rounded-full font-bold text-xl" style={{background: '#C9A961'}}>
               #{employee.employee_number}
             </div>
             <button
@@ -256,33 +256,24 @@ export default function MapPage() {
 
       {/* خريطة الفعاليات */}
       <div className="p-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold text-center mb-8"
-          style={{color: '#000000'}}
-        >
-           
-        </motion.h2>
-
         {/* زر خريطة الفعالية التفاعلية */}
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={() => router.push('/event-map')}
           className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 active:scale-95"
-          style={{background: '#AB8025', color: 'white'}}
+          style={{background: '#C9A961', color: '#000000'}}
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full flex items-center justify-center"
-                 style={{background: 'rgba(255,255,255,0.2)'}}>
+                 style={{background: 'rgba(0,0,0,0.2)'}}>
               <MapPin size={32} />
             </div>
 
             <div className="flex-1 text-right">
-              <h3 className="text-2xl font-bold mb-1"> خريطة الفعالية</h3>
-              <p className="text-sm opacity-90">
-                 خريطة تفصيلية لجميع مواقع الفعالية
+              <h3 className="text-2xl font-bold mb-1">🗺️ خريطة الفعالية</h3>
+              <p className="text-sm" style={{opacity: 0.8}}>
+                خريطة تفصيلية لجميع مواقع الفعالية
               </p>
             </div>
 
@@ -309,21 +300,22 @@ export default function MapPage() {
                   disabled={!isActive}
                   className="w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95"
                   style={{
-                    background: isActive ? activity.bgColor : '#E0E0E0',
-                    color: isActive ? 'white' : '#9E9E9E',
+                    background: isActive ? '#C9A961' : 'rgba(255,255,255,0.1)',
+                    color: isActive ? '#000000' : 'rgba(255,255,255,0.3)',
                     opacity: isActive ? 1 : 0.5,
-                    cursor: isActive ? 'pointer' : 'not-allowed'
+                    cursor: isActive ? 'pointer' : 'not-allowed',
+                    border: isActive ? 'none' : '1px solid rgba(255,255,255,0.1)'
                   }}
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-full flex items-center justify-center"
-                         style={{background: isActive ? 'rgba(255,255,255,0.2)' : '#BDBDBD'}}>
+                         style={{background: isActive ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.05)'}}>
                       <Icon size={32} />
                     </div>
 
                     <div className="flex-1 text-right">
                       <h3 className="text-xl font-bold mb-1">{activity.title}</h3>
-                      <p className="text-sm opacity-90">
+                      <p className="text-sm" style={{opacity: 0.8}}>
                         {isActive ? 'انقر للدخول' : 'غير متاح حالياً'}
                       </p>
                     </div>

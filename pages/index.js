@@ -222,7 +222,7 @@ export default function Home() {
     <div
       className="min-h-screen flex flex-col p-6"
       style={{
-        backgroundImage: 'url(/bg/BG%2001.png)',
+        backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -244,56 +244,69 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full"
       >
-        <Card className="mb-8">
-          <h1 className="text-3xl font-bold text-black text-center mb-2">
-            أهلاً بك! 👋
+        <div className="mb-8 p-8 rounded-3xl" style={{background: 'rgba(0,0,0,0.85)', border: '1px solid rgba(201,169,97,0.3)'}}>
+          <h1 className="text-3xl font-bold text-center mb-2" style={{color: 'white'}}>
+            اسم الفريق...
           </h1>
-          <p className="text-center text-black mb-8">
-            يرجى تأكيد بياناتك للمتابعة
+          <p className="text-center mb-8" style={{color: 'rgba(255,255,255,0.5)', fontSize: '14px'}}>
+            الرجاء إدخال اسم الفريق
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-black font-semibold mb-2">
-                الاسم الثلاثي
-              </label>
               <input
                 type="text"
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full px-4 py-4 border-2 rounded-xl focus:outline-none text-lg transition-colors text-black"
-                style={{borderColor: '#9C7DDE', background: 'white'}}
-                placeholder="أدخل اسمك الكامل"
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors text-center"
+                style={{
+                  borderBottom: '2px solid #C9A961',
+                  background: 'transparent',
+                  color: 'white',
+                  borderTop: 'none',
+                  borderLeft: 'none',
+                  borderRight: 'none'
+                }}
+                placeholder=""
                 disabled={isSubmitting}
               />
             </div>
 
             <div>
-              <label className="block text-black font-semibold mb-2">
-               المسمى الوظيفي *
-              </label>
               <select
                 value={formData.employeeType}
                 onChange={(e) => setFormData({ ...formData, employeeType: e.target.value, jobTitle: e.target.value })}
-                className="w-full px-4 py-4 border-2 rounded-xl focus:outline-none text-lg transition-colors text-black"
-                style={{borderColor: '#9C7DDE', background: 'white'}}
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors text-center"
+                style={{
+                  background: 'transparent',
+                  color: 'rgba(255,255,255,0.7)',
+                  border: '1px solid rgba(201,169,97,0.5)'
+                }}
                 disabled={isSubmitting}
                 required
               >
-                <option value="">اختر المسمى الوظيفي</option>
-                <option value="مجلس_الإدارة">مجلس الإدارة (أرقام 1-20)</option>
-                <option value="موظف">موظف (أرقام 31-400)</option>
-                <option value="ضيف">ضيف (أرقام 401-440)</option>
+                <option value="" style={{background: '#1a1a1a', color: 'white'}}>اختر المسمى الوظيفي</option>
+                <option value="مجلس_الإدارة" style={{background: '#1a1a1a', color: 'white'}}>مجلس الإدارة (أرقام 1-20)</option>
+                <option value="موظف" style={{background: '#1a1a1a', color: 'white'}}>موظف (أرقام 31-400)</option>
+                <option value="ضيف" style={{background: '#1a1a1a', color: 'white'}}>ضيف (أرقام 401-440)</option>
               </select>
             </div>
 
             {error && (
-              <div className="border px-4 py-3 rounded-xl text-black" style={{background: '#ffebee', borderColor: '#ef5350'}}>
+              <div className="px-4 py-3 rounded-xl text-center" style={{color: '#ff3333', borderBottom: '2px solid #ff3333'}}>
                 {error}
               </div>
             )}
 
-            <Button variant="primary" type="submit" disabled={isSubmitting} className="w-full justify-center">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50"
+              style={{
+                background: '#C9A961',
+                color: '#000000'
+              }}
+            >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
                   <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
@@ -303,15 +316,11 @@ export default function Home() {
                   جارٍ التسجيل...
                 </span>
               ) : (
-                'تأكيد البيانات'
+                'ابدأ التحدي'
               )}
-            </Button>
+            </button>
           </form>
-        </Card>
-
-        <p className="text-center text-sm text-black opacity-70">
-          بمسح رمز QR، أنت توافق على المشاركة في الفعالية
-        </p>
+        </div>
       </motion.div>
     </div>
   )

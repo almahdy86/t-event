@@ -22,7 +22,7 @@ export default function HospitalityPage() {
     <div
       className="min-h-screen flex flex-col"
       style={{
-        backgroundImage: 'url(/bg/BG%2003.png)',
+        backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

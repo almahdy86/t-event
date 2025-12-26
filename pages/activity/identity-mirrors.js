@@ -173,20 +173,20 @@ export default function IdentityMirrorsPage() {
       <div
         className="min-h-screen flex flex-col"
         style={{
-          backgroundImage: 'url(/bg/BG%2003.png)',
+          backgroundImage: 'url(/bg/newbg.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="p-4 flex items-center justify-between bg-white shadow">
+        <div className="p-4 flex items-center justify-between shadow" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
           <button
             onClick={() => router.push('/map')}
-            style={{color: '#000000'}}
+            style={{color: 'white'}}
           >
             ← رجوع
           </button>
-          <h1 className="font-bold text-xl" style={{color: '#000000'}}>مرايا الهوية</h1>
+          <h1 className="font-bold text-xl" style={{color: 'white'}}>مرايا الهوية</h1>
           <div className="w-8"></div>
         </div>
 
@@ -196,9 +196,9 @@ export default function IdentityMirrorsPage() {
             animate={{ scale: 1 }}
             transition={{ type: 'spring' }}
             className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
-            style={{background: '#AB8025'}}
+            style={{background: '#C9A961'}}
           >
-            <Camera size={64} color="white" />
+            <Camera size={64} color="#000000" />
           </motion.div>
 
           <motion.h2
@@ -206,7 +206,7 @@ export default function IdentityMirrorsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-4xl font-bold mb-4 text-center"
-            style={{color: '#000000'}}
+            style={{color: 'white'}}
           >
             التقط لحظتك! 📸
           </motion.h2>
@@ -216,24 +216,12 @@ export default function IdentityMirrorsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className="text-xl text-center mb-8"
-            style={{color: '#000000'}}
+            style={{color: 'rgba(255,255,255,0.7)'}}
           >
             شارك لحظاتك المميزة مع زملائك
             <br />
             على الشاشة الكبيرة
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white rounded-2xl p-6 mb-8 w-full max-w-sm shadow-lg"
-          >
-            <h3 className="font-bold text-lg mb-3" style={{color: '#CE7B5B'}}>            شارك لحظاتك المميزة مع زملائك
-            <br />
-            على الشاشة الكبيرة</h3>
-            {/* <p style={{color: '#000000'}}>القاعة الرئيسية - الجهة الشرقية</p> */}
-          </motion.div>
 
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
@@ -242,7 +230,7 @@ export default function IdentityMirrorsPage() {
             whileTap={{ scale: 0.95 }}
             onClick={startCamera}
             className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-colors flex items-center gap-3"
-            style={{background: '#AB8025', color: 'white'}}
+            style={{background: '#C9A961', color: '#000000'}}
           >
             <Camera size={28} />
             ابدأ التصوير
