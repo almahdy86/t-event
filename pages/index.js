@@ -246,41 +246,44 @@ export default function Home() {
       >
         <div className="mb-8 p-8 rounded-3xl" style={{background: 'rgba(0,0,0,0.85)', border: '1px solid rgba(201,169,97,0.3)'}}>
           <h1 className="text-3xl font-bold text-center mb-2" style={{color: 'white'}}>
-            اسم الفريق...
+            أهلاً بك! 👋
           </h1>
-          <p className="text-center mb-8" style={{color: 'rgba(255,255,255,0.5)', fontSize: '14px'}}>
-            الرجاء إدخال اسم الفريق
+          <p className="text-center mb-8" style={{color: 'rgba(255,255,255,0.7)'}}>
+            يرجى تأكيد بياناتك للمتابعة
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
+              <label className="block font-semibold mb-2" style={{color: 'white'}}>
+                الاسم الثلاثي
+              </label>
               <input
                 type="text"
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors text-center"
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  borderBottom: '2px solid #C9A961',
-                  background: 'transparent',
-                  color: 'white',
-                  borderTop: 'none',
-                  borderLeft: 'none',
-                  borderRight: 'none'
+                  border: '2px solid #C9A961',
+                  background: 'rgba(255,255,255,0.1)',
+                  color: 'white'
                 }}
-                placeholder=""
+                placeholder="أدخل اسمك الكامل"
                 disabled={isSubmitting}
               />
             </div>
 
             <div>
+              <label className="block font-semibold mb-2" style={{color: 'white'}}>
+                المسمى الوظيفي *
+              </label>
               <select
                 value={formData.employeeType}
                 onChange={(e) => setFormData({ ...formData, employeeType: e.target.value, jobTitle: e.target.value })}
-                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors text-center"
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  background: 'transparent',
-                  color: 'rgba(255,255,255,0.7)',
-                  border: '1px solid rgba(201,169,97,0.5)'
+                  border: '2px solid #C9A961',
+                  background: 'rgba(255,255,255,0.1)',
+                  color: 'white'
                 }}
                 disabled={isSubmitting}
                 required
@@ -293,7 +296,7 @@ export default function Home() {
             </div>
 
             {error && (
-              <div className="px-4 py-3 rounded-xl text-center" style={{color: '#ff3333', borderBottom: '2px solid #ff3333'}}>
+              <div className="px-4 py-3 rounded-xl" style={{background: 'rgba(255,51,51,0.2)', color: '#ff6666', border: '1px solid #ff3333'}}>
                 {error}
               </div>
             )}
@@ -316,7 +319,7 @@ export default function Home() {
                   جارٍ التسجيل...
                 </span>
               ) : (
-                'ابدأ التحدي'
+                'تأكيد البيانات'
               )}
             </button>
           </form>
