@@ -262,7 +262,7 @@ export default function MapPage() {
           className="text-3xl font-bold text-center mb-8"
           style={{color: '#000000'}}
         >
-           🗺️
+           
         </motion.h2>
 
         {/* زر خريطة الفعالية التفاعلية */}
@@ -280,7 +280,7 @@ export default function MapPage() {
             </div>
 
             <div className="flex-1 text-right">
-              <h3 className="text-2xl font-bold mb-1">🗺️ خريطة الفعالية</h3>
+              <h3 className="text-2xl font-bold mb-1"> خريطة الفعالية</h3>
               <p className="text-sm opacity-90">
                  خريطة تفصيلية لجميع مواقع الفعالية
               </p>
