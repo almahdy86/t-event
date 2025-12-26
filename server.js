@@ -821,12 +821,20 @@ app.prepare().then(() => {
       }
 
       // 2. حذف الإجابات (تعتمد على employees و questions)
-      await pool.query('DELETE FROM answers')
-      console.log('✓ Deleted answers')
+      try {
+        const answersResult = await pool.query('DELETE FROM answers')
+        console.log(`✓ Deleted ${answersResult.rowCount} answers`)
+      } catch (error) {
+        console.log('⚠️ answers table issue:', error.message)
+      }
 
       // 3. حذف الصور المشاركة (تعتمد على employees)
-      await pool.query('DELETE FROM shared_photos')
-      console.log('✓ Deleted shared photos')
+      try {
+        const photosResult = await pool.query('DELETE FROM shared_photos')
+        console.log(`✓ Deleted ${photosResult.rowCount} shared photos`)
+      } catch (error) {
+        console.log('⚠️ shared_photos table issue:', error.message)
+      }
 
       // 4. مسح الملفات المحلية
       try {
@@ -839,23 +847,37 @@ app.prepare().then(() => {
               console.error('Error deleting file:', file, err)
             }
           })
-          console.log('✓ Deleted uploaded files')
+          console.log(`✓ Deleted ${files.length} uploaded files`)
+        } else {
+          console.log('⚠️ Uploads directory does not exist')
         }
       } catch (err) {
-        console.error('Error accessing uploads directory:', err)
+        console.log('⚠️ Error accessing uploads directory:', err.message)
       }
 
       // 5. حذف الموظفين
-      await pool.query('DELETE FROM employees')
-      console.log('✓ Deleted employees')
+      try {
+        const employeesResult = await pool.query('DELETE FROM employees')
+        console.log(`✓ Deleted ${employeesResult.rowCount} employees`)
+      } catch (error) {
+        console.log('⚠️ employees table issue:', error.message)
+      }
 
       // 6. تعطيل جميع الأسئلة
-      await pool.query('UPDATE questions SET is_active = false')
-      console.log('✓ Deactivated all questions')
+      try {
+        const questionsResult = await pool.query('UPDATE questions SET is_active = false')
+        console.log(`✓ Deactivated ${questionsResult.rowCount} questions`)
+      } catch (error) {
+        console.log('⚠️ questions table issue:', error.message)
+      }
 
       // 7. تعطيل جميع الأنشطة
-      await pool.query('UPDATE activity_status SET is_active = false')
-      console.log('✓ Deactivated all activities')
+      try {
+        const activitiesResult = await pool.query('UPDATE activity_status SET is_active = false')
+        console.log(`✓ Deactivated ${activitiesResult.rowCount} activities`)
+      } catch (error) {
+        console.log('⚠️ activity_status table issue:', error.message)
+      }
 
       console.log('✅ Data reset completed successfully!')
 

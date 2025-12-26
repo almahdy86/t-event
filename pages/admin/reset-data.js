@@ -55,15 +55,16 @@ export default function ResetData() {
 
       const data = await response.json()
 
-      if (data.success) {
+      if (response.ok && data.success) {
         setStep(3)
       } else {
-        setError(data.message || 'حدث خطأ')
+        console.error('Reset failed:', data)
+        setError(data.message || 'حدث خطأ في مسح البيانات')
         setStep(1)
       }
     } catch (error) {
       console.error('Error:', error)
-      setError('حدث خطأ في الاتصال')
+      setError('حدث خطأ في الاتصال: ' + error.message)
       setStep(1)
     }
   }
