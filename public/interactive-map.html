@@ -48,6 +48,7 @@
             bottom: 0;
             overflow: auto;
             background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            scroll-behavior: smooth;
         }
 
         .map-wrapper {
@@ -55,12 +56,13 @@
             min-width: 100%;
             min-height: 100%;
             padding: 8px;
+            position: relative;
         }
 
         .map-inner {
             position: relative;
-            width: 1920px;
-            height: 1080px;
+            width: 2400px;
+            height: 1600px;
             margin: 0 auto;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             border-radius: 12px;
@@ -439,22 +441,35 @@
                 // 65% من الأسفل عمودياً
                 const topPosition = (scrollHeight - clientHeight) * 0.65;
 
+                console.log('Scroll Info:', {
+                    scrollHeight,
+                    clientHeight,
+                    scrollWidth,
+                    clientWidth,
+                    topPosition,
+                    leftPosition
+                });
+
                 mapContainer.scrollTo({
                     top: topPosition,
                     left: leftPosition,
                     behavior: 'auto'
                 });
+
+                console.log('Scrolled to:', mapContainer.scrollTop, mapContainer.scrollLeft);
             }
         }
 
         // استدعاء الدالة عند تحميل الصورة
         document.getElementById('mapImage').addEventListener('load', function() {
-            setTimeout(scrollToBottomCenter, 50);
+            console.log('Image loaded, scrolling...');
+            setTimeout(scrollToBottomCenter, 100);
         });
 
         // استدعاء عند تحميل الصفحة
         window.addEventListener('load', function() {
-            setTimeout(scrollToBottomCenter, 100);
+            console.log('Page loaded, scrolling...');
+            setTimeout(scrollToBottomCenter, 200);
         });
     </script>
 </body>
