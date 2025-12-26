@@ -460,16 +460,32 @@
             }
         }
 
-        // استدعاء الدالة عند تحميل الصورة
-        document.getElementById('mapImage').addEventListener('load', function() {
-            console.log('Image loaded, scrolling...');
-            setTimeout(scrollToBottomCenter, 100);
+        // تنفيذ فوري
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Ready');
+
+            const mapImage = document.getElementById('mapImage');
+            const mapContainer = document.getElementById('mapContainer');
+
+            if (mapImage && mapContainer) {
+                // عند تحميل الصورة
+                mapImage.addEventListener('load', function() {
+                    console.log('Image loaded, scrolling...');
+                    setTimeout(scrollToBottomCenter, 100);
+                });
+
+                // إذا كانت الصورة محملة بالفعل
+                if (mapImage.complete) {
+                    console.log('Image already loaded, scrolling now...');
+                    setTimeout(scrollToBottomCenter, 100);
+                }
+            }
         });
 
-        // استدعاء عند تحميل الصفحة
+        // استدعاء عند تحميل الصفحة كاملة
         window.addEventListener('load', function() {
-            console.log('Page loaded, scrolling...');
-            setTimeout(scrollToBottomCenter, 200);
+            console.log('Page fully loaded, scrolling...');
+            setTimeout(scrollToBottomCenter, 300);
         });
     </script>
 </body>
