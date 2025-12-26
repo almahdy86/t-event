@@ -289,7 +289,7 @@ export default function Home() {
                 required
               >
                 <option value="" style={{background: '#1a1a1a', color: 'white'}}>اختر المسمى الوظيفي</option>
-                <option value="مجلس_الإدارة" style={{background: '#1a1a1a', color: 'white'}}>مجلس الإدارة (أرقام 1-20)</option>
+                <option value="مجلس_الإدارة" style={{background: '#1a1a1a', color: 'white'}}>مجلس الإدارة (أرقام 1-30)</option>
                 <option value="موظف" style={{background: '#1a1a1a', color: 'white'}}>موظف (أرقام 31-400)</option>
                 <option value="ضيف" style={{background: '#1a1a1a', color: 'white'}}>ضيف (أرقام 401-440)</option>
               </select>

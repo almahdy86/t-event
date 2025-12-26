@@ -313,7 +313,7 @@ app.prepare().then(() => {
       switch(employeeType) {
         case 'مجلس_الإدارة':
           minNum = 1
-          maxNum = 20
+          maxNum = 30
           break
         case 'موظف':
           minNum = 31
