@@ -614,11 +614,17 @@ app.prepare().then(() => {
   server.delete('/api/admin/questions/:id', async (req, res) => {
     try {
       const { id } = req.params
+
+      // حذف جميع الإجابات المرتبطة بالسؤال أولاً
+      await pool.query('DELETE FROM answers WHERE question_id = $1', [id])
+
+      // ثم حذف السؤال
       await pool.query('DELETE FROM questions WHERE id = $1', [id])
+
       res.json({ success: true })
     } catch (error) {
       console.error('Error deleting question:', error)
-      res.status(500).json({ success: false })
+      res.status(500).json({ success: false, error: error.message })
     }
   })
 
