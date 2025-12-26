@@ -262,7 +262,7 @@ export default function Home() {
 
             <div>
               <label className="block text-black font-semibold mb-2">
-                نوع الحضور *
+               المسمى الوظيفي *
               </label>
               <select
                 value={formData.employeeType}
@@ -272,7 +272,7 @@ export default function Home() {
                 disabled={isSubmitting}
                 required
               >
-                <option value="">اختر نوع الحضور</option>
+                <option value="">اختر المسمى الوظيفي</option>
                 <option value="مجلس_الإدارة">مجلس الإدارة (أرقام 1-20)</option>
                 <option value="موظف">موظف (أرقام 31-400)</option>
                 <option value="ضيف">ضيف (أرقام 401-440)</option>

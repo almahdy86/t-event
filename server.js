@@ -810,32 +810,46 @@ app.prepare().then(() => {
       console.log('⚠️ Starting data reset...')
 
       // مسح جميع البيانات (باستثناء المسؤولين)
+      // الترتيب مهم جداً بسبب foreign key constraints
+
+      // 1. حذف الفائزين في القرعة
       await pool.query('DELETE FROM lottery_winners')
       console.log('✓ Deleted lottery winners')
 
+      // 2. حذف الإجابات (تعتمد على employees و questions)
       await pool.query('DELETE FROM answers')
       console.log('✓ Deleted answers')
 
+      // 3. حذف الصور المشاركة (تعتمد على employees)
       await pool.query('DELETE FROM shared_photos')
       console.log('✓ Deleted shared photos')
 
-      // مسح الملفات المحلية
-      const files = fs.readdirSync(uploadsDir)
-      files.forEach(file => {
-        try {
-          fs.unlinkSync(path.join(uploadsDir, file))
-        } catch (err) {
-          console.error('Error deleting file:', file, err)
+      // 4. مسح الملفات المحلية
+      try {
+        if (fs.existsSync(uploadsDir)) {
+          const files = fs.readdirSync(uploadsDir)
+          files.forEach(file => {
+            try {
+              fs.unlinkSync(path.join(uploadsDir, file))
+            } catch (err) {
+              console.error('Error deleting file:', file, err)
+            }
+          })
+          console.log('✓ Deleted uploaded files')
         }
-      })
-      console.log('✓ Deleted uploaded files')
+      } catch (err) {
+        console.error('Error accessing uploads directory:', err)
+      }
 
+      // 5. حذف الموظفين
       await pool.query('DELETE FROM employees')
       console.log('✓ Deleted employees')
 
+      // 6. تعطيل جميع الأسئلة
       await pool.query('UPDATE questions SET is_active = false')
       console.log('✓ Deactivated all questions')
 
+      // 7. تعطيل جميع الأنشطة
       await pool.query('UPDATE activities SET is_active = false')
       console.log('✓ Deactivated all activities')
 
@@ -847,9 +861,11 @@ app.prepare().then(() => {
       })
     } catch (error) {
       console.error('❌ Error resetting data:', error)
+      console.error('Error details:', error.message)
+      console.error('Error stack:', error.stack)
       res.status(500).json({
         success: false,
-        message: 'حدث خطأ أثناء مسح البيانات'
+        message: `حدث خطأ أثناء مسح البيانات: ${error.message}`
       })
     }
   })
