@@ -25,8 +25,10 @@ module.exports = {
         },
       },
       fontFamily: {
+        'aktiv': ['Aktiv Grotesk', 'Cairo', 'IBM Plex Sans Arabic', 'sans-serif'],
         'dubai': ['Dubai', 'sans-serif'],
         'arabic': ['Cairo', 'IBM Plex Sans Arabic', 'sans-serif'],
+        'sans': ['Aktiv Grotesk', 'Cairo', 'IBM Plex Sans Arabic', 'sans-serif'],
       },
     },
   },
