@@ -425,24 +425,30 @@
 
         // الوظيفة المسؤولة عن التمرير للأسفل والمنتصف
         function scrollToBottomCenter() {
-            // حساب أقصى تمدد للأسفل
+            // حساب التمرير العمودي (65% من الأسفل)
             const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = document.documentElement.clientHeight;
-            
+
             // حساب التمرير الأفقي للمنتصف (مع مراعاة اتجاه RTL)
             const scrollWidth = document.documentElement.scrollWidth;
             const clientWidth = document.documentElement.clientWidth;
-            
+
             // في حالة RTL، التمرير للمنتصف يكون نصف الفرق بين عرض المحتوى وعرض الشاشة
             const leftPosition = (scrollWidth - clientWidth) / 2;
-            const topPosition = scrollHeight - clientHeight;
+            // 65% من الأسفل (مثل صفحة event-map.js)
+            const topPosition = (scrollHeight - clientHeight) * 0.65;
 
             window.scrollTo({
                 top: topPosition,
                 left: leftPosition,
-                behavior: 'smooth' // 'smooth' للتمرير السلس أو 'auto' للانتقال اللحظي
+                behavior: 'auto' // 'auto' للانتقال اللحظي عند التحميل
             });
         }
+
+        // استدعاء الدالة عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            scrollToBottomCenter();
+        });
     </script>
 </body>
 </html>
