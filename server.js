@@ -812,9 +812,13 @@ app.prepare().then(() => {
       // مسح جميع البيانات (باستثناء المسؤولين)
       // الترتيب مهم جداً بسبب foreign key constraints
 
-      // 1. حذف الفائزين في القرعة
-      await pool.query('DELETE FROM lottery_winners')
-      console.log('✓ Deleted lottery winners')
+      // 1. حذف الفائزين في القرعة (إذا كان الجدول موجود)
+      try {
+        await pool.query('DELETE FROM lottery_winners')
+        console.log('✓ Deleted lottery winners')
+      } catch (error) {
+        console.log('⚠️ lottery_winners table does not exist, skipping...')
+      }
 
       // 2. حذف الإجابات (تعتمد على employees و questions)
       await pool.query('DELETE FROM answers')
