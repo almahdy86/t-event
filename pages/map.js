@@ -272,7 +272,7 @@ export default function MapPage() {
 
             <div className="flex-1 text-right">
               <h3 className="text-2xl font-bold mb-1"> خريطة الفعالية</h3>
-              <p className="text-sm" style={{opacity: 0.8}}>
+              <p className="text-sm" style={{color: '#bc785b'}}>
                 خريطة تفصيلية لجميع مواقع الفعالية
               </p>
             </div>
@@ -315,7 +315,7 @@ export default function MapPage() {
 
                     <div className="flex-1 text-right">
                       <h3 className="text-xl font-bold mb-1">{activity.title}</h3>
-                      <p className="text-sm" style={{opacity: 0.8}}>
+                      <p className="text-sm" style={{color: '#bc785b'}}>
                         {isActive ? 'انقر للدخول' : 'غير متاح حالياً'}
                       </p>
                     </div>
