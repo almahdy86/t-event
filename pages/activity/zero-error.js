@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Clock, CheckCircle, XCircle, Trophy, ArrowRight } from 'lucide-react'
+import { Clock, CheckCircle, XCircle, Trophy, ArrowRight, ArrowLeft } from 'lucide-react'
 import io from 'socket.io-client'
 
 let socket
@@ -182,11 +182,19 @@ export default function ZeroErrorChallengePage() {
     >
       {/* Header */}
       <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
-        <div className="flex items-center gap-2" style={{color: 'white'}}>
-          <Clock size={24} strokeWidth={1.5} />
-          <span className="text-2xl font-bold">
-            {timeLeft}s
-          </span>
+        <div className="flex items-center gap-3" style={{color: 'white'}}>
+          <button
+            onClick={() => router.push('/map')}
+            className="hover:opacity-70 transition-opacity"
+          >
+            <ArrowLeft size={24} strokeWidth={1.5} />
+          </button>
+          <div className="flex items-center gap-2">
+            <Clock size={24} strokeWidth={1.5} />
+            <span className="text-2xl font-bold">
+              {timeLeft}s
+            </span>
+          </div>
         </div>
         <h1 className="font-bold text-xl" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
         <div className="px-3 py-1 rounded-full font-bold" style={{background: 'rgba(255,255,255,0.2)', color: 'white'}}>
