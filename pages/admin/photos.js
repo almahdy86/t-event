@@ -110,7 +110,7 @@ export default function PhotosManagement() {
             >
               <ArrowRight size={24} strokeWidth={1.5} />
             </button>
-            <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>إدارة الصور</h1>
+            <h1 className="text-2xl font-bold" style={{color: '#ce7b5b'}}>إدارة الصور</h1>
           </div>
 
           {/* Filter Buttons */}
@@ -211,7 +211,7 @@ export default function PhotosManagement() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => approvePhoto(photo.id)}
-                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#bc785b] hover:text-black"
+                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#ce7b5b] hover:text-black"
                         style={{background: '#000000'}}
                       >
                         <CheckCircle size={18} strokeWidth={1.5} />
@@ -219,7 +219,7 @@ export default function PhotosManagement() {
                       </button>
                       <button
                         onClick={() => rejectPhoto(photo.id)}
-                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#bc785b] hover:text-black"
+                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#ce7b5b] hover:text-black"
                         style={{background: '#000000'}}
                       >
                         <XCircle size={18} strokeWidth={1.5} />
@@ -229,7 +229,7 @@ export default function PhotosManagement() {
                   ) : (
                     <button
                       onClick={() => deletePhoto(photo.id)}
-                      className="w-full text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#bc785b] hover:text-black"
+                      className="w-full text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#ce7b5b] hover:text-black"
                       style={{background: '#000000'}}
                     >
                       <Trash2 size={18} strokeWidth={1.5} />

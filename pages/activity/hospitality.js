@@ -49,8 +49,8 @@ export default function HospitalityPage() {
           <Heart size={64} strokeWidth={1.5} />
         </motion.div>
 
-        <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#bc785b'}}>
-          فن الإكرام 
+        <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#ce7b5b'}}>
+          فن الإكرام
         </h2>
 
         <p className="text-xl text-center mb-8 opacity-90 max-w-md">
@@ -82,8 +82,8 @@ export default function HospitalityPage() {
         <motion.button
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push('/map')}
-          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#bc785b] hover:text-black"
-          style={{background: '#000000', color: '#bc785b'}}
+          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#ce7b5b] hover:text-black"
+          style={{background: '#000000', color: '#ce7b5b'}}
         >
           عودة للخريطة
         </motion.button>

@@ -86,7 +86,7 @@ export default function LeaderboardPage() {
           className="text-center"
         >
           <Trophy className="w-20 h-20 text-yellow-300 mx-auto mb-4" strokeWidth={1.5} />
-          <h1 className="text-4xl font-black mb-2" style={{color: '#bc785b'}}>
+          <h1 className="text-4xl font-black mb-2" style={{color: '#ce7b5b'}}>
             🏆 لائحة المتصدرين
           </h1>
           <p className="text-white/90 text-lg">

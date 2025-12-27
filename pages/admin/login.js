@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  border: '2px solid #bc785b',
+                  border: '2px solid #ce7b5b',
                   background: 'rgba(255, 255, 255, 0.02)',
                   color: 'white'
                 }}
@@ -107,7 +107,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  border: '2px solid #bc785b',
+                  border: '2px solid #ce7b5b',
                   background: 'rgba(255, 255, 255, 0.02)',
                   color: 'white'
                 }}
@@ -126,10 +126,10 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#bc785b] hover:text-black"
+              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#ce7b5b] hover:text-black"
               style={{
                 background: '#000000',
-                color: '#bc785b'
+                color: '#ce7b5b'
               }}
             >
               {isLoading ? (

@@ -208,9 +208,9 @@ export default function IdentityMirrorsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-4xl font-bold mb-4 text-center"
-            style={{color: '#bc785b'}}
+            style={{color: '#ce7b5b'}}
           >
-            التقط لحظتك! 
+            التقط لحظتك!
           </motion.h2>
 
           <motion.p
@@ -231,8 +231,8 @@ export default function IdentityMirrorsPage() {
             transition={{ delay: 0.5 }}
             whileTap={{ scale: 0.95 }}
             onClick={startCamera}
-            className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all flex items-center gap-3 hover:bg-[#bc785b] hover:text-black"
-            style={{background: '#000000', color: '#bc785b'}}
+            className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all flex items-center gap-3 hover:bg-[#ce7b5b] hover:text-black"
+            style={{background: '#000000', color: '#ce7b5b'}}
           >
             <Camera size={28} strokeWidth={1.5} />
             ابدأ التصوير
@@ -377,7 +377,7 @@ export default function IdentityMirrorsPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
           onClick={() => router.push('/map')}
-          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#bc785b] hover:text-black"
+          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#ce7b5b] hover:text-black"
           style={{background: '#000000', color: '#FFFFFF'}}
         >
           العودة للخريطة

@@ -226,7 +226,7 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .btn-primary:hover {
-  background-color: #bc785b;
+  background-color: #ce7b5b;
   color: #000000;
 }
 .btn-primary:active { transform: translateY(1px); }
@@ -245,7 +245,7 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .btn-secondary:hover {
-  background-color: #bc785b;
+  background-color: #ce7b5b;
   color: #000000;
 }
 .btn-secondary:active { transform: translateY(1px); }
@@ -264,8 +264,8 @@ body {
   gap: 8px;
 }
 .btn-ghost:hover {
-  background-color: #bc785b;
-  border-color: #bc785b;
+  background-color: #ce7b5b;
+  border-color: #ce7b5b;
   color: #000000;
 }
 

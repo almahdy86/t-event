@@ -215,7 +215,7 @@ export default function Home() {
             transition={{ delay: 0.7, type: 'spring' }}
             className="mb-6"
           >
-            <div className="inline-block text-black px-12 py-6 rounded-2xl shadow-2xl" style={{background: '#bc785b'}}>
+            <div className="inline-block text-black px-12 py-6 rounded-2xl shadow-2xl" style={{background: '#ce7b5b'}}>
               <p className="text-sm mb-2">رقمك في الفعالية</p>
               <p className="text-6xl font-bold">#{employee?.employee_number}</p>
             </div>
@@ -281,7 +281,7 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  border: '2px solid #bc785b2a',
+                  border: '2px solid #ce7b5b2a',
                   background: 'rgba(255, 255, 255, 0.02)',
                   color: 'white'
                 }}
@@ -299,7 +299,7 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, employeeType: e.target.value, jobTitle: e.target.value })}
                 className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                 border: '2px solid #bc785b2a',
+                 border: '2px solid #ce7b5b2a',
                   background: 'rgba(255,255,255,0.1)',
                   color: 'white'
                 }}
@@ -324,7 +324,7 @@ export default function Home() {
               disabled={isSubmitting}
               className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:opacity-90"
               style={{
-                background: '#bc785b',
+                background: '#ce7b5b',
                 color: '#ffffff'
               }}
             >

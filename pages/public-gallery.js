@@ -85,7 +85,7 @@ export default function PublicGalleryPage() {
           <h1 className="text-4xl font-black mb-2" style={{color: '#ffffffff'}}>
              معرض صور الفعالية
           </h1>
-          <p className="text-lg" style={{color: '#bc785b'}}>
+          <p className="text-lg" style={{color: '#ce7b5b'}}>
             صور مشاركينا الرائعة
           </p>
         </motion.div>
@@ -94,9 +94,9 @@ export default function PublicGalleryPage() {
         <div className="flex gap-4 justify-center mb-6">
           <button
             onClick={() => setFilter('all')}
-            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
+            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#ce7b5b] hover:text-black"
             style={{
-              background: filter === 'all' ? '#000000' : '#bc785b',
+              background: filter === 'all' ? '#000000' : '#ce7b5b',
               color: 'white',
               boxShadow: filter === 'all' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
@@ -106,9 +106,9 @@ export default function PublicGalleryPage() {
           </button>
           <button
             onClick={() => setFilter('top')}
-            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
+            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#ce7b5b] hover:text-black"
             style={{
-              background: filter === 'top' ? '#000000' : '#bc785b',
+              background: filter === 'top' ? '#000000' : '#ce7b5b',
               color: 'white',
               boxShadow: filter === 'top' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
@@ -227,7 +227,7 @@ export default function PublicGalleryPage() {
               </div>
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="w-full text-white py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
+                className="w-full text-white py-3 rounded-xl font-bold transition-all hover:bg-[#ce7b5b] hover:text-black"
                 style={{background: '#000000'}}
               >
                 إغلاق

@@ -22,7 +22,7 @@ export default function EventMapPage() {
           <ArrowRight size={20} strokeWidth={1.5} />
           <span className="font-bold">رجوع</span>
         </button>
-        <h1 className="text-xl font-bold" style={{color: '#bc785b'}}>
+        <h1 className="text-xl font-bold" style={{color: '#ce7b5b'}}>
            خريطة الفعالية
         </h1>
         {/* <button

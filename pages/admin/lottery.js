@@ -125,7 +125,7 @@ export default function LotteryPage() {
           className="text-center mb-8"
         >
           <Sparkles className="w-16 h-16 mx-auto mb-4" strokeWidth={1.5} style={{color: '#CE7B5B'}} />
-          <h1 className="text-4xl font-black mb-2" style={{color: '#bc785b'}}>
+          <h1 className="text-4xl font-black mb-2" style={{color: '#ce7b5b'}}>
             🎁 قرعة الفائزين
           </h1>
           <p className="text-white/90 text-lg">
@@ -164,7 +164,7 @@ export default function LotteryPage() {
           <button
             onClick={startDraw}
             disabled={isDrawing || eligibleEmployees.length === 0}
-            className="w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all hover:bg-[#bc785b] hover:text-black"
+            className="w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all hover:bg-[#ce7b5b] hover:text-black"
             style={{
               background: isDrawing || eligibleEmployees.length === 0 ? '#9E9E9E' : '#000000',
               color: 'white',
@@ -269,7 +269,7 @@ export default function LotteryPage() {
                 </button>
                 <button
                   onClick={() => window.print()}
-                  className="flex-1 text-white py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
+                  className="flex-1 text-white py-3 rounded-xl font-bold transition-all hover:bg-[#ce7b5b] hover:text-black"
                   style={{background: '#000000'}}
                 >
                   طباعة النتائج

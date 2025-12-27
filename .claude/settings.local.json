@@ -10,7 +10,8 @@
       "Bash(dir:*)",
       "Bash(findstr:*)",
       "Bash(grep:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(find:*)"
     ]
   }
 }

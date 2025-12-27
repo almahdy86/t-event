@@ -111,7 +111,7 @@ export default function ResetData() {
           </p>
           <button
             onClick={() => router.push('/admin/dashboard')}
-            className="px-8 py-4 rounded-xl text-white font-bold transition-all hover:scale-105 hover:bg-[#bc785b] hover:text-black"
+            className="px-8 py-4 rounded-xl text-white font-bold transition-all hover:scale-105 hover:bg-[#ce7b5b] hover:text-black"
             style={{background: '#000000'}}
           >
             العودة للوحة التحكم

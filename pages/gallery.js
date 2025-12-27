@@ -126,8 +126,8 @@ export default function GalleryPage() {
       <div className="container mx-auto p-6">
         {photos.length === 0 ? (
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-12 text-center">
-            <Camera size={64} strokeWidth={1.5} className="mx-auto mb-4" style={{color: '#bc785b'}} />
-            <p className="text-xl" style={{color: '#bc785b'}}>لا توجد صور معتمدة بعد</p>
+            <Camera size={64} strokeWidth={1.5} className="mx-auto mb-4" style={{color: '#ce7b5b'}} />
+            <p className="text-xl" style={{color: '#ce7b5b'}}>لا توجد صور معتمدة بعد</p>
             <p className="mt-2 text-white">عد لاحقاً لمشاهدة الصور المشاركة</p>
           </div>
         ) : (
@@ -149,9 +149,9 @@ export default function GalleryPage() {
         {photos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3 text-white">
-              <Trophy size={40} strokeWidth={1.5} style={{color: '#bc785b'}} />
+              <Trophy size={40} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
               الأكثر إعجاباً
-              <Trophy size={40} strokeWidth={1.5} style={{color: '#bc785b'}} />
+              <Trophy size={40} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -245,7 +245,7 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
       className={`bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow ${
         isTopRanked ? 'border-4' : ''
       }`}
-      style={isTopRanked ? {borderColor: '#bc785b'} : {}}
+      style={isTopRanked ? {borderColor: '#ce7b5b'} : {}}
     >
       {/* Photo */}
       <div className="relative aspect-square bg-gray-200 cursor-pointer" onClick={onClick}>
@@ -260,7 +260,7 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="font-bold text-lg" style={{color: '#bc785b'}}>{photo.full_name}</h3>
+            <h3 className="font-bold text-lg" style={{color: '#ce7b5b'}}>{photo.full_name}</h3>
             <p className="text-sm text-white">رقم #{photo.employee_number}</p>
           </div>
         </div>

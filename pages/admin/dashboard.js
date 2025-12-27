@@ -146,7 +146,7 @@ export default function AdminDashboard() {
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-colors"
-            style={{background: 'white', color: '#bc785b'}}
+            style={{background: 'white', color: '#ce7b5b'}}
             onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.9)'}
             onMouseLeave={(e) => e.target.style.background = 'white'}
           >
@@ -189,7 +189,7 @@ export default function AdminDashboard() {
 
         {/* Activities Control */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-6" style={{color: '#bc785b'}}>
+          <h2 className="text-2xl font-bold mb-6" style={{color: '#ce7b5b'}}>
             التحكم في الفعاليات
           </h2>
           

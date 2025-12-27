@@ -144,7 +144,7 @@ export default function EmployeesManagement() {
               <ArrowRight size={24} strokeWidth={1.5} />
             </button>
             <div>
-              <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>إدارة الموظفين</h1>
+              <h1 className="text-2xl font-bold" style={{color: '#ce7b5b'}}>إدارة الموظفين</h1>
               <p className="text-sm opacity-80">إجمالي: {employees.length} موظف</p>
             </div>
           </div>

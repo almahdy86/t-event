@@ -222,7 +222,7 @@ export default function MapPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#bc785b'}}>
+            <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#ce7b5b'}}>
               #{employee.employee_number}
             </div>
             <button
@@ -261,7 +261,7 @@ export default function MapPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={() => router.push('/event-map')}
-          className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 hover:bg-[#bc785b] hover:text-black active:scale-95"
+          className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 hover:bg-[#ce7b5b] hover:text-black active:scale-95"
           style={{background: '#000000', color: 'white' }}
         >
           <div className="flex items-center gap-4">
@@ -272,7 +272,7 @@ export default function MapPage() {
 
             <div className="flex-1 text-right">
               <h3 className="text-2xl font-bold mb-1"> خريطة الفعالية</h3>
-              <p className="text-sm" style={{color: '#bc785b'}}>
+              <p className="text-sm" style={{color: '#ce7b5b'}}>
                 خريطة تفصيلية لجميع مواقع الفعالية
               </p>
             </div>
@@ -298,13 +298,13 @@ export default function MapPage() {
                 <button
                   onClick={() => isActive && router.push(activity.route)}
                   disabled={!isActive}
-                  className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${isActive ? 'hover:bg-[#bc785b] hover:text-black' : ''}`}
+                  className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${isActive ? 'hover:bg-[#ce7b5b] hover:text-black' : ''}`}
                   style={{
                     background: isActive ? '#000000' : 'rgba(255,255,255,0.1)',
                     color: isActive ? 'white' : 'rgba(255,255,255,0.3)',
                     opacity: isActive ? 1 : 0.5,
                     cursor: isActive ? 'pointer' : 'not-allowed',
-                    border: isActive ? 'none' : '1px solid #bc785b0b'
+                    border: isActive ? 'none' : '1px solid #ce7b5b0b'
                   }}
                 >
                   <div className="flex items-center gap-4">
@@ -315,7 +315,7 @@ export default function MapPage() {
 
                     <div className="flex-1 text-right">
                       <h3 className="text-xl font-bold mb-1">{activity.title}</h3>
-                      <p className="text-sm" style={{color: '#bc785b'}}>
+                      <p className="text-sm" style={{color: '#ce7b5b'}}>
                         {isActive ? 'انقر للدخول' : 'غير متاح حالياً'}
                       </p>
                     </div>
@@ -339,8 +339,8 @@ export default function MapPage() {
         animate={{ scale: 1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => router.push('/gallery')}
-        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#bc785b] hover:text-white"
-        style={{background: '#000000',color:'#bc785b'}}
+        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#ce7b5b] hover:text-white"
+        style={{background: '#000000',color:'#ce7b5b'}}
       >
         <Camera size={28} strokeWidth={1.5} />
       </motion.button>

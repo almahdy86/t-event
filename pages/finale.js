@@ -60,8 +60,8 @@ export default function FinalePage() {
             className="text-center text-white"
           >
             <Users size={100} strokeWidth={1.5} className="mx-auto mb-6" />
-            <h1 className="text-4xl font-bold" style={{color: '#bc785b'}}>
-              حان وقت الصورة الجماعية! 
+            <h1 className="text-4xl font-bold" style={{color: '#ce7b5b'}}>
+              حان وقت الصورة الجماعية!
             </h1>
           </motion.div>
         </div>
@@ -125,8 +125,8 @@ export default function FinalePage() {
           transition={{ delay: 0.5 }}
           className="bg-white/20 backdrop-blur rounded-3xl p-8 max-w-md"
         >
-          <h2 className="text-3xl font-bold mb-4" style={{color: '#bc785b'}}>
-            ابحث عن رقمك! 
+          <h2 className="text-3xl font-bold mb-4" style={{color: '#ce7b5b'}}>
+            ابحث عن رقمك!
           </h2>
           <p className="text-xl leading-relaxed">
             توجه إلى منطقة التصوير

@@ -139,12 +139,12 @@ export default function ZeroErrorChallengePage() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
-            style={{background: 'rgba(188, 120, 91, 0.2)'}}
+            style={{background: 'rgba(206, 123, 91, 0.2)'}}
           >
-            <Trophy size={64} strokeWidth={1.5} style={{color: '#bc785b'}} />
+            <Trophy size={64} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
           </motion.div>
 
-          <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#bc785b'}}>
+          <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#ce7b5b'}}>
             تحدي بلا أخطاء! 🎯
           </h2>
 
@@ -212,7 +212,7 @@ export default function ZeroErrorChallengePage() {
           className="bg-white rounded-3xl p-6 mb-6 shadow-2xl"
         >
           <div className="flex items-start gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0" style={{background: '#bc785b'}}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0" style={{background: '#ce7b5b'}}>
               ؟
             </div>
             <h2 className="text-xl font-bold text-gray-800 leading-relaxed">
@@ -245,7 +245,7 @@ export default function ZeroErrorChallengePage() {
                     ? 'bg-white border-4'
                     : 'bg-white text-gray-800 hover:bg-gray-50'
                 } ${isAnswered && !isCorrect && !isSelected && 'opacity-50'}`}
-                style={isSelected && !isCorrect && !isWrong ? {color: '#bc785b', borderColor: '#bc785b'} : {}}
+                style={isSelected && !isCorrect && !isWrong ? {color: '#ce7b5b', borderColor: '#ce7b5b'} : {}}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -255,7 +255,7 @@ export default function ZeroErrorChallengePage() {
                       isSelected ? 'text-white' :
                       'text-white'
                     }`}
-                    style={!isCorrect && !isWrong ? {background: isSelected ? '#bc785b' : 'rgba(188, 120, 91, 0.3)'} : {}}
+                    style={!isCorrect && !isWrong ? {background: isSelected ? '#ce7b5b' : 'rgba(206, 123, 91, 0.3)'} : {}}
                     >
                       {String.fromCharCode(65 + index)}
                     </div>

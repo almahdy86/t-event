@@ -70,7 +70,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="theme-color" content="#bc785b" />
+        <meta name="theme-color" content="#ce7b5b" />
         <link rel="manifest" content="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
         <title>فعالية التنفيذي</title>

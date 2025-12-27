@@ -164,7 +164,7 @@ export default function QuestionsManagement() {
             >
               <ArrowRight size={24} strokeWidth={1.5} />
             </button>
-            <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>إدارة الأسئلة</h1>
+            <h1 className="text-2xl font-bold" style={{color: '#ce7b5b'}}>إدارة الأسئلة</h1>
           </div>
           <button
             onClick={() => {
@@ -172,7 +172,7 @@ export default function QuestionsManagement() {
               setEditingQuestion(null)
               resetForm()
             }}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all hover:bg-[#bc785b] hover:text-black"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all hover:bg-[#ce7b5b] hover:text-black"
             style={{background: '#000000', color: 'white'}}
           >
             <Plus size={20} strokeWidth={1.5} />
@@ -240,7 +240,7 @@ export default function QuestionsManagement() {
               <div className="flex gap-3">
                 <button
                   type="submit"
-                  className="flex-1 text-white py-3 rounded-lg font-bold transition-all hover:bg-[#bc785b] hover:text-black"
+                  className="flex-1 text-white py-3 rounded-lg font-bold transition-all hover:bg-[#ce7b5b] hover:text-black"
                   style={{background: '#000000'}}
                 >
                   {editingQuestion ? 'حفظ التعديلات' : 'إضافة السؤال'}
