@@ -233,7 +233,7 @@ export default function IdentityMirrorsPage() {
             whileTap={{ scale: 0.95 }}
             onClick={startCamera}
             className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all flex items-center gap-3 hover:bg-[#ce7b5b] hover:text-black"
-            style={{background: '#000000', color: '#ce7b5b'}}
+            style={{background: '#ce7b5b', color: '#000000'}}
           >
             <Camera size={28} strokeWidth={1.5} />
             ابدأ التصوير
