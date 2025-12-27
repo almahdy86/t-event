@@ -67,7 +67,7 @@ export default function PublicGalleryPage() {
   const displayedPhotos = getDisplayedPhotos()
 
   return (
-    <div className="min-h-screen py-6 px-2" style={{
+    <div className="min-h-screen py-6 px-2 relative" style={{
       backgroundImage: 'url(/bg/newbg.png)',
       backgroundSize: 'auto',
       backgroundPosition: 'center',
@@ -75,8 +75,9 @@ export default function PublicGalleryPage() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
+      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
-      <div className="w-full mb-6">
+      <div className="w-full mb-6 relative z-10">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -121,7 +122,7 @@ export default function PublicGalleryPage() {
       </div>
 
       {/* Photos Grid */}
-      <div className="w-full">
+      <div className="w-full relative z-10">
         {photos.length === 0 ? (
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}

@@ -129,7 +129,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen" style={{
+    <div className="min-h-screen relative" style={{
       backgroundImage: 'url(/bg/newbg.png)',
       backgroundSize: 'auto',
       backgroundPosition: 'center',
@@ -137,8 +137,9 @@ export default function AdminDashboard() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
+      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
-      <div className="p-4 shadow-lg" style={{background: '#000000'}}>
+      <div className="p-4 shadow-lg relative z-10" style={{background: '#000000'}}>
         <div className="container mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold" style={{color: 'white'}}>لوحة التحكم - التنفيذي</h1>
@@ -158,7 +159,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto p-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <StatCard
             title="إجمالي الموظفين"

@@ -118,7 +118,7 @@ export default function Home() {
 
   if (step === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{
+      <div className="min-h-screen flex items-center justify-center relative" style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
         backgroundPosition: 'center',
@@ -126,7 +126,8 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="text-center">
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="text-center relative z-10">
           <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-black font-semibold">جارٍ التحميل...</p>
         </div>
@@ -136,7 +137,7 @@ export default function Home() {
 
   if (step === 'redirect') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 relative" style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
         backgroundPosition: 'center',
@@ -144,10 +145,11 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="text-center"
+          className="text-center relative z-10"
         >
           <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: '#234024'}}>
             <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -173,7 +175,7 @@ export default function Home() {
 
   if (step === 'success') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 relative" style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
         backgroundPosition: 'center',
@@ -181,11 +183,12 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', duration: 0.6 }}
-          className="text-center"
+          className="text-center relative z-10"
         >
           <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow" style={{background: '#ffffff'}}>
             <svg className="w-20 h-20 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -241,7 +244,7 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen flex flex-col p-6"
+      className="min-h-screen flex flex-col p-6 relative"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
@@ -249,7 +252,8 @@ export default function Home() {
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="flex justify-center py-8">
+      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="flex justify-center py-8 relative z-10">
         <div className="w-32 h-32 relative">
           <Image
             src="/logo.svg"
@@ -263,7 +267,7 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full"
+        className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full relative z-10"
       >
         <div className="mb-8 p-8 rounded-3xl" style={{background: 'rgba(0,0,0,0.85)', border: '1px solid rgba(201,169,97,0.3)'}}>
           <h1 className="text-3xl font-bold text-center mb-2" style={{color: 'white'}}>

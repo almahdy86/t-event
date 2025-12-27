@@ -71,7 +71,7 @@ export default function ResetData() {
 
   if (!stats) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{
+      <div className="min-h-screen flex items-center justify-center relative" style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
         backgroundPosition: 'center',
@@ -79,7 +79,8 @@ export default function ResetData() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="text-center">
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="text-center relative z-10">
           <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-black font-semibold">جارٍ التحميل...</p>
         </div>
@@ -89,7 +90,7 @@ export default function ResetData() {
 
   if (step === 3) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 relative" style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
         backgroundPosition: 'center',
@@ -97,10 +98,11 @@ export default function ResetData() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="text-center max-w-md"
+          className="text-center max-w-md relative z-10"
         >
           <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: '#234024'}}>
             <CheckCircle size={80} strokeWidth={1.5} className="text-white" />
@@ -125,7 +127,7 @@ export default function ResetData() {
 
   if (step === 2) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{
+      <div className="min-h-screen flex items-center justify-center relative" style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
         backgroundPosition: 'center',
@@ -133,7 +135,8 @@ export default function ResetData() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="text-center">
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="text-center relative z-10">
           <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-black font-semibold text-xl">جارٍ مسح البيانات...</p>
           <p className="text-black mt-2">يرجى عدم إغلاق الصفحة</p>
@@ -143,7 +146,7 @@ export default function ResetData() {
   }
 
   return (
-    <div className="min-h-screen" style={{
+    <div className="min-h-screen relative" style={{
       backgroundImage: 'url(/bg/newbg.png)',
       backgroundSize: 'auto',
       backgroundPosition: 'center',
@@ -151,8 +154,9 @@ export default function ResetData() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
+      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
-      <div className="text-white p-4 shadow-lg" style={{background: '#d32f2f'}}>
+      <div className="text-white p-4 shadow-lg relative z-10" style={{background: '#d32f2f'}}>
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
@@ -167,7 +171,7 @@ export default function ResetData() {
         </div>
       </div>
 
-      <div className="container mx-auto p-6 max-w-2xl">
+      <div className="container mx-auto p-6 max-w-2xl relative z-10">
         {/* Warning Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

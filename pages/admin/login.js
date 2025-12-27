@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
 
   return (
     <div
-      className="min-h-screen flex flex-col p-6"
+      className="min-h-screen flex flex-col p-6 relative"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
@@ -52,7 +52,8 @@ export default function AdminLoginPage() {
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="flex justify-center py-8">
+      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="flex justify-center py-8 relative z-10">
         <div className="w-32 h-32 relative">
           <Image
             src="/logo.svg"
@@ -66,7 +67,7 @@ export default function AdminLoginPage() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full"
+        className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full relative z-10"
       >
         <div className="mb-8 p-8 rounded-3xl" style={{background: 'rgba(0,0,0,0.85)', border: '1px solid rgba(201,169,97,0.3)'}}>
           <h1 className="text-3xl font-bold text-center mb-2" style={{color: 'white'}}>

@@ -194,7 +194,7 @@ export default function MapPage() {
 
   return (
     <div
-      className="min-h-screen pb-20"
+      className="min-h-screen pb-20 relative"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
@@ -203,8 +203,9 @@ export default function MapPage() {
         backgroundAttachment: 'fixed'
       }}
     >
+      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header ثابت */}
-      <div className="shadow-lg sticky top-0 z-50" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
+      <div className="shadow-lg sticky top-0 z-50 relative" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 relative">
@@ -238,6 +239,7 @@ export default function MapPage() {
       </div>
 
       {/* الإشعارات */}
+      <div className="relative z-10">
       <AnimatePresence>
         {notification && (
           <motion.div
@@ -373,6 +375,7 @@ export default function MapPage() {
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </div>
   )
 }

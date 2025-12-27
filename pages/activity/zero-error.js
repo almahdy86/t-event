@@ -114,7 +114,7 @@ export default function ZeroErrorChallengePage() {
   if (!question) {
     return (
       <div
-        className="min-h-screen flex flex-col"
+        className="min-h-screen flex flex-col relative"
         style={{
           backgroundImage: 'url(/bg/newbg.png)',
           backgroundSize: 'auto',
@@ -122,7 +122,8 @@ export default function ZeroErrorChallengePage() {
           backgroundRepeat: 'repeat'
         }}
       >
-        <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="p-4 flex items-center justify-between relative z-10" style={{background: '#000000'}}>
           <button
             onClick={() => router.push('/map')}
             className="font-bold"
@@ -134,7 +135,7 @@ export default function ZeroErrorChallengePage() {
           <div className="w-8"></div>
         </div>
 
-        <div className="flex-1 flex flex-col items-center justify-center p-6 text-white">
+        <div className="flex-1 flex flex-col items-center justify-center p-6 text-white relative z-10">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -173,7 +174,7 @@ export default function ZeroErrorChallengePage() {
 
   return (
     <div
-      className="min-h-screen flex flex-col"
+      className="min-h-screen flex flex-col relative"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
@@ -181,8 +182,9 @@ export default function ZeroErrorChallengePage() {
         backgroundRepeat: 'repeat'
       }}
     >
+      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
-      <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
+      <div className="p-4 flex items-center justify-between relative z-10" style={{background: '#000000'}}>
         <div className="flex items-center gap-3" style={{color: 'white'}}>
           <button
             onClick={() => router.push('/map')}
@@ -205,6 +207,7 @@ export default function ZeroErrorChallengePage() {
       </div>
 
       {/* السؤال والخيارات */}
+      <div className="relative z-10">
       <div className="flex-1 flex flex-col p-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -316,6 +319,7 @@ export default function ZeroErrorChallengePage() {
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
       </div>
     </div>
   )

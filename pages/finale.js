@@ -32,7 +32,7 @@ export default function FinalePage() {
   if (!showNumber) {
     return (
       <div
-        className="min-h-screen flex flex-col"
+        className="min-h-screen flex flex-col relative"
         style={{
           backgroundImage: 'url(/bg/newbg.png)',
           backgroundSize: 'auto',
@@ -40,8 +40,9 @@ export default function FinalePage() {
           backgroundRepeat: 'repeat'
         }}
       >
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
         {/* زر الرجوع */}
-        <div className="p-4">
+        <div className="p-4 relative z-10">
           <button
             onClick={() => router.push('/map')}
             className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
@@ -52,7 +53,7 @@ export default function FinalePage() {
           </button>
         </div>
 
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center relative z-10">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: [0, 1.2, 1] }}
@@ -79,8 +80,9 @@ export default function FinalePage() {
         backgroundRepeat: 'repeat'
       }}
     >
+      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* زر الرجوع */}
-      <div className="p-4 z-20">
+      <div className="p-4 z-20 relative">
         <button
           onClick={() => router.push('/map')}
           className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
@@ -92,7 +94,7 @@ export default function FinalePage() {
       </div>
 
       {/* المحتوى الرئيسي */}
-      <div className="flex-1 flex items-center justify-center p-6">
+      <div className="flex-1 flex items-center justify-center p-6 relative z-10">
         {/* الرقم الضخم */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}

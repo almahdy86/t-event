@@ -20,7 +20,7 @@ export default function HospitalityPage() {
 
   return (
     <div
-      className="min-h-screen flex flex-col"
+      className="min-h-screen flex flex-col relative"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
         backgroundSize: 'auto',
@@ -28,7 +28,8 @@ export default function HospitalityPage() {
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
+      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="p-4 flex items-center justify-between relative z-10" style={{background: '#000000'}}>
         <button
           onClick={() => router.push('/map')}
           className="font-bold"
@@ -40,13 +41,14 @@ export default function HospitalityPage() {
         <div className="w-8"></div>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center p-6 text-white">
+      <div className="flex-1 flex flex-col items-center justify-center p-6 text-white relative z-10">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mb-8"
+          className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
+          style={{backgroundColor: 'white'}}
         >
-          <Heart size={64} strokeWidth={1.5} />
+          <Heart size={64} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
         </motion.div>
 
         <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#ce7b5b'}}>
@@ -59,7 +61,7 @@ export default function HospitalityPage() {
           وشاشات العرض عالية الدقة
         </p>
 
-        <div className="bg-white/20 rounded-2xl p-6 mb-8 w-full max-w-sm">
+        <div className="bg-white/60 rounded-2xl p-6 mb-8 w-full max-w-sm">
           {/* <div className="flex items-start gap-3 mb-4">
             <MapPin size={24} strokeWidth={1.5} className="flex-shrink-0 mt-1" />
             {/* <div>
@@ -68,7 +70,7 @@ export default function HospitalityPage() {
             </div> *
           </div> */}
 
-          <div className="pt-4">
+          <div className="pt-4 rounded-xl p-4" style={{backgroundColor: 'black'}}>
             <h4 className="font-bold mb-2">التعليمات:</h4>
             <ul className="space-y-2 text-sm">
               <li>• توجه إلى منطقة الفعالية</li>

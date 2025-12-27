@@ -171,7 +171,7 @@ export default function IdentityMirrorsPage() {
   if (step === 'intro') {
     return (
       <div
-        className="min-h-screen flex flex-col"
+        className="min-h-screen flex flex-col relative"
         style={{
           backgroundImage: 'url(/bg/newbg.png)',
           backgroundSize: 'auto',
@@ -179,7 +179,8 @@ export default function IdentityMirrorsPage() {
           backgroundRepeat: 'repeat'
         }}
       >
-        <div className="p-4 flex items-center justify-between shadow" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
+        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="p-4 flex items-center justify-between shadow relative z-10" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
           <button
             onClick={() => router.push('/map')}
             className="flex items-center gap-2 font-bold"
@@ -192,7 +193,7 @@ export default function IdentityMirrorsPage() {
           <div className="w-8"></div>
         </div>
 
-        <div className="flex-1 flex flex-col items-center justify-center p-6">
+        <div className="flex-1 flex flex-col items-center justify-center p-6 relative z-10">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}

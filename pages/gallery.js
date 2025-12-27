@@ -95,9 +95,10 @@ export default function GalleryPage() {
   if (!employee) return null
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/bg/newbg.png)'}}>
+    <div className="min-h-screen bg-cover bg-center bg-fixed relative" style={{backgroundImage: 'url(/bg/newbg.png)'}}>
+      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
-      <div className="p-6 shadow-lg sticky top-0 z-10" style={{background: '#000000'}}>
+      <div className="p-6 shadow-lg sticky top-0 z-10 relative" style={{background: '#000000'}}>
         <div className="container mx-auto">
           <div className="flex items-center justify-between mb-4">
             <button
@@ -123,7 +124,7 @@ export default function GalleryPage() {
       </div>
 
       {/* Photos Grid */}
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto p-6 relative z-10">
         {photos.length === 0 ? (
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-12 text-center">
             <Camera size={64} strokeWidth={1.5} className="mx-auto mb-4" style={{color: '#ce7b5b'}} />

@@ -90,7 +90,7 @@ export default function PhotosManagement() {
   }
 
   return (
-    <div className="min-h-screen" style={{
+    <div className="min-h-screen relative" style={{
       backgroundImage: 'url(/bg/newbg.png)',
       backgroundSize: 'auto',
       backgroundPosition: 'center',
@@ -98,8 +98,9 @@ export default function PhotosManagement() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
+      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
-      <div className="text-white p-4 shadow-lg" style={{background: '#234024'}}>
+      <div className="text-white p-4 shadow-lg relative z-10" style={{background: '#234024'}}>
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
@@ -150,7 +151,7 @@ export default function PhotosManagement() {
         </div>
       </div>
 
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto p-6 relative z-10">
         {/* Photos Grid */}
         {photos.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
