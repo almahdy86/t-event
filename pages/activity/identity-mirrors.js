@@ -234,14 +234,16 @@ export default function IdentityMirrorsPage() {
 
   if (step === 'camera') {
     return (
-      <div className="fixed inset-0 bg-black">
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          className="w-full h-full object-cover"
-        />
-        
+      <div className="fixed inset-0 bg-black flex flex-col">
+        <div className="flex-1 flex items-center justify-center bg-black">
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            className="w-full aspect-square object-cover"
+          />
+        </div>
+
         <canvas ref={canvasRef} className="hidden" />
 
         {/* أزرار التحكم */}
