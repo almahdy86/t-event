@@ -89,9 +89,19 @@ export default function EventMapPage() {
       description: 'مزيج متناغم من الفعاليات التفاعلية والموسيقى الطربية'
     },
     {
-      title: 'ضيافـــة • حفــاوة • إكــرام',
-      subtitle: 'HOSPITALITY • HAFAWA • HONORING',
-      description: 'تجربة حسية يصمم فيها الموظف بطاقة ضيافة تعكس أسلوبه الشخصي في الضيافة'
+      title: 'ضيافـــة',
+      subtitle: 'HOSPITALITY',
+      description: 'تجربة تفاعلية تجسد التخصيص، حيث يصنع كل موظف بطاقة ضيافة تعكس بصمته الشخصية وقيم التنفيذي'
+    },
+    {
+      title: 'حفــاوة',
+      subtitle: 'HAFAWA',
+      description: 'استقبال منظم في أجواء ترحيبية تعكس هوية الحفل'
+    },
+    {
+      title: 'إكــرام',
+      subtitle: 'HONORING',
+      description: 'تجربة حسية يصمم فيها الموظف بطاقة تعكس أسلوبه الشخصي في الضيافة'
     }
   ]
 
