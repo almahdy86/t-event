@@ -11,7 +11,11 @@
       "Bash(findstr:*)",
       "Bash(grep:*)",
       "Bash(done)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(magick identify:*)",
+      "Bash(where:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)"
     ]
   }
 }
