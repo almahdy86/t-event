@@ -10,7 +10,6 @@ export default function EmployeesManagement() {
   const [searchTerm, setSearchTerm] = useState('')
   const [filterType, setFilterType] = useState('all')
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     const token = localStorage.getItem('admin_token')
     if (!token) {
@@ -19,11 +18,8 @@ export default function EmployeesManagement() {
     }
     fetchEmployees()
   }, [])
-
-  useEffect(() => {
     filterEmployees()
   }, [searchTerm, filterType, employees])
-
   const fetchEmployees = async () => {
     try {
       setLoading(true)
@@ -39,79 +35,48 @@ export default function EmployeesManagement() {
       console.error('خطأ في جلب الموظفين:', error)
     } finally {
       setLoading(false)
-    }
   }
-
   const filterEmployees = () => {
     let filtered = employees
-
     // Filter by type
     if (filterType !== 'all') {
       filtered = filtered.filter(emp => emp.job_title === filterType)
-    }
-
     // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(emp =>
         emp.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         emp.employee_number.toString().includes(searchTerm)
       )
-    }
-
     setFilteredEmployees(filtered)
-  }
-
   const deleteEmployee = async (employeeId, employeeName) => {
     if (!confirm(`هل أنت متأكد من حذف ${employeeName}؟\n\nسيتم حذف جميع بياناته (الصور، الإجابات، إلخ)`)) {
-      return
-    }
-
-    try {
-      const token = localStorage.getItem('admin_token')
       const response = await fetch(`/api/admin/employees/${employeeId}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
         alert('تم حذف الموظف بنجاح')
         fetchEmployees()
       } else {
         alert('فشل حذف الموظف: ' + (data.message || 'حدث خطأ'))
-      }
-    } catch (error) {
       console.error('خطأ في حذف الموظف:', error)
       alert('فشل حذف الموظف')
-    }
-  }
-
   const getTypeLabel = (type) => {
     switch(type) {
       case 'مجلس_الإدارة': return 'مجلس الإدارة'
       case 'موظف': return 'موظف'
       case 'ضيف': return 'ضيف'
       default: return type
-    }
-  }
-
   const getTypeBadgeColor = (type) => {
-    switch(type) {
       case 'مجلس_الإدارة': return 'bg-purple-500'
       case 'موظف': return 'bg-blue-500'
       case 'ضيف': return 'bg-green-500'
       default: return 'bg-gray-500'
-    }
-  }
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
+        backgroundRepeat: 'repeat',
         minHeight: '100vh'
       }}>
         <div className="text-center">
@@ -120,12 +85,10 @@ export default function EmployeesManagement() {
         </div>
       </div>
     )
-  }
-
   return (
     <div className="min-h-screen" style={{
       backgroundImage: 'url(/bg/newbg.png)',
-      backgroundSize: 'cover',
+      backgroundSize: 'auto',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
@@ -148,9 +111,6 @@ export default function EmployeesManagement() {
               <p className="text-sm opacity-80">إجمالي: {employees.length} موظف</p>
             </div>
           </div>
-        </div>
-      </div>
-
       <div className="container mx-auto p-6">
         {/* Search and Filter */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
@@ -166,35 +126,25 @@ export default function EmployeesManagement() {
                 className="w-full pr-10 pl-4 py-3 border-2 rounded-lg outline-none"
                 style={{borderColor: '#9C7DDE'}}
               />
-            </div>
-
             {/* Filter by Type */}
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
               className="w-full px-4 py-3 border-2 rounded-lg outline-none"
               style={{borderColor: '#9C7DDE'}}
-            >
               <option value="all">جميع الأنواع</option>
               <option value="مجلس_الإدارة">مجلس الإدارة</option>
               <option value="موظف">موظف</option>
               <option value="ضيف">ضيف</option>
             </select>
-          </div>
-
           <div className="mt-4 flex gap-2 text-sm">
             <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full">
               مجلس الإدارة: {employees.filter(e => e.job_title === 'مجلس_الإدارة').length}
             </span>
             <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full">
               موظفين: {employees.filter(e => e.job_title === 'موظف').length}
-            </span>
             <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full">
               ضيوف: {employees.filter(e => e.job_title === 'ضيف').length}
-            </span>
-          </div>
-        </div>
-
         {/* Employees List */}
         {filteredEmployees.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
@@ -204,7 +154,6 @@ export default function EmployeesManagement() {
                 ? 'لا توجد نتائج للبحث'
                 : 'لا يوجد موظفين مسجلين بعد'}
             </p>
-          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredEmployees.map((employee, index) => (
@@ -231,22 +180,15 @@ export default function EmployeesManagement() {
                       <span className={`${getTypeBadgeColor(employee.job_title)} text-white text-xs px-2 py-1 rounded-full`}>
                         {getTypeLabel(employee.job_title)}
                       </span>
-                    </div>
                   </div>
                 </div>
-
                 {/* Employee Info */}
                 <div className="space-y-2 mb-4 text-sm text-gray-600">
                   <div className="flex justify-between">
                     <span className="font-semibold">UID:</span>
                     <span className="font-mono">{employee.uid}</span>
-                  </div>
-                  <div className="flex justify-between">
                     <span className="font-semibold">تاريخ التسجيل:</span>
                     <span>{new Date(employee.created_at).toLocaleDateString('ar-SA')}</span>
-                  </div>
-                </div>
-
                 {/* Delete Button */}
                 <button
                   onClick={() => deleteEmployee(employee.id, employee.full_name)}
@@ -257,9 +199,7 @@ export default function EmployeesManagement() {
                 </button>
               </motion.div>
             ))}
-          </div>
         )}
-      </div>
     </div>
   )
 }

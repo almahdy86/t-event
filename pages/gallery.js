@@ -11,7 +11,6 @@ export default function GalleryPage() {
   const [socket, setSocket] = useState(null)
   const [selectedPhoto, setSelectedPhoto] = useState(null)
   const [userLikes, setUserLikes] = useState(new Set()) // تتبع إعجابات المستخدم
-
   useEffect(() => {
     const storedEmployee = localStorage.getItem('tanfeethi_employee')
     if (!storedEmployee) {
@@ -21,16 +20,13 @@ export default function GalleryPage() {
     const emp = JSON.parse(storedEmployee)
     setEmployee(emp)
     fetchPhotos(emp.id)
-
     // Socket connection for real-time updates
     const newSocket = io()
     setSocket(newSocket)
-
     newSocket.on('photo:likes:update', (updatedPhoto) => {
       setPhotos(prev =>
         prev.map(p => p.id === updatedPhoto.id ? updatedPhoto : p)
       )
-
       // تحديث حالة الإعجاب للمستخدم الحالي
       if (updatedPhoto.employeeId === emp.id) {
         setUserLikes(prev => {
@@ -44,16 +40,12 @@ export default function GalleryPage() {
         })
       }
     })
-
     // إضافة صورة معتمدة فوراً (تحديث فوري!)
     newSocket.on('photo:approved', (approvedPhoto) => {
       console.log('✅ New photo approved:', approvedPhoto)
       setPhotos(prev => [approvedPhoto, ...prev])
-    })
-
     return () => newSocket.close()
   }, [])
-
   const fetchPhotos = async (employeeId) => {
     try {
       const response = await fetch(`/api/photos/approved?employeeId=${employeeId}`)
@@ -64,16 +56,12 @@ export default function GalleryPage() {
         if (data.userLikes) {
           setUserLikes(new Set(data.userLikes))
         }
-      }
     } catch (error) {
       console.error('خطأ في جلب الصور:', error)
-    }
   }
-
   const likePhoto = (photoId) => {
     if (socket && employee) {
       socket.emit('photo:like', { photoId, employeeId: employee.id })
-
       // تحديث فوري للواجهة
       setUserLikes(prev => {
         const newLikes = new Set(prev)
@@ -81,19 +69,12 @@ export default function GalleryPage() {
           newLikes.delete(photoId)
         } else {
           newLikes.add(photoId)
-        }
         return newLikes
       })
-
       // Vibration feedback
       if (navigator.vibrate) {
         navigator.vibrate(50)
-      }
-    }
-  }
-
   if (!employee) return null
-
   return (
     <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/bg/newbg.png)'}}>
       {/* Header */}
@@ -113,7 +94,6 @@ export default function GalleryPage() {
             </h1>
             <div className="w-10" />
           </div>
-
           {/* <div className="rounded-xl p-4" style={{background: '#CE7B5B'}}>
             {/* <p className="text-center text-lg font-semibold" style={{color: '#000000'}}>
               شاهد وأعجب بصور زملائك! 
@@ -121,7 +101,6 @@ export default function GalleryPage() {
           </div> */}
         </div>
       </div>
-
       {/* Photos Grid */}
       <div className="container mx-auto p-6">
         {photos.length === 0 ? (
@@ -129,7 +108,6 @@ export default function GalleryPage() {
             <Camera size={64} strokeWidth={1.5} className="mx-auto mb-4" style={{color: '#ce7b5b'}} />
             <p className="text-xl" style={{color: '#ce7b5b'}}>لا توجد صور معتمدة بعد</p>
             <p className="mt-2 text-white">عد لاحقاً لمشاهدة الصور المشاركة</p>
-          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {photos.map((photo, index) => (
@@ -142,18 +120,14 @@ export default function GalleryPage() {
                 onClick={() => setSelectedPhoto(photo)}
               />
             ))}
-          </div>
         )}
-
         {/* Top 3 Section */}
         {photos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3 text-white">
               <Trophy size={40} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
               الأكثر إعجاباً
-              <Trophy size={40} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
             </h2>
-
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {photos
                 .slice()
@@ -187,10 +161,6 @@ export default function GalleryPage() {
                   </motion.div>
                 ))}
             </div>
-          </div>
-        )}
-      </div>
-
       {/* Photo Modal */}
       {selectedPhoto && (
         <div
@@ -222,22 +192,15 @@ export default function GalleryPage() {
                   {selectedPhoto.likes_count || 0}
                 </button>
               </div>
-            </div>
-            <button
               onClick={() => setSelectedPhoto(null)}
               className="absolute top-4 right-4 bg-white text-gray-800 p-3 rounded-full hover:bg-gray-200"
-            >
               ✕
-            </button>
           </motion.div>
-        </div>
       )}
     </div>
   )
 }
-
 function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false }) {
-  return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -254,17 +217,12 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
           alt={`Photo by ${photo.full_name}`}
           className="w-full h-full object-cover"
         />
-      </div>
-
       {/* Info */}
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div>
             <h3 className="font-bold text-lg" style={{color: '#ce7b5b'}}>{photo.full_name}</h3>
             <p className="text-sm text-white">رقم #{photo.employee_number}</p>
-          </div>
-        </div>
-
         {/* Like Button */}
         <motion.button
           whileTap={{ scale: 0.9 }}
@@ -274,11 +232,7 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
               ? 'bg-gradient-to-r from-red-500 to-pink-500 text-white'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
-        >
           <Heart size={24} strokeWidth={1.5} fill={isLiked ? 'currentColor' : 'none'} />
           <span className="text-xl">{photo.likes_count || 0}</span>
         </motion.button>
-      </div>
     </motion.div>
-  )
-}

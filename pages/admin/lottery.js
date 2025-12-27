@@ -11,20 +11,16 @@ export default function LotteryPage() {
   const [winners, setWinners] = useState([])
   const [isDrawing, setIsDrawing] = useState(false)
   const [currentDrawing, setCurrentDrawing] = useState(null)
-
   useEffect(() => {
     const token = localStorage.getItem('admin_token')
     const adminInfo = localStorage.getItem('admin_info')
-
     if (!token || !adminInfo) {
       router.push('/admin/login')
       return
     }
-
     setAdmin(JSON.parse(adminInfo))
     fetchEligibleEmployees()
   }, [])
-
   const fetchEligibleEmployees = async () => {
     try {
       const response = await fetch('/api/admin/lottery/eligible')
@@ -34,63 +30,40 @@ export default function LotteryPage() {
       }
     } catch (error) {
       console.error('Error:', error)
-    }
   }
-
   const startDraw = async () => {
     if (eligibleEmployees.length === 0) {
       alert('لا يوجد موظفون مؤهلون للقرعة!')
-      return
-    }
-
     if (numberOfWinners > eligibleEmployees.length) {
       alert(`عدد الفائزين أكبر من عدد المؤهلين (${eligibleEmployees.length})`)
-      return
-    }
-
     setIsDrawing(true)
     setWinners([])
-
     const selected = []
     const available = [...eligibleEmployees]
-
     for (let i = 0; i < numberOfWinners; i++) {
       // انتظر قليلاً بين كل فائز
       await new Promise(resolve => setTimeout(resolve, 2000))
-
       // اختيار عشوائي
       const randomIndex = Math.floor(Math.random() * available.length)
       const winner = available[randomIndex]
-
       // إضافة الفائز مع رقم الجائزة
       const winnerWithRank = {
         ...winner,
         rank: i + 1,
         prize: getPrizeName(i + 1)
-      }
-
       setCurrentDrawing(winnerWithRank)
       await new Promise(resolve => setTimeout(resolve, 1500))
-
       selected.push(winnerWithRank)
       available.splice(randomIndex, 1)
-
       setWinners([...selected])
       setCurrentDrawing(null)
-    }
-
     setIsDrawing(false)
-  }
-
   const getPrizeName = (rank) => {
     const prizes = {
       1: 'الجائزة الأولى 🥇',
       2: 'الجائزة الثانية 🥈',
       3: 'الجائزة الثالثة 🥉',
-    }
     return prizes[rank] || `الجائزة رقم ${rank}`
-  }
-
   const getRankIcon = (rank) => {
     switch (rank) {
       case 1:
@@ -101,9 +74,6 @@ export default function LotteryPage() {
         return <Award className="w-12 h-12 text-amber-600" strokeWidth={1.5} />
       default:
         return <Gift className="w-10 h-10 text-tanfeethi-turquoise" strokeWidth={1.5} />
-    }
-  }
-
   return (
     <div className="min-h-screen py-8 px-4" style={{background: 'linear-gradient(135deg, #234024 0%, #AB8025 100%)'}}>
       {/* Header */}
@@ -118,12 +88,10 @@ export default function LotteryPage() {
           <ArrowRight size={20} strokeWidth={1.5} />
           رجوع للوحة التحكم
         </button>
-
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-8"
-        >
           <Sparkles className="w-16 h-16 mx-auto mb-4" strokeWidth={1.5} style={{color: '#CE7B5B'}} />
           <h1 className="text-4xl font-black mb-2" style={{color: '#ce7b5b'}}>
             🎁 قرعة الفائزين
@@ -132,7 +100,6 @@ export default function LotteryPage() {
             اسحب الفائزين من المشاركين المؤهلين
           </p>
         </motion.div>
-
         {/* Settings */}
         <div className="bg-white/10 backdrop-blur rounded-2xl p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -144,11 +111,7 @@ export default function LotteryPage() {
                 {eligibleEmployees.length} موظف
               </div>
             </div>
-
-            <div>
-              <label className="block text-white font-bold mb-2">
                 عدد الفائزين:
-              </label>
               <input
                 type="number"
                 min="1"
@@ -158,9 +121,7 @@ export default function LotteryPage() {
                 className="w-full bg-white/20 text-white rounded-xl px-4 py-3 text-xl font-bold focus:outline-none focus:ring-2 focus:ring-white/50"
                 disabled={isDrawing}
               />
-            </div>
           </div>
-
           <button
             onClick={startDraw}
             disabled={isDrawing || eligibleEmployees.length === 0}
@@ -175,7 +136,6 @@ export default function LotteryPage() {
           </button>
         </div>
       </div>
-
       {/* Current Drawing Animation */}
       <AnimatePresence>
         {currentDrawing && (
@@ -184,7 +144,6 @@ export default function LotteryPage() {
             animate={{ scale: 1, rotate: 0 }}
             exit={{ scale: 0, rotate: 180 }}
             className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-          >
             <motion.div
               animate={{
                 scale: [1, 1.05, 1],
@@ -202,27 +161,20 @@ export default function LotteryPage() {
               </h3>
               <div className="text-6xl font-black" style={{color: '#AB8025'}}>
                 #{currentDrawing.employee_number}
-              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Winners List */}
       {winners.length > 0 && (
         <div className="max-w-4xl mx-auto">
-          <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             className="bg-white rounded-3xl overflow-hidden shadow-2xl"
-          >
             <div className="px-6 py-4" style={{background: 'linear-gradient(90deg, #AB8025 0%, #CE7B5B 100%)'}}>
               <h2 className="text-2xl font-black text-white flex items-center gap-2">
                 <Trophy className="w-6 h-6" strokeWidth={1.5} />
                 الفائزون
-              </h2>
-            </div>
-
             <div className="p-6 space-y-4">
               {winners.map((winner, index) => (
                 <motion.div
@@ -236,26 +188,18 @@ export default function LotteryPage() {
                   <div className="flex-shrink-0">
                     {getRankIcon(winner.rank)}
                   </div>
-
                   <div className="flex-1">
                     <div className="text-lg font-bold mb-1" style={{color: '#234024'}}>
                       {winner.prize}
                     </div>
                     <div className="text-2xl font-black" style={{color: '#000000'}}>
                       {winner.full_name}
-                    </div>
                     <div className="text-sm" style={{color: '#666666'}}>
                       رقم {winner.employee_number} • {winner.correct_count} إجابة صحيحة
-                    </div>
-                  </div>
-
                   <div className="text-4xl font-black" style={{color: '#CE7B5B'}}>
                     #{winner.employee_number}
-                  </div>
                 </motion.div>
               ))}
-            </div>
-
             {!isDrawing && (
               <div className="px-6 py-4 flex gap-4" style={{background: '#F3F0EE'}}>
                 <button
@@ -264,20 +208,13 @@ export default function LotteryPage() {
                   style={{background: '#E0E0E0', color: '#000000'}}
                   onMouseEnter={(e) => e.target.style.background = '#BDBDBD'}
                   onMouseLeave={(e) => e.target.style.background = '#E0E0E0'}
-                >
                   إعادة القرعة
                 </button>
-                <button
                   onClick={() => window.print()}
                   className="flex-1 text-white py-3 rounded-xl font-bold transition-all hover:bg-[#ce7b5b] hover:text-black"
                   style={{background: '#000000'}}
-                >
                   طباعة النتائج
-                </button>
-              </div>
             )}
-          </motion.div>
-        </div>
       )}
     </div>
   )
