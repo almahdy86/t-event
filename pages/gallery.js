@@ -95,7 +95,13 @@ export default function GalleryPage() {
   if (!employee) return null
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-fixed relative" style={{backgroundImage: 'url(/bg/newbg.png)'}}>
+    <div className="min-h-screen relative" style={{
+      backgroundImage: 'url(/bg/newbg.png)',
+      backgroundSize: 'auto',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'repeat',
+      backgroundAttachment: 'fixed'
+    }}>
       <div className="fixed inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
       <div className="p-6 shadow-lg sticky top-0 z-10 relative" style={{background: '#000000'}}>
