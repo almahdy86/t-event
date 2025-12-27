@@ -23,7 +23,7 @@ export default function EventMapPage() {
           <span className="font-bold">رجوع</span>
         </button>
         <h1 className="text-xl font-bold" style={{color: '#bc785b'}}>
-          🗺️ خريطة الفعالية
+           خريطة الفعالية
         </h1>
         {/* <button
           onClick={() => window.location.href = '/interactive-map.html'}

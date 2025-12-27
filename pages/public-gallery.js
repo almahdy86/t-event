@@ -82,10 +82,10 @@ export default function PublicGalleryPage() {
           className="text-center mb-8"
         >
           <Camera className="w-16 h-16 mx-auto mb-4" strokeWidth={1.5} style={{color: '#CE7B5B'}} />
-          <h1 className="text-4xl font-black mb-2" style={{color: '#bc785b'}}>
-            📸 معرض صور الفعالية
+          <h1 className="text-4xl font-black mb-2" style={{color: '#ffffffff'}}>
+             معرض صور الفعالية
           </h1>
-          <p className="text-lg" style={{color: '#000000'}}>
+          <p className="text-lg" style={{color: '#bc785b'}}>
             صور مشاركينا الرائعة
           </p>
         </motion.div>
@@ -96,7 +96,7 @@ export default function PublicGalleryPage() {
             onClick={() => setFilter('all')}
             className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
             style={{
-              background: filter === 'all' ? '#000000' : '#9C7DDE',
+              background: filter === 'all' ? '#000000' : '#bc785b',
               color: 'white',
               boxShadow: filter === 'all' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
@@ -108,7 +108,7 @@ export default function PublicGalleryPage() {
             onClick={() => setFilter('top')}
             className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
             style={{
-              background: filter === 'top' ? '#000000' : '#9C7DDE',
+              background: filter === 'top' ? '#000000' : '#bc785b',
               color: 'white',
               boxShadow: filter === 'top' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
