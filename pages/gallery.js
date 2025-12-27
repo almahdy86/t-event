@@ -211,7 +211,7 @@ export default function GalleryPage() {
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
               <h3 className="text-2xl font-bold mb-2">{selectedPhoto.full_name}</h3>
-              <p className="text-lg mb-4">رقم #{selectedPhoto.employee_number}</p>
+              <p className="text-lg mb-4 text-black">رقم #{selectedPhoto.employee_number}</p>
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => {

@@ -61,7 +61,7 @@ export default function HospitalityPage() {
           وشاشات العرض عالية الدقة
         </p>
 
-        <div className="bg-white/60 rounded-2xl p-6 mb-8 w-full max-w-sm">
+        <div className="bg-black rounded-2xl p-6 mb-8 w-full max-w-sm">
           {/* <div className="flex items-start gap-3 mb-4">
             <MapPin size={24} strokeWidth={1.5} className="flex-shrink-0 mt-1" />
             {/* <div>
