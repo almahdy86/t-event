@@ -164,21 +164,11 @@ export default function LotteryPage() {
           <button
             onClick={startDraw}
             disabled={isDrawing || eligibleEmployees.length === 0}
-            className="w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all"
+            className="w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all hover:bg-[#AB8025]"
             style={{
-              background: isDrawing || eligibleEmployees.length === 0 ? '#9E9E9E' : '#CE7B5B',
+              background: isDrawing || eligibleEmployees.length === 0 ? '#9E9E9E' : '#000000',
               color: 'white',
               cursor: isDrawing || eligibleEmployees.length === 0 ? 'not-allowed' : 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              if (!isDrawing && eligibleEmployees.length > 0) {
-                e.target.style.background = '#AB8025'
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isDrawing && eligibleEmployees.length > 0) {
-                e.target.style.background = '#CE7B5B'
-              }
             }}
           >
             {isDrawing ? '🎲 جارٍ السحب...' : '🎁 ابدأ القرعة'}
@@ -279,10 +269,8 @@ export default function LotteryPage() {
                 </button>
                 <button
                   onClick={() => window.print()}
-                  className="flex-1 text-white py-3 rounded-xl font-bold transition-all"
-                  style={{background: '#234024'}}
-                  onMouseEnter={(e) => e.target.style.background = '#AB8025'}
-                  onMouseLeave={(e) => e.target.style.background = '#234024'}
+                  className="flex-1 text-white py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
+                  style={{background: '#000000'}}
                 >
                   طباعة النتائج
                 </button>

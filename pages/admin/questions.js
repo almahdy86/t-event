@@ -166,10 +166,8 @@ export default function QuestionsManagement() {
               setEditingQuestion(null)
               resetForm()
             }}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all"
-            style={{background: '#AB8025', color: 'white'}}
-            onMouseEnter={(e) => e.target.style.background = '#9C7DDE'}
-            onMouseLeave={(e) => e.target.style.background = '#AB8025'}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all hover:bg-[#AB8025]"
+            style={{background: '#000000', color: 'white'}}
           >
             <Plus size={20} />
             سؤال جديد
@@ -236,10 +234,8 @@ export default function QuestionsManagement() {
               <div className="flex gap-3">
                 <button
                   type="submit"
-                  className="flex-1 text-white py-3 rounded-lg font-bold transition-all"
-                  style={{background: '#AB8025'}}
-                  onMouseEnter={(e) => e.target.style.background = '#9C7DDE'}
-                  onMouseLeave={(e) => e.target.style.background = '#AB8025'}
+                  className="flex-1 text-white py-3 rounded-lg font-bold transition-all hover:bg-[#AB8025]"
+                  style={{background: '#000000'}}
                 >
                   {editingQuestion ? 'حفظ التعديلات' : 'إضافة السؤال'}
                 </button>

@@ -115,10 +115,8 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:transform-none"
-              style={{background: '#AB8025'}}
-              onMouseEnter={(e) => e.target.style.background = '#8a6b1f'}
-              onMouseLeave={(e) => e.target.style.background = '#AB8025'}
+              className="w-full text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:bg-[#AB8025] active:scale-95 disabled:opacity-50 disabled:transform-none"
+              style={{background: '#000000'}}
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">

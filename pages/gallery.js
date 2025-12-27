@@ -97,7 +97,7 @@ export default function GalleryPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="p-6 shadow-lg sticky top-0 z-10" style={{background: '#AB8025'}}>
+      <div className="p-6 shadow-lg sticky top-0 z-10" style={{background: '#000000'}}>
         <div className="container mx-auto">
           <div className="flex items-center justify-between mb-4">
             <button

@@ -222,7 +222,7 @@ export default function MapPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="text-black px-4 py-2 rounded-full font-bold text-xl" style={{background: '#C9A961'}}>
+            <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#000000'}}>
               #{employee.employee_number}
             </div>
             <button
@@ -261,8 +261,8 @@ export default function MapPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={() => router.push('/event-map')}
-          className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 active:scale-95"
-          style={{background: '#C9A961', color: '#000000'}}
+          className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 hover:bg-[#AB8025] active:scale-95"
+          style={{background: '#000000', color: '#FFFFFF'}}
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full flex items-center justify-center"
@@ -298,10 +298,10 @@ export default function MapPage() {
                 <button
                   onClick={() => isActive && router.push(activity.route)}
                   disabled={!isActive}
-                  className="w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95"
+                  className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${isActive ? 'hover:bg-[#AB8025]' : ''}`}
                   style={{
-                    background: isActive ? '#C9A961' : 'rgba(255,255,255,0.1)',
-                    color: isActive ? '#000000' : 'rgba(255,255,255,0.3)',
+                    background: isActive ? '#000000' : 'rgba(255,255,255,0.1)',
+                    color: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.3)',
                     opacity: isActive ? 1 : 0.5,
                     cursor: isActive ? 'pointer' : 'not-allowed',
                     border: isActive ? 'none' : '1px solid rgba(255,255,255,0.1)'
@@ -339,8 +339,8 @@ export default function MapPage() {
         animate={{ scale: 1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => router.push('/gallery')}
-        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110"
-        style={{background: '#CE7B5B'}}
+        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#AB8025]"
+        style={{background: '#000000'}}
       >
         <Camera size={28} strokeWidth={2.5} />
       </motion.button>

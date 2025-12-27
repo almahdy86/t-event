@@ -196,9 +196,9 @@ export default function IdentityMirrorsPage() {
             animate={{ scale: 1 }}
             transition={{ type: 'spring' }}
             className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
-            style={{background: '#C9A961'}}
+            style={{background: '#000000'}}
           >
-            <Camera size={64} color="#000000" />
+            <Camera size={64} color="#FFFFFF" />
           </motion.div>
 
           <motion.h2
@@ -229,8 +229,8 @@ export default function IdentityMirrorsPage() {
             transition={{ delay: 0.5 }}
             whileTap={{ scale: 0.95 }}
             onClick={startCamera}
-            className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-colors flex items-center gap-3"
-            style={{background: '#C9A961', color: '#000000'}}
+            className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all flex items-center gap-3 hover:bg-[#AB8025]"
+            style={{background: '#000000', color: '#FFFFFF'}}
           >
             <Camera size={28} />
             ابدأ التصوير
@@ -375,8 +375,8 @@ export default function IdentityMirrorsPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
           onClick={() => router.push('/map')}
-          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl hover:opacity-90 transition-all"
-          style={{background: 'white', color: '#AB8025'}}
+          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#AB8025]"
+          style={{background: '#000000', color: '#FFFFFF'}}
         >
           العودة للخريطة
         </motion.button>

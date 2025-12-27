@@ -88,11 +88,11 @@ export default function PublicGalleryPage() {
         <div className="flex gap-4 justify-center mb-6">
           <button
             onClick={() => setFilter('all')}
-            className="px-6 py-3 rounded-xl font-bold transition-all"
+            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
             style={{
-              background: filter === 'all' ? '#AB8025' : '#9C7DDE',
+              background: filter === 'all' ? '#000000' : '#9C7DDE',
               color: 'white',
-              boxShadow: filter === 'all' ? '0 4px 12px rgba(171,128,37,0.3)' : 'none'
+              boxShadow: filter === 'all' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
           >
             <Camera className="inline-block w-5 h-5 ml-2" />
@@ -100,11 +100,11 @@ export default function PublicGalleryPage() {
           </button>
           <button
             onClick={() => setFilter('top')}
-            className="px-6 py-3 rounded-xl font-bold transition-all"
+            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
             style={{
-              background: filter === 'top' ? '#AB8025' : '#9C7DDE',
+              background: filter === 'top' ? '#000000' : '#9C7DDE',
               color: 'white',
-              boxShadow: filter === 'top' ? '0 4px 12px rgba(171,128,37,0.3)' : 'none'
+              boxShadow: filter === 'top' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
           >
             <Trophy className="inline-block w-5 h-5 ml-2" />
@@ -221,8 +221,8 @@ export default function PublicGalleryPage() {
               </div>
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="w-full text-white py-3 rounded-xl font-bold transition-all"
-                style={{background: '#CE7B5B'}}
+                className="w-full text-white py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
+                style={{background: '#000000'}}
               >
                 إغلاق
               </button>

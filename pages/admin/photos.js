@@ -205,20 +205,16 @@ export default function PhotosManagement() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => approvePhoto(photo.id)}
-                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2"
-                        style={{background: '#234024'}}
-                        onMouseEnter={(e) => e.target.style.background = '#AB8025'}
-                        onMouseLeave={(e) => e.target.style.background = '#234024'}
+                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#AB8025]"
+                        style={{background: '#000000'}}
                       >
                         <CheckCircle size={18} />
                         اعتماد
                       </button>
                       <button
                         onClick={() => rejectPhoto(photo.id)}
-                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2"
-                        style={{background: '#CE7B5B'}}
-                        onMouseEnter={(e) => e.target.style.background = '#AB8025'}
-                        onMouseLeave={(e) => e.target.style.background = '#CE7B5B'}
+                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#AB8025]"
+                        style={{background: '#000000'}}
                       >
                         <XCircle size={18} />
                         رفض
@@ -227,10 +223,8 @@ export default function PhotosManagement() {
                   ) : (
                     <button
                       onClick={() => deletePhoto(photo.id)}
-                      className="w-full text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2"
-                      style={{background: '#CE7B5B'}}
-                      onMouseEnter={(e) => e.target.style.background = '#AB8025'}
-                      onMouseLeave={(e) => e.target.style.background = '#CE7B5B'}
+                      className="w-full text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#AB8025]"
+                      style={{background: '#000000'}}
                     >
                       <Trash2 size={18} />
                       حذف

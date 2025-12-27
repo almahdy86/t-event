@@ -304,10 +304,10 @@ export default function Home() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50"
+              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#AB8025]"
               style={{
-                background: '#C9A961',
-                color: '#000000'
+                background: '#000000',
+                color: '#FFFFFF'
               }}
             >
               {isSubmitting ? (

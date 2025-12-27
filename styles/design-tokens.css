@@ -1,7 +1,7 @@
 /* Design tokens for Tanfeethi identity (colors in RGB for flexible alpha) */
 :root {
   /* Brand Colors - Primary Palette */
-  --color-primary: #CE7B5B;        /* ذهبي وردي */
+  --color-primary: #000000;        /* أسود للأزرار */
   --color-secondary: #9C7DDE;      /* الخزامى */
   --color-accent: #3D2031;         /* أرجواني ملكي */
   --color-highlight: #234024;      /* أخضر سعودي */
@@ -9,9 +9,11 @@
   /* Text Colors */
   --color-text-primary: #000000;   /* أسود */
   --color-text-light: #F3F0EE;     /* ترابي فاتح */
+  --color-text-on-button: #FFFFFF; /* أبيض للنص على الأزرار */
 
   /* Accent Colors */
-  --color-gold: #AB8025;           /* ذهبي داكن */
+  --color-gold: #AB8025;           /* ذهبي داكن - لون النحاس للـ hover */
+  --color-copper: #AB8025;         /* لون النحاس */
 
   /* Primary palette (RGB format for alpha support) */
   --tanfeethi-brown-rgb: 206,123,91;

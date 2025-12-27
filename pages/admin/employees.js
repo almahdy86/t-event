@@ -208,7 +208,7 @@ export default function EmployeesManagement() {
                   <div className="flex items-center gap-3">
                     <div
                       className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                      style={{background: '#AB8025'}}
+                      style={{background: '#000000'}}
                     >
                       {employee.employee_number}
                     </div>
