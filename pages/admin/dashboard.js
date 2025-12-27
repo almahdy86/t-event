@@ -137,18 +137,18 @@ export default function AdminDashboard() {
       minHeight: '100vh'
     }}>
       {/* Header */}
-      <div className="text-white p-4 shadow-lg" style={{background: '#234024'}}>
+      <div className="p-4 shadow-lg" style={{background: '#000000'}}>
         <div className="container mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>لوحة التحكم - التنفيذي</h1>
-            <p className="text-sm opacity-80">مرحباً، {admin.fullName || admin.username}</p>
+            <h1 className="text-2xl font-bold" style={{color: 'white'}}>لوحة التحكم - التنفيذي</h1>
+            <p className="text-sm" style={{color: 'rgba(255,255,255,0.8)'}}>مرحباً، {admin.fullName || admin.username}</p>
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
-            style={{background: 'rgba(255,255,255,0.2)'}}
-            onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.3)'}
-            onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-colors"
+            style={{background: 'white', color: '#bc785b'}}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.9)'}
+            onMouseLeave={(e) => e.target.style.background = 'white'}
           >
             <LogOut size={20} strokeWidth={1.5} />
             تسجيل الخروج

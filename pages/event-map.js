@@ -13,11 +13,11 @@ export default function EventMapPage() {
       minHeight: '100vh'
     }}>
       {/* Header */}
-      <div className="bg-white shadow-lg p-4 flex items-center justify-between">
+      <div className="shadow-lg p-4 flex items-center justify-between" style={{background: '#000000'}}>
         <button
           onClick={() => router.push('/map')}
           className="flex items-center gap-2"
-          style={{color: '#000000'}}
+          style={{color: 'white'}}
         >
           <ArrowRight size={20} strokeWidth={1.5} />
           <span className="font-bold">رجوع</span>

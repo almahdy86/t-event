@@ -122,14 +122,15 @@ export default function ZeroErrorChallengePage() {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="p-4 flex items-center justify-between" style={{background: 'rgba(171,128,37,0.3)', backdropFilter: 'blur(10px)'}}>
+        <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
           <button
             onClick={() => router.push('/map')}
-            className="text-white"
+            className="font-bold"
+            style={{color: 'white'}}
           >
             ← رجوع
           </button>
-          <h1 className="text-white font-bold text-xl">تحدي بلا أخطاء</h1>
+          <h1 className="font-bold text-xl" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
           <div className="w-8"></div>
         </div>
 
@@ -180,15 +181,15 @@ export default function ZeroErrorChallengePage() {
       }}
     >
       {/* Header */}
-      <div className="p-4 flex items-center justify-between" style={{background: 'rgba(171,128,37,0.3)', backdropFilter: 'blur(10px)'}}>
-        <div className="flex items-center gap-2 text-white">
+      <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
+        <div className="flex items-center gap-2" style={{color: 'white'}}>
           <Clock size={24} strokeWidth={1.5} />
           <span className="text-2xl font-bold">
             {timeLeft}s
           </span>
         </div>
-        <h1 className="text-white font-bold text-xl">تحدي بلا أخطاء</h1>
-        <div className="bg-white/20 px-3 py-1 rounded-full text-white font-bold">
+        <h1 className="font-bold text-xl" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
+        <div className="px-3 py-1 rounded-full font-bold" style={{background: 'rgba(255,255,255,0.2)', color: 'white'}}>
           #{employee.employee_number}
         </div>
       </div>

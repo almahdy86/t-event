@@ -28,14 +28,15 @@ export default function HospitalityPage() {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <div className="p-4 flex items-center justify-between" style={{background: 'rgba(171,128,37,0.3)', backdropFilter: 'blur(10px)'}}>
+      <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
         <button
           onClick={() => router.push('/map')}
-          className="text-white"
+          className="font-bold"
+          style={{color: 'white'}}
         >
           ← رجوع
         </button>
-        <h1 className="text-white font-bold text-xl">فن الإكرام</h1>
+        <h1 className="font-bold text-xl" style={{color: 'white'}}>فن الإكرام</h1>
         <div className="w-8"></div>
       </div>
 

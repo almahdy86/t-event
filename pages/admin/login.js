@@ -43,71 +43,82 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{background: 'linear-gradient(135deg, #AB8025 0%, #CE7B5B 100%)'}}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md"
-      >
-        <div className="bg-white rounded-3xl shadow-2xl p-8">
-          {/* الشعار */}
-          <div className="flex justify-center mb-8">
-            <div className="w-24 h-24 relative">
-              <Image
-                src="/logo.svg"
-                alt="التنفيذي"
-                fill
-                className="object-contain"
-              />
-            </div>
-          </div>
+    <div
+      className="min-h-screen flex flex-col p-6"
+      style={{
+        backgroundImage: 'url(/bg/newbg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="flex justify-center py-8">
+        <div className="w-32 h-32 relative">
+          <Image
+            src="/logo.svg"
+            alt="شعار التنفيذي"
+            fill
+            className="object-contain"
+          />
+        </div>
+      </div>
 
-          <h1 className="text-3xl font-bold text-center mb-2" style={{color: '#AB8025'}}>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full"
+      >
+        <div className="mb-8 p-8 rounded-3xl" style={{background: 'rgba(0,0,0,0.85)', border: '1px solid rgba(201,169,97,0.3)'}}>
+          <h1 className="text-3xl font-bold text-center mb-2" style={{color: 'white'}}>
             لوحة التحكم
           </h1>
-          <p className="text-center text-gray-600 mb-8">
+          <p className="text-center mb-8" style={{color: 'rgba(255,255,255,0.7)'}}>
             فعالية المدرج البشري - التنفيذي
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block font-semibold mb-2" style={{color: '#AB8025'}}>
+              <label className="block font-semibold mb-2" style={{color: 'white'}}>
                 اسم المستخدم
               </label>
-              <div className="relative">
-                <User className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} strokeWidth={1.5} />
-                <input
-                  type="text"
-                  value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  className="w-full pr-12 pl-4 py-4 border-2 border-gray-200 rounded-xl focus:border-tanfeethi-turquoise focus:outline-none"
-                  placeholder="أدخل اسم المستخدم"
-                  disabled={isLoading}
-                  required
-                />
-              </div>
+              <input
+                type="text"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
+                style={{
+                  border: '2px solid #bc785b',
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  color: 'white'
+                }}
+                placeholder="أدخل اسم المستخدم"
+                disabled={isLoading}
+                required
+              />
             </div>
 
             <div>
-              <label className="block font-semibold mb-2" style={{color: '#AB8025'}}>
+              <label className="block font-semibold mb-2" style={{color: 'white'}}>
                 كلمة المرور
               </label>
-              <div className="relative">
-                <Lock className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} strokeWidth={1.5} />
-                <input
-                  type="password"
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full pr-12 pl-4 py-4 border-2 border-gray-200 rounded-xl focus:border-tanfeethi-turquoise focus:outline-none"
-                  placeholder="أدخل كلمة المرور"
-                  disabled={isLoading}
-                  required
-                />
-              </div>
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
+                style={{
+                  border: '2px solid #bc785b',
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  color: 'white'
+                }}
+                placeholder="أدخل كلمة المرور"
+                disabled={isLoading}
+                required
+              />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-center">
+              <div className="px-4 py-3 rounded-xl" style={{background: 'rgba(255,51,51,0.2)', color: '#ff6666', border: '1px solid #ff3333'}}>
                 {error}
               </div>
             )}
@@ -115,12 +126,15 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:bg-[#bc785b] hover:text-black active:scale-95 disabled:opacity-50 disabled:transform-none"
-              style={{background: '#000000'}}
+              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#bc785b] hover:text-black"
+              style={{
+                background: '#000000',
+                color: '#bc785b'
+              }}
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
-                  <svg className="animate-spin h-5 w-5 ml-3" viewBox="0 0 24 24">
+                  <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
@@ -133,7 +147,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-white/80 mt-6 text-sm">
+        <p className="text-center mt-6 text-sm" style={{color: 'rgba(255,255,255,0.6)'}}>
           مخصص للمشرفين فقط
         </p>
       </motion.div>

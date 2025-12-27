@@ -97,17 +97,17 @@ export default function GalleryPage() {
   return (
     <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/bg/newbg.png)'}}>
       {/* Header */}
-      <div className="p-6 shadow-lg sticky top-0 z-10 bg-white/10 backdrop-blur-sm">
+      <div className="p-6 shadow-lg sticky top-0 z-10" style={{background: '#000000'}}>
         <div className="container mx-auto">
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={() => router.push('/map')}
               className="p-2 rounded-lg transition-colors"
-              style={{background: 'rgba(255,255,255,0.3)', color: '#bc785b'}}
+              style={{background: 'rgba(255,255,255,0.1)', color: 'white'}}
             >
               <ArrowRight size={24} strokeWidth={1.5} />
             </button>
-            <h1 className="text-3xl font-bold flex items-center gap-3 text-white">
+            <h1 className="text-3xl font-bold flex items-center gap-3" style={{color: 'white'}}>
               {/* <Camera size={32} strokeWidth={2.5} /> */}
               معرض الصور المشاركة
             </h1>
@@ -149,9 +149,9 @@ export default function GalleryPage() {
         {photos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3 text-white">
-              <Trophy className="text-yellow-500" size={40} strokeWidth={1.5} />
+              <Trophy size={40} strokeWidth={1.5} style={{color: '#bc785b'}} />
               الأكثر إعجاباً
-              <Trophy className="text-yellow-500" size={40} strokeWidth={1.5} />
+              <Trophy size={40} strokeWidth={1.5} style={{color: '#bc785b'}} />
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -243,8 +243,9 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       className={`bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow ${
-        isTopRanked ? 'border-4 border-yellow-400' : ''
+        isTopRanked ? 'border-4' : ''
       }`}
+      style={isTopRanked ? {borderColor: '#bc785b'} : {}}
     >
       {/* Photo */}
       <div className="relative aspect-square bg-gray-200 cursor-pointer" onClick={onClick}>
