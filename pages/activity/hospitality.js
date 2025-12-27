@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
-import { Heart, MapPin, ArrowRight } from 'lucide-react'
+import { Heart, MapPin, ArrowRight, ArrowLeft } from 'lucide-react'
 
 export default function HospitalityPage() {
   const router = useRouter()
@@ -34,7 +34,7 @@ export default function HospitalityPage() {
           className="font-bold"
           style={{color: 'white'}}
         >
-          ← رجوع
+          → رجوع
         </button>
         <h1 className="font-bold text-xl" style={{color: 'white'}}>فن الإكرام</h1>
         <div className="w-8"></div>
@@ -93,7 +93,7 @@ export default function HospitalityPage() {
           className="mt-6 text-white/80 hover:text-white flex items-center gap-2"
         >
           التالي: الصورة الجماعية
-          <ArrowRight size={20} strokeWidth={1.5} />
+          <ArrowLeft size={20} strokeWidth={1.5} />
         </button>
       </div>
     </div>

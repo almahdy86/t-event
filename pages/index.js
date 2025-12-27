@@ -281,7 +281,7 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  border: '2px solid #bc785b',
+                  border: '2px solid #bc785b2a',
                   background: 'rgba(255, 255, 255, 0.02)',
                   color: 'white'
                 }}
@@ -299,7 +299,7 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, employeeType: e.target.value, jobTitle: e.target.value })}
                 className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  border: '2px solid #C9A961',
+                 border: '2px solid #bc785b2a',
                   background: 'rgba(255,255,255,0.1)',
                   color: 'white'
                 }}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
-import { Camera, Upload, ArrowRight, Check } from 'lucide-react'
+import { Camera, Upload, ArrowRight, Check, ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 
 export default function IdentityMirrorsPage() {
@@ -247,7 +247,7 @@ export default function IdentityMirrorsPage() {
             style={{color: '#f9f5f7ff'}}
           >
             التالي: تحدي بلا أخطاء
-            <ArrowRight size={20} strokeWidth={1.5} />
+            <ArrowLeft size={20} strokeWidth={1.5} />
           </motion.button>
         </div>
       </div>

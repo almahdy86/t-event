@@ -70,10 +70,10 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="theme-color" content="#8B6F47" />
+        <meta name="theme-color" content="#bc785b" />
         <link rel="manifest" content="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
-        <title>فعالية التنفيذي - المدرج البشري</title>
+        <title>فعالية التنفيذي</title>
       </Head>
       <Component {...pageProps} />
     </>
