@@ -18,31 +18,38 @@ export default function Home() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+
   useEffect(() => {
     if (!router.isReady) return
     
     const storedEmployee = localStorage.getItem('tanfeethi_employee')
+    
     if (storedEmployee) {
       const emp = JSON.parse(storedEmployee)
       setEmployee(emp)
       router.push('/map')
       return
     }
+    
     if (uid) {
       checkEmployee(uid)
     } else {
       setStep('register')
+    }
   }, [router.isReady, uid])
+
   const checkEmployee = async (userId) => {
     try {
       const response = await fetch(`/api/employee/${userId}`)
       const data = await response.json()
+
       if (data.success) {
         setEmployee(data.employee)
         setStep('redirect')
         localStorage.setItem('tanfeethi_employee', JSON.stringify(data.employee))
         
         const lastPage = localStorage.getItem('tanfeethi_last_page')
+        
         setTimeout(() => {
           if (lastPage && lastPage !== '/') {
             router.push(lastPage)
@@ -56,13 +63,22 @@ export default function Home() {
     } catch (error) {
       console.error('خطأ في التحقق:', error)
       setError('حدث خطأ في الاتصال')
+      setStep('register')
+    }
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     if (!formData.fullName.trim() || !formData.employeeType) {
       setError('يرجى ملء جميع الحقول')
+      return
+    }
+
     setIsSubmitting(true)
     setError('')
+
+    try {
       const response = await fetch('/api/employee/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -73,24 +89,40 @@ export default function Home() {
           employeeType: formData.employeeType
         })
       })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setEmployee(data.employee)
+        localStorage.setItem('tanfeethi_employee', JSON.stringify(data.employee))
+        
         if (navigator.vibrate) {
           navigator.vibrate([100, 50, 100])
         }
+        
         setStep('success')
+        
+        setTimeout(() => {
           router.push('/map')
         }, 3000)
+      } else {
         setError(data.message || 'حدث خطأ في التسجيل')
+      }
+    } catch (error) {
       console.error('خطأ في التسجيل:', error)
+      setError('حدث خطأ في الاتصال')
     } finally {
       setIsSubmitting(false)
+    }
+  }
+
   if (step === 'loading') {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'auto',
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
-        backgroundRepeat: 'repeat',
         minHeight: '100vh'
       }}>
         <div className="text-center">
@@ -99,8 +131,17 @@ export default function Home() {
         </div>
       </div>
     )
+  }
+
   if (step === 'redirect') {
+    return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+        backgroundImage: 'url(/bg/newbg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh'
+      }}>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -119,13 +160,36 @@ export default function Home() {
           </p>
           <div className="inline-block text-white px-8 py-3 rounded-full text-2xl font-bold" style={{background: '#9C7DDE'}}>
             #{employee?.employee_number}
+          </div>
           <p className="mt-4 text-black">
             جارٍ التوجيه...
+          </p>
         </motion.div>
+      </div>
+    )
+  }
+
   if (step === 'success') {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+        backgroundImage: 'url(/bg/newbg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh'
+      }}>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
           transition={{ type: 'spring', duration: 0.6 }}
+          className="text-center"
+        >
           <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow" style={{background: '#ffffff'}}>
             <svg className="w-20 h-20 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -134,33 +198,52 @@ export default function Home() {
           >
             مرحباً بك في فعالية التنفيذي
           </motion.h2>
+
           <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="mb-6"
+          >
             <p className="text-xl text-white mb-2">{employee?.full_name}</p>
             <p className="text-lg text-white mb-4">{employee?.job_title}</p>
           </motion.div>
+
+          <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.7, type: 'spring' }}
+            className="mb-6"
+          >
             <div className="inline-block text-black px-12 py-6 rounded-2xl shadow-2xl" style={{background: '#ce7b5b'}}>
               <p className="text-sm mb-2">رقمك في الفعالية</p>
               <p className="text-6xl font-bold">#{employee?.employee_number}</p>
             </div>
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
             className="text-white"
+          >
             احفظ هذا الرقم جيداً!
             <br />
             ستحتاجه في نهاية الفعالية
           </motion.p>
+        </motion.div>
+      </div>
+    )
+  }
+
   return (
     <div
       className="min-h-screen flex flex-col p-6"
       style={{
-        backgroundRepeat: 'repeat'
+        backgroundImage: 'url(/bg/newbg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
       }}
     >
       <div className="flex justify-center py-8">
@@ -171,6 +254,9 @@ export default function Home() {
             fill
             className="object-contain"
           />
+        </div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -182,6 +268,8 @@ export default function Home() {
           </h1>
           <p className="text-center mb-8" style={{color: 'rgba(255,255,255,0.7)'}}>
             يرجى تأكيد بياناتك للمتابعة
+          </p>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block font-semibold mb-2" style={{color: 'white'}}>
@@ -200,12 +288,22 @@ export default function Home() {
                 placeholder="أدخل اسمك "
                 disabled={isSubmitting}
               />
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-2" style={{color: 'white'}}>
                 المسمى الوظيفي *
+              </label>
               <select
                 value={formData.employeeType}
                 onChange={(e) => setFormData({ ...formData, employeeType: e.target.value, jobTitle: e.target.value })}
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
+                style={{
                  border: '2px solid #ce7b5b2a',
                   background: 'rgba(255,255,255,0.1)',
+                  color: 'white'
+                }}
+                disabled={isSubmitting}
                 required
               >
                 <option value="" style={{background: '#1a1a1a', color: 'white'}}>اختر المسمى الوظيفي</option>
@@ -213,11 +311,14 @@ export default function Home() {
                 <option value="موظف" style={{background: '#1a1a1a', color: 'white'}}>موظف (أرقام 31-400)</option>
                 <option value="ضيف" style={{background: '#1a1a1a', color: 'white'}}>ضيف (أرقام 401-440)</option>
               </select>
+            </div>
+
             {error && (
               <div className="px-4 py-3 rounded-xl" style={{background: 'rgba(255,51,51,0.2)', color: '#ff6666', border: '1px solid #ff3333'}}>
                 {error}
               </div>
             )}
+
             <button
               type="submit"
               disabled={isSubmitting}
@@ -240,6 +341,7 @@ export default function Home() {
               )}
             </button>
           </form>
+        </div>
       </motion.div>
     </div>
   )

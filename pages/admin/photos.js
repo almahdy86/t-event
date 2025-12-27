@@ -8,6 +8,7 @@ export default function PhotosManagement() {
   const [photos, setPhotos] = useState([])
   const [filter, setFilter] = useState('pending') // pending, approved, all
   const [selectedPhoto, setSelectedPhoto] = useState(null)
+
   useEffect(() => {
     const token = localStorage.getItem('admin_token')
     if (!token) {
@@ -16,6 +17,7 @@ export default function PhotosManagement() {
     }
     fetchPhotos()
   }, [filter])
+
   const fetchPhotos = async () => {
     try {
       const response = await fetch(`/api/admin/photos?filter=${filter}`)
@@ -25,8 +27,11 @@ export default function PhotosManagement() {
       }
     } catch (error) {
       console.error('خطأ في جلب الصور:', error)
+    }
   }
+
   const approvePhoto = async (photoId) => {
+    try {
       const token = localStorage.getItem('admin_token')
       const response = await fetch(`/api/admin/photos/${photoId}/approve`, {
         method: 'POST',
@@ -36,27 +41,60 @@ export default function PhotosManagement() {
         },
         body: JSON.stringify({ is_approved: true })
       })
+
       if (response.ok) {
         alert('تم اعتماد الصورة')
         fetchPhotos()
+      }
+    } catch (error) {
       console.error('خطأ في اعتماد الصورة:', error)
+    }
+  }
+
   const rejectPhoto = async (photoId) => {
     if (!confirm('هل أنت متأكد من رفض هذه الصورة؟')) return
+
+    try {
+      const token = localStorage.getItem('admin_token')
       const response = await fetch(`/api/admin/photos/${photoId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
+      })
+
+      if (response.ok) {
         alert('تم رفض وحذف الصورة')
+        fetchPhotos()
+      }
+    } catch (error) {
       console.error('خطأ في حذف الصورة:', error)
+    }
+  }
+
   const deletePhoto = async (photoId) => {
     if (!confirm('هل أنت متأكد من حذف هذه الصورة؟')) return
+
+    try {
+      const token = localStorage.getItem('admin_token')
+      const response = await fetch(`/api/admin/photos/${photoId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+
+      if (response.ok) {
         alert('تم حذف الصورة')
+        fetchPhotos()
+      }
+    } catch (error) {
+      console.error('خطأ في حذف الصورة:', error)
+    }
+  }
+
   return (
     <div className="min-h-screen" style={{
       backgroundImage: 'url(/bg/newbg.png)',
-      backgroundSize: 'auto',
+      backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
-        backgroundRepeat: 'repeat',
       minHeight: '100vh'
     }}>
       {/* Header */}
@@ -74,23 +112,43 @@ export default function PhotosManagement() {
             </button>
             <h1 className="text-2xl font-bold" style={{color: '#ce7b5b'}}>إدارة الصور</h1>
           </div>
+
           {/* Filter Buttons */}
           <div className="flex gap-2">
+            <button
               onClick={() => setFilter('pending')}
               className="px-4 py-2 rounded-lg font-bold transition-all"
               style={{
                 background: filter === 'pending' ? '#AB8025' : 'rgba(255,255,255,0.2)',
                 color: 'white'
               }}
+            >
               قيد الانتظار
+            </button>
+            <button
               onClick={() => setFilter('approved')}
+              className="px-4 py-2 rounded-lg font-bold transition-all"
+              style={{
                 background: filter === 'approved' ? '#AB8025' : 'rgba(255,255,255,0.2)',
+                color: 'white'
+              }}
+            >
               المعتمدة
+            </button>
+            <button
               onClick={() => setFilter('all')}
+              className="px-4 py-2 rounded-lg font-bold transition-all"
+              style={{
                 background: filter === 'all' ? '#AB8025' : 'rgba(255,255,255,0.2)',
+                color: 'white'
+              }}
+            >
               الكل
+            </button>
+          </div>
         </div>
       </div>
+
       <div className="container mx-auto p-6">
         {/* Photos Grid */}
         {photos.length === 0 ? (
@@ -98,6 +156,7 @@ export default function PhotosManagement() {
             <p className="text-gray-400 text-lg">
               {filter === 'pending' ? 'لا توجد صور بانتظار الموافقة' : 'لا توجد صور'}
             </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {photos.map((photo, index) => (
@@ -123,16 +182,20 @@ export default function PhotosManagement() {
                     </div>
                   )}
                 </div>
+
                 {/* Info */}
                 <div className="p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <p className="font-bold text-lg">{photo.full_name}</p>
                       <p className="text-sm text-gray-500">رقم #{photo.employee_number}</p>
+                    </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold text-red-500">{photo.likes_count || 0}</p>
                       <p className="text-xs text-gray-500">إعجاب</p>
+                    </div>
                   </div>
+
                   <p className="text-xs text-gray-400 mb-3">
                     {new Date(photo.created_at).toLocaleDateString('ar-SA', {
                       year: 'numeric',
@@ -142,6 +205,7 @@ export default function PhotosManagement() {
                       minute: '2-digit'
                     })}
                   </p>
+
                   {/* Actions */}
                   {!photo.is_approved ? (
                     <div className="flex gap-2">
@@ -153,9 +217,15 @@ export default function PhotosManagement() {
                         <CheckCircle size={18} strokeWidth={1.5} />
                         اعتماد
                       </button>
+                      <button
                         onClick={() => rejectPhoto(photo.id)}
+                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#ce7b5b] hover:text-black"
+                        style={{background: '#000000'}}
+                      >
                         <XCircle size={18} strokeWidth={1.5} />
                         رفض
+                      </button>
+                    </div>
                   ) : (
                     <button
                       onClick={() => deletePhoto(photo.id)}
@@ -165,9 +235,14 @@ export default function PhotosManagement() {
                       <Trash2 size={18} strokeWidth={1.5} />
                       حذف
                     </button>
+                  )}
+                </div>
               </motion.div>
             ))}
+          </div>
         )}
+      </div>
+
       {/* Photo Modal */}
       {selectedPhoto && (
         <div
@@ -185,10 +260,14 @@ export default function PhotosManagement() {
               alt="Full size"
               className="w-full h-full object-contain rounded-lg"
             />
+            <button
               onClick={() => setSelectedPhoto(null)}
               className="absolute top-4 right-4 bg-white text-gray-800 p-2 rounded-full hover:bg-gray-200"
+            >
               <XCircle size={24} strokeWidth={1.5} />
+            </button>
           </motion.div>
+        </div>
       )}
     </div>
   )

@@ -5,6 +5,7 @@ import { Clock, CheckCircle, XCircle, Trophy, ArrowRight, ArrowLeft } from 'luci
 import io from 'socket.io-client'
 
 let socket
+
 export default function ZeroErrorChallengePage() {
   const router = useRouter()
   const [employee, setEmployee] = useState(null)
@@ -14,6 +15,7 @@ export default function ZeroErrorChallengePage() {
   const [isAnswered, setIsAnswered] = useState(false)
   const [result, setResult] = useState(null)
   const [startTime, setStartTime] = useState(null)
+
   useEffect(() => {
     const storedEmployee = localStorage.getItem('tanfeethi_employee')
     if (!storedEmployee) {
@@ -21,24 +23,34 @@ export default function ZeroErrorChallengePage() {
       return
     }
     setEmployee(JSON.parse(storedEmployee))
+
     // الاتصال بـ Socket
     socketInitializer()
+
     // جلب السؤال النشط
     fetchActiveQuestion()
+
     return () => {
       if (socket) socket.disconnect()
+    }
   }, [])
+
+  useEffect(() => {
     if (question && timeLeft > 0 && !isAnswered) {
       const timer = setTimeout(() => {
         setTimeLeft(prev => prev - 1)
       }, 1000)
+
       return () => clearTimeout(timer)
     } else if (timeLeft === 0 && !isAnswered) {
       // انتهى الوقت
       handleSubmit(null)
+    }
   }, [timeLeft, isAnswered, question])
+
   const socketInitializer = () => {
     socket = io();
+
     socket.on('question:active', (newQuestion) => {
       setQuestion(newQuestion)
       setTimeLeft(30)
@@ -47,9 +59,11 @@ export default function ZeroErrorChallengePage() {
       setSelectedAnswer(null)
       setStartTime(Date.now())
     })
+
     socket.on('answer:result', (data) => {
       setResult(data)
       setIsAnswered(true)
+
       // اهتزاز حسب النتيجة
       if (navigator.vibrate) {
         if (data.error === 'already_answered') {
@@ -60,7 +74,9 @@ export default function ZeroErrorChallengePage() {
           navigator.vibrate([200, 100, 200])
         }
       }
+    })
   }
+
   const fetchActiveQuestion = async () => {
     try {
       const response = await fetch('/api/questions/active')
@@ -69,11 +85,17 @@ export default function ZeroErrorChallengePage() {
       if (data.success && data.question) {
         setQuestion(data.question)
         setStartTime(Date.now())
+      }
     } catch (error) {
       console.error('خطأ في جلب السؤال:', error)
+    }
+  }
+
   const handleSubmit = (answer) => {
     if (isAnswered || !employee || !question) return
+
     const timeTaken = Math.floor((Date.now() - startTime) / 1000)
+
     if (socket) {
       socket.emit('answer:submit', {
         questionId: question.id,
@@ -82,17 +104,22 @@ export default function ZeroErrorChallengePage() {
         selectedAnswer: answer,
         timeTaken
       })
+    }
+
     setSelectedAnswer(answer)
+  }
+
   if (!employee) return null
+
   if (!question) {
     return (
       <div
         className="min-h-screen flex flex-col"
         style={{
           backgroundImage: 'url(/bg/newbg.png)',
-          backgroundSize: 'auto',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
@@ -106,56 +133,77 @@ export default function ZeroErrorChallengePage() {
           <h1 className="font-bold text-xl" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
           <div className="w-8"></div>
         </div>
+
         <div className="flex-1 flex flex-col items-center justify-center p-6 text-white">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
             style={{background: 'rgba(206, 123, 91, 0.2)'}}
+          >
             <Trophy size={64} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
           </motion.div>
+
           <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#ce7b5b'}}>
             تحدي بلا أخطاء! 🎯
           </h2>
+
           <p className="text-xl text-center mb-8 opacity-90">
             اختبر معرفتك ببروتوكولات الخدمة
             <br />
             وكن من الفائزين بالجوائز
           </p>
+
           <div className="bg-white/20 rounded-2xl p-6 w-full max-w-sm">
             <h3 className="font-bold text-lg mb-3">⏰ انتظر بدء التحدي</h3>
             <p className="opacity-90">سيتم عرض السؤال قريباً على جميع المشاركين</p>
           </div>
+
+          <button
             onClick={() => router.push('/activity/hospitality')}
             className="mt-8 text-white/80 hover:text-white flex items-center gap-2"
+          >
             التالي: فن الإكرام
             <ArrowRight size={20} strokeWidth={1.5} />
+          </button>
+        </div>
       </div>
     )
+  }
+
   return (
     <div
       className="min-h-screen flex flex-col"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'auto',
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'repeat'
+        backgroundRepeat: 'no-repeat'
       }}
     >
       {/* Header */}
       <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>
         <div className="flex items-center gap-3" style={{color: 'white'}}>
+          <button
+            onClick={() => router.push('/map')}
             className="hover:opacity-70 transition-opacity flex items-center gap-2 font-bold"
+          >
             <ArrowRight size={24} strokeWidth={1.5} />
             <span>رجوع</span>
+          </button>
           <div className="flex items-center gap-2">
             <Clock size={24} strokeWidth={1.5} />
             <span className="text-2xl font-bold">
               {timeLeft}s
             </span>
+          </div>
+        </div>
         <h1 className="font-bold text-xl" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
         <div className="px-3 py-1 rounded-full font-bold" style={{background: 'rgba(255,255,255,0.2)', color: 'white'}}>
           #{employee.employee_number}
+        </div>
+      </div>
+
       {/* السؤال والخيارات */}
       <div className="flex-1 flex flex-col p-6">
         <motion.div
@@ -170,13 +218,16 @@ export default function ZeroErrorChallengePage() {
             <h2 className="text-xl font-bold text-gray-800 leading-relaxed">
               {question.question_text}
             </h2>
+          </div>
         </motion.div>
+
         {/* الخيارات */}
         <div className="space-y-4 flex-1">
           {(Array.isArray(question.options) ? question.options : JSON.parse(question.options)).map((option, index) => {
             const isSelected = selectedAnswer === index
             const isCorrect = result && index === result.correctAnswer
             const isWrong = result && isSelected && !result.isCorrect
+
             return (
               <motion.button
                 key={index}
@@ -216,10 +267,13 @@ export default function ZeroErrorChallengePage() {
                   )}
                   {isWrong && (
                     <XCircle size={28} strokeWidth={1.5} className="text-white" />
+                  )}
                 </div>
               </motion.button>
             )
           })}
+        </div>
+
         {/* النتيجة */}
         <AnimatePresence>
           {result && (
@@ -241,22 +295,28 @@ export default function ZeroErrorChallengePage() {
                   : result.isCorrect ? '🎉' : '😔'}
               </div>
               <h3 className="text-2xl font-bold mb-2">
+                {result.error === 'already_answered'
                   ? 'تنبيه!'
                   : result.isCorrect ? 'إجابة صحيحة!' : 'إجابة خاطئة'}
               </h3>
               <p className="text-lg opacity-90">
+                {result.error === 'already_answered'
                   ? result.message || 'لقد أجبت على هذا السؤال من قبل!'
+                  : result.isCorrect
                   ? 'تم تسجيلك في قرعة الجوائز!'
                   : 'لا تقلق، هناك فرص أخرى!'}
               </p>
+
               <button
                 onClick={() => router.push('/map')}
                 className="mt-6 bg-white text-gray-800 font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition-colors"
+              >
                 العودة للخريطة
               </button>
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
     </div>
   )
 }

@@ -12,17 +12,21 @@ export default function AdminLoginPage() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
+
     try {
       const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       })
+
       const data = await response.json()
+
       if (data.success) {
         localStorage.setItem('admin_token', data.token)
         localStorage.setItem('admin_info', JSON.stringify(data.admin))
@@ -37,14 +41,15 @@ export default function AdminLoginPage() {
       setIsLoading(false)
     }
   }
+
   return (
     <div
       className="min-h-screen flex flex-col p-6"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'auto',
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'repeat'
+        backgroundRepeat: 'no-repeat'
       }}
     >
       <div className="flex justify-center py-8">
@@ -57,6 +62,7 @@ export default function AdminLoginPage() {
           />
         </div>
       </div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -69,6 +75,7 @@ export default function AdminLoginPage() {
           <p className="text-center mb-8" style={{color: 'rgba(255,255,255,0.7)'}}>
             فعالية المدرج البشري - التنفيذي
           </p>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block font-semibold mb-2" style={{color: 'white'}}>
@@ -89,16 +96,33 @@ export default function AdminLoginPage() {
                 required
               />
             </div>
+
+            <div>
+              <label className="block font-semibold mb-2" style={{color: 'white'}}>
                 كلمة المرور
+              </label>
+              <input
                 type="password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
+                style={{
+                  border: '2px solid #ce7b5b',
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  color: 'white'
+                }}
                 placeholder="أدخل كلمة المرور"
+                disabled={isLoading}
+                required
+              />
+            </div>
+
             {error && (
               <div className="px-4 py-3 rounded-xl" style={{background: 'rgba(255,51,51,0.2)', color: '#ff6666', border: '1px solid #ff3333'}}>
                 {error}
               </div>
             )}
+
             <button
               type="submit"
               disabled={isLoading}
@@ -121,6 +145,8 @@ export default function AdminLoginPage() {
               )}
             </button>
           </form>
+        </div>
+
         <p className="text-center mt-6 text-sm" style={{color: 'rgba(255,255,255,0.6)'}}>
           مخصص للمشرفين فقط
         </p>

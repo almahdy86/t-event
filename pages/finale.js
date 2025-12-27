@@ -7,6 +7,7 @@ export default function FinalePage() {
   const router = useRouter()
   const [employee, setEmployee] = useState(null)
   const [showNumber, setShowNumber] = useState(false)
+
   useEffect(() => {
     const storedEmployee = localStorage.getItem('tanfeethi_employee')
     if (!storedEmployee) {
@@ -14,6 +15,7 @@ export default function FinalePage() {
       return
     }
     setEmployee(JSON.parse(storedEmployee))
+
     // إظهار الرقم بعد ثانية
     setTimeout(() => {
       setShowNumber(true)
@@ -24,16 +26,18 @@ export default function FinalePage() {
       }
     }, 1000)
   }, [])
+
   if (!employee) return null
+
   if (!showNumber) {
     return (
       <div
         className="min-h-screen flex flex-col"
         style={{
           backgroundImage: 'url(/bg/newbg.png)',
-          backgroundSize: 'auto',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
+          backgroundRepeat: 'no-repeat'
         }}
       >
         {/* زر الرجوع */}
@@ -47,28 +51,32 @@ export default function FinalePage() {
             رجوع
           </button>
         </div>
+
         <div className="flex-1 flex items-center justify-center">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: [0, 1.2, 1] }}
             transition={{ duration: 1 }}
             className="text-center text-white"
+          >
             <Users size={100} strokeWidth={1.5} className="mx-auto mb-6" />
             <h1 className="text-4xl font-bold" style={{color: '#ce7b5b'}}>
               حان وقت الصورة الجماعية!
             </h1>
           </motion.div>
+        </div>
       </div>
     )
   }
+
   return (
     <div
       className="fixed inset-0 flex flex-col text-white overflow-hidden"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'auto',
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'repeat'
+        backgroundRepeat: 'no-repeat'
       }}
     >
       {/* زر الرجوع */}
@@ -81,6 +89,8 @@ export default function FinalePage() {
           <ArrowRight size={20} strokeWidth={1.5} />
           رجوع
         </button>
+      </div>
+
       {/* المحتوى الرئيسي */}
       <div className="flex-1 flex items-center justify-center p-6">
         {/* الرقم الضخم */}
@@ -89,6 +99,8 @@ export default function FinalePage() {
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', duration: 1 }}
           className="text-center"
+        >
+        <motion.div
           animate={{
             scale: [1, 1.05, 1],
           }}
@@ -96,17 +108,23 @@ export default function FinalePage() {
             duration: 2,
             repeat: Infinity,
             ease: "easeInOut"
+          }}
           className="mb-8"
+        >
           <div className="text-9xl font-black mb-4 drop-shadow-2xl" style={{ fontSize: '12rem' }}>
             {employee.employee_number}
           </div>
           <div className="text-4xl font-bold mb-2">
             #{employee.employee_number}
+          </div>
         </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
           className="bg-white/20 backdrop-blur rounded-3xl p-8 max-w-md"
+        >
           <h2 className="text-3xl font-bold mb-4" style={{color: '#ce7b5b'}}>
             ابحث عن رقمك!
           </h2>
@@ -114,19 +132,29 @@ export default function FinalePage() {
             توجه إلى منطقة التصوير
             <br />
             وقف على الملصق الأرضي
+            <br />
             رقم <span className="font-bold text-4xl">#{employee.employee_number}</span>
           </p>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           className="mt-8 text-2xl font-bold animate-pulse"
+        >
            المنطقة المخصصة للتصوير
+        </motion.div>
+        </motion.div>
+      </div>
+
       {/* تأثيرات بصرية */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(20)].map((_, i) => {
           const randomX = Math.random() * 100
           const randomDelay = Math.random() * 2
           const randomDuration = Math.random() * 3 + 2
+
           return (
             <motion.div
               key={i}
@@ -138,13 +166,16 @@ export default function FinalePage() {
               animate={{
                 y: ['0vh', '100vh'],
                 x: [`${randomX}%`, `${Math.random() * 100}%`]
+              }}
               transition={{
                 duration: randomDuration,
                 repeat: Infinity,
                 delay: randomDelay
+              }}
             />
           )
         })}
+      </div>
     </div>
   )
 }
