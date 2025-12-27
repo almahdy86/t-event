@@ -95,19 +95,19 @@ export default function GalleryPage() {
   if (!employee) return null
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/bg/newbg.png)'}}>
       {/* Header */}
-      <div className="p-6 shadow-lg sticky top-0 z-10" style={{background: '#000000'}}>
+      <div className="p-6 shadow-lg sticky top-0 z-10 bg-white/10 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={() => router.push('/map')}
-              className="p-2 rounded-lg transition-colors text-white"
-              style={{background: 'rgba(255,255,255,0.2)'}}
+              className="p-2 rounded-lg transition-colors"
+              style={{background: 'rgba(255,255,255,0.3)', color: '#bc785b'}}
             >
               <ArrowRight size={24} strokeWidth={1.5} />
             </button>
-            <h1 className="text-3xl font-bold flex items-center gap-3" style={{color: '#bc785b'}}>
+            <h1 className="text-3xl font-bold flex items-center gap-3 text-white">
               {/* <Camera size={32} strokeWidth={2.5} /> */}
               معرض الصور المشاركة
             </h1>
@@ -125,10 +125,10 @@ export default function GalleryPage() {
       {/* Photos Grid */}
       <div className="container mx-auto p-6">
         {photos.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-            <Camera size={64} strokeWidth={1.5} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-400 text-xl">لا توجد صور معتمدة بعد</p>
-            <p className="text-gray-400 mt-2">عد لاحقاً لمشاهدة الصور المشاركة</p>
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-12 text-center">
+            <Camera size={64} strokeWidth={1.5} className="mx-auto mb-4" style={{color: '#bc785b'}} />
+            <p className="text-xl" style={{color: '#bc785b'}}>لا توجد صور معتمدة بعد</p>
+            <p className="mt-2 text-white">عد لاحقاً لمشاهدة الصور المشاركة</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,7 +148,7 @@ export default function GalleryPage() {
         {/* Top 3 Section */}
         {photos.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3" style={{color: '#bc785b'}}>
+            <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3 text-white">
               <Trophy className="text-yellow-500" size={40} strokeWidth={1.5} />
               الأكثر إعجاباً
               <Trophy className="text-yellow-500" size={40} strokeWidth={1.5} />
@@ -242,7 +242,7 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow ${
+      className={`bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow ${
         isTopRanked ? 'border-4 border-yellow-400' : ''
       }`}
     >
@@ -259,8 +259,8 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="font-bold text-lg">{photo.full_name}</h3>
-            <p className="text-sm text-gray-500">رقم #{photo.employee_number}</p>
+            <h3 className="font-bold text-lg" style={{color: '#bc785b'}}>{photo.full_name}</h3>
+            <p className="text-sm text-white">رقم #{photo.employee_number}</p>
           </div>
         </div>
 

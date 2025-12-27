@@ -206,9 +206,9 @@ export default function IdentityMirrorsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-4xl font-bold mb-4 text-center"
-            style={{color: 'white'}}
+            style={{color: '#bc785b'}}
           >
-            التقط لحظتك! 📸
+            التقط لحظتك! 
           </motion.h2>
 
           <motion.p
@@ -230,7 +230,7 @@ export default function IdentityMirrorsPage() {
             whileTap={{ scale: 0.95 }}
             onClick={startCamera}
             className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all flex items-center gap-3 hover:bg-[#bc785b] hover:text-black"
-            style={{background: '#000000', color: '#FFFFFF'}}
+            style={{background: '#000000', color: '#bc785b'}}
           >
             <Camera size={28} strokeWidth={1.5} />
             ابدأ التصوير

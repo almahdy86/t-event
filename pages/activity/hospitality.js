@@ -49,7 +49,7 @@ export default function HospitalityPage() {
         </motion.div>
 
         <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#bc785b'}}>
-          فن الإكرام ✨
+          فن الإكرام 
         </h2>
 
         <p className="text-xl text-center mb-8 opacity-90 max-w-md">
@@ -67,7 +67,7 @@ export default function HospitalityPage() {
             </div> *
           </div> */}
 
-          <div className="border-t border-white/20 pt-4">
+          <div className="pt-4">
             <h4 className="font-bold mb-2">التعليمات:</h4>
             <ul className="space-y-2 opacity-90 text-sm">
               <li>• توجه إلى منطقة الفعالية</li>
@@ -82,7 +82,7 @@ export default function HospitalityPage() {
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push('/map')}
           className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#bc785b] hover:text-black"
-          style={{background: '#000000', color: '#FFFFFF'}}
+          style={{background: '#000000', color: '#bc785b'}}
         >
           عودة للخريطة
         </motion.button>

@@ -61,7 +61,7 @@ export default function FinalePage() {
           >
             <Users size={100} strokeWidth={1.5} className="mx-auto mb-6" />
             <h1 className="text-4xl font-bold" style={{color: '#bc785b'}}>
-              حان وقت الصورة الجماعية! 📸
+              حان وقت الصورة الجماعية! 
             </h1>
           </motion.div>
         </div>
@@ -126,7 +126,7 @@ export default function FinalePage() {
           className="bg-white/20 backdrop-blur rounded-3xl p-8 max-w-md"
         >
           <h2 className="text-3xl font-bold mb-4" style={{color: '#bc785b'}}>
-            ابحث عن رقمك! 🎯
+            ابحث عن رقمك! 
           </h2>
           <p className="text-xl leading-relaxed">
             توجه إلى منطقة التصوير
@@ -143,7 +143,7 @@ export default function FinalePage() {
           transition={{ delay: 1 }}
           className="mt-8 text-2xl font-bold animate-pulse"
         >
-          📍 المنطقة المخصصة للتصوير
+           المنطقة المخصصة للتصوير
         </motion.div>
         </motion.div>
       </div>
