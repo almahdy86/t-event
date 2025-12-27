@@ -138,9 +138,10 @@ export default function ZeroErrorChallengePage() {
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mb-8"
+            className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
+            style={{background: 'rgba(188, 120, 91, 0.2)'}}
           >
-            <Trophy size={64} strokeWidth={1.5} />
+            <Trophy size={64} strokeWidth={1.5} style={{color: '#bc785b'}} />
           </motion.div>
 
           <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#bc785b'}}>
@@ -211,7 +212,7 @@ export default function ZeroErrorChallengePage() {
           className="bg-white rounded-3xl p-6 mb-6 shadow-2xl"
         >
           <div className="flex items-start gap-3 mb-4">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0" style={{background: '#bc785b'}}>
               ؟
             </div>
             <h2 className="text-xl font-bold text-gray-800 leading-relaxed">
@@ -241,18 +242,21 @@ export default function ZeroErrorChallengePage() {
                     : isWrong
                     ? 'bg-red-500 text-white'
                     : isSelected
-                    ? 'bg-white text-blue-600 border-4 border-blue-600'
+                    ? 'bg-white border-4'
                     : 'bg-white text-gray-800 hover:bg-gray-50'
                 } ${isAnswered && !isCorrect && !isSelected && 'opacity-50'}`}
+                style={isSelected && !isCorrect && !isWrong ? {color: '#bc785b', borderColor: '#bc785b'} : {}}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
                       isCorrect ? 'bg-white text-green-500' :
                       isWrong ? 'bg-white text-red-500' :
-                      isSelected ? 'bg-blue-600 text-white' :
-                      'bg-blue-100 text-blue-600'
-                    }`}>
+                      isSelected ? 'text-white' :
+                      'text-white'
+                    }`}
+                    style={!isCorrect && !isWrong ? {background: isSelected ? '#bc785b' : 'rgba(188, 120, 91, 0.3)'} : {}}
+                    >
                       {String.fromCharCode(65 + index)}
                     </div>
                     <span className="text-lg">{option}</span>

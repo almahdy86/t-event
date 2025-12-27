@@ -182,9 +182,11 @@ export default function IdentityMirrorsPage() {
         <div className="p-4 flex items-center justify-between shadow" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
           <button
             onClick={() => router.push('/map')}
+            className="flex items-center gap-2 font-bold"
             style={{color: 'white'}}
           >
-            ← رجوع
+            <ArrowRight size={24} strokeWidth={1.5} />
+            <span>رجوع</span>
           </button>
           <h1 className="font-bold text-xl" style={{color: 'white'}}>مرايا الهوية</h1>
           <div className="w-8"></div>
