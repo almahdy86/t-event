@@ -98,7 +98,7 @@ export default function PublicGalleryPage() {
             onClick={() => setFilter('all')}
             className="px-6 py-3 rounded-xl font-bold transition-all"
             style={{
-              background: filter === 'all' ? '#ce7b5b' : '#000000',
+              background: filter === 'all' ? '#ffffff' : '#ce7b5b',
               color: 'white',
               boxShadow: filter === 'all' ? '0 4px 12px rgba(206,123,91,0.3)' : 'none'
             }}
@@ -110,7 +110,7 @@ export default function PublicGalleryPage() {
             onClick={() => setFilter('top')}
             className="px-6 py-3 rounded-xl font-bold transition-all"
             style={{
-              background: filter === 'top' ? '#ce7b5b' : '#000000',
+              background: filter === 'top' ? '#ffffff' : '#ce7b5b',
               color: 'white',
               boxShadow: filter === 'top' ? '0 4px 12px rgba(206,123,91,0.3)' : 'none'
             }}
