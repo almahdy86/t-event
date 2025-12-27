@@ -126,7 +126,7 @@ export default function EventMapPage() {
           <span className="font-bold">رجوع</span>
         </button>
         <h1 className="text-xl font-bold" style={{color: '#ce7b5b'}}>
-          خريطة لقاء التنفيذي 2025
+         خارطة لقاء التنفيذي
         </h1>
         <button
           onClick={() => setIsPanelOpen(!isPanelOpen)}
