@@ -261,8 +261,8 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="font-bold text-lg" style={{color: '#ce7b5b'}}>{photo.full_name}</h3>
-            <p className="text-sm text-white">رقم #{photo.employee_number}</p>
+            <h3 className="font-bold text-lg" style={{color: '#000000'}}>{photo.full_name}</h3>
+            <p className="text-sm" style={{color: '#000000'}}>رقم #{photo.employee_number}</p>
           </div>
         </div>
 

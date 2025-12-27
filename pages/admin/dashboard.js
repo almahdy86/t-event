@@ -213,11 +213,11 @@ export default function AdminDashboard() {
                 
                 <button
                   onClick={() => toggleActivity(activity.id)}
-                  className={`px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105 ${
-                    activities[activity.id]
-                      ? 'bg-green-500 text-white'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
+                  className="px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105"
+                  style={{
+                    background: activities[activity.id] ? '#ce7b5b' : '#6b7280',
+                    color: 'white'
+                  }}
                 >
                   {activities[activity.id] ? 'مفعّل' : 'معطّل'}
                 </button>
