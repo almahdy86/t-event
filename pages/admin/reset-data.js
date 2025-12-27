@@ -73,8 +73,9 @@ export default function ResetData() {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
@@ -90,8 +91,9 @@ export default function ResetData() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
@@ -125,8 +127,9 @@ export default function ResetData() {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
@@ -142,8 +145,9 @@ export default function ResetData() {
   return (
     <div className="min-h-screen" style={{
       backgroundImage: 'url(/bg/newbg.png)',
-      backgroundSize: 'cover',
+      backgroundSize: 'auto',
       backgroundPosition: 'center',
+      backgroundRepeat: 'repeat',
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>

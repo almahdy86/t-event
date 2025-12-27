@@ -18,7 +18,8 @@
       "Bash(pip install:*)",
       "Bash(while read file)",
       "Bash(do grep -q \"backgroundRepeat\" \"$file\")",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(cat:*)"
     ]
   }
 }

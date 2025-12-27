@@ -35,9 +35,9 @@ export default function FinalePage() {
         className="min-h-screen flex flex-col"
         style={{
           backgroundImage: 'url(/bg/newbg.png)',
-          backgroundSize: 'cover',
+          backgroundSize: 'auto',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'repeat'
         }}
       >
         {/* زر الرجوع */}
@@ -74,9 +74,9 @@ export default function FinalePage() {
       className="fixed inset-0 flex flex-col text-white overflow-hidden"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'repeat'
       }}
     >
       {/* زر الرجوع */}

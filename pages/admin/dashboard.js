@@ -131,8 +131,9 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen" style={{
       backgroundImage: 'url(/bg/newbg.png)',
-      backgroundSize: 'cover',
+      backgroundSize: 'auto',
       backgroundPosition: 'center',
+      backgroundRepeat: 'repeat',
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>

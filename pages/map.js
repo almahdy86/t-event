@@ -197,9 +197,9 @@ export default function MapPage() {
       className="min-h-screen pb-20"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        backgroundRepeat: 'repeat',
         backgroundAttachment: 'fixed'
       }}
     >

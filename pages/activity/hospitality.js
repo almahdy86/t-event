@@ -23,9 +23,9 @@ export default function HospitalityPage() {
       className="min-h-screen flex flex-col"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'repeat'
       }}
     >
       <div className="p-4 flex items-center justify-between" style={{background: '#000000'}}>

@@ -47,9 +47,9 @@ export default function AdminLoginPage() {
       className="min-h-screen flex flex-col p-6"
       style={{
         backgroundImage: 'url(/bg/newbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'repeat'
       }}
     >
       <div className="flex justify-center py-8">

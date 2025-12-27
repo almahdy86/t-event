@@ -174,9 +174,9 @@ export default function IdentityMirrorsPage() {
         className="min-h-screen flex flex-col"
         style={{
           backgroundImage: 'url(/bg/newbg.png)',
-          backgroundSize: 'cover',
+          backgroundSize: 'auto',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'repeat'
         }}
       >
         <div className="p-4 flex items-center justify-between shadow" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
