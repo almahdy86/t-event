@@ -17,7 +17,7 @@
   --color-heading: #bc785b;        /* لون العناوين */
 
   /* Primary palette (RGB format for alpha support) */
-  --tanfeethi-brown-rgb: 206,123,91;
+  --tanfeethi-brown-rgb: rgb(188, 120, 91);
   --tanfeethi-brown: rgb(var(--tanfeethi-brown-rgb));
   --tanfeethi-brown-light-rgb: 206,123,91;
   --tanfeethi-brown-light: rgb(var(--tanfeethi-brown-light-rgb));
