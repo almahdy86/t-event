@@ -53,7 +53,7 @@ export default function HospitalityPage() {
           فن الإكرام
         </h2>
 
-        <p className="text-xl text-center mb-8 opacity-90 max-w-md">
+        <p className="text-xl text-center mb-8 max-w-md">
           شارك في سباق جماعي مثير باستخدام iPad
           <br />
           وشاشات العرض عالية الدقة
@@ -70,7 +70,7 @@ export default function HospitalityPage() {
 
           <div className="pt-4">
             <h4 className="font-bold mb-2">التعليمات:</h4>
-            <ul className="space-y-2 opacity-90 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>• توجه إلى منطقة الفعالية</li>
               <li>• انضم إلى فريقك</li>
               <li>• اتبع التعليمات على الشاشة</li>
