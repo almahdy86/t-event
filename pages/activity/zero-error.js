@@ -140,9 +140,9 @@ export default function ZeroErrorChallengePage() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
-            style={{background: 'rgba(206, 123, 91, 0.2)'}}
+            style={{backgroundColor: 'black'}}
           >
-            <Trophy size={64} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
+            <Trophy size={64} strokeWidth={1.5} style={{color: 'white'}} />
           </motion.div>
 
           <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#ce7b5b'}}>
@@ -182,7 +182,7 @@ export default function ZeroErrorChallengePage() {
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
       <div className="p-4 flex items-center justify-between relative z-10" style={{background: '#000000'}}>
         <div className="flex items-center gap-3" style={{color: 'white'}}>

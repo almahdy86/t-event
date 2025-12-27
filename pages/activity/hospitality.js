@@ -46,9 +46,9 @@ export default function HospitalityPage() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
-          style={{backgroundColor: 'white'}}
+          style={{backgroundColor: 'black'}}
         >
-          <Heart size={64} strokeWidth={1.5} style={{color: '#ce7b5b'}} />
+          <Heart size={64} strokeWidth={1.5} style={{color: 'white'}} />
         </motion.div>
 
         <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#ce7b5b'}}>
