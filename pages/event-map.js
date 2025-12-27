@@ -116,7 +116,7 @@ export default function EventMapPage() {
     }}>
       <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
-      <div className="shadow-lg p-4 flex items-center justify-between relative z-10" style={{background: '#000000'}}>
+      <div className="shadow-lg p-4 flex items-center justify-between sticky top-0 z-50" style={{background: '#000000'}}>
         <button
           onClick={() => router.push('/map')}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
