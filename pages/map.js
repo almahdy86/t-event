@@ -262,7 +262,7 @@ export default function MapPage() {
           animate={{ opacity: 1, y: 0 }}
           onClick={() => router.push('/event-map')}
           className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 hover:bg-[#bc785b] hover:text-black active:scale-95"
-          style={{background: '#000000', color: '#bc785b' }}
+          style={{background: '#000000', color: 'white' }}
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full flex items-center justify-center"
@@ -301,7 +301,7 @@ export default function MapPage() {
                   className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${isActive ? 'hover:bg-[#bc785b] hover:text-black' : ''}`}
                   style={{
                     background: isActive ? '#000000' : 'rgba(255,255,255,0.1)',
-                    color: isActive ? '#bc785b' : 'rgba(255,255,255,0.3)',
+                    color: isActive ? 'white' : 'rgba(255,255,255,0.3)',
                     opacity: isActive ? 1 : 0.5,
                     cursor: isActive ? 'pointer' : 'not-allowed',
                     border: isActive ? 'none' : '1px solid #bc785b0b'
