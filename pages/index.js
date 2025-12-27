@@ -184,8 +184,8 @@ export default function Home() {
           transition={{ type: 'spring', duration: 0.6 }}
           className="text-center"
         >
-          <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow" style={{background: '#234024'}}>
-            <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow" style={{background: '#ffffff'}}>
+            <svg className="w-20 h-20 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
             </svg>
           </div>
@@ -196,7 +196,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="text-3xl font-bold text-white mb-4"
           >
-            مرحباً بك في فعالية التنفيذي! 
+            مرحباً بك في فعالية التنفيذي
           </motion.h2>
 
           <motion.div
@@ -215,7 +215,7 @@ export default function Home() {
             transition={{ delay: 0.7, type: 'spring' }}
             className="mb-6"
           >
-            <div className="inline-block text-white px-12 py-6 rounded-2xl shadow-2xl" style={{background: '#CE7B5B'}}>
+            <div className="inline-block text-black px-12 py-6 rounded-2xl shadow-2xl" style={{background: '#bc785b'}}>
               <p className="text-sm mb-2">رقمك في الفعالية</p>
               <p className="text-6xl font-bold">#{employee?.employee_number}</p>
             </div>

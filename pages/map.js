@@ -222,7 +222,7 @@ export default function MapPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#000000'}}>
+            <div className="text-white px-4 py-2 rounded-full font-bold text-xl" style={{background: '#bc785b'}}>
               #{employee.employee_number}
             </div>
             <button
@@ -301,10 +301,10 @@ export default function MapPage() {
                   className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${isActive ? 'hover:bg-[#bc785b] hover:text-black' : ''}`}
                   style={{
                     background: isActive ? '#000000' : 'rgba(255,255,255,0.1)',
-                    color: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.3)',
+                    color: isActive ? '#bc785b' : 'rgba(255,255,255,0.3)',
                     opacity: isActive ? 1 : 0.5,
                     cursor: isActive ? 'pointer' : 'not-allowed',
-                    border: isActive ? 'none' : '1px solid rgba(255,255,255,0.1)'
+                    border: isActive ? 'none' : '1px solid #bc785b0b'
                   }}
                 >
                   <div className="flex items-center gap-4">
@@ -340,7 +340,7 @@ export default function MapPage() {
         whileTap={{ scale: 0.9 }}
         onClick={() => router.push('/gallery')}
         className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#bc785b] hover:text-white"
-        style={{background: '#000000'}}
+        style={{background: '#000000',color:'#bc785b'}}
       >
         <Camera size={28} strokeWidth={1.5} />
       </motion.button>
