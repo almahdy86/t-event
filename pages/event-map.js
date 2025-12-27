@@ -8,13 +8,68 @@ export default function EventMapPage() {
   const [zoom, setZoom] = useState(100)
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const [activeTab, setActiveTab] = useState(0)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
 
   const handleZoomIn = () => {
     setZoom(prev => Math.min(prev + 25, 200))
   }
 
   const handleZoomOut = () => {
-    setZoom(prev => Math.max(prev - 25, 100))
+    setZoom(prev => {
+      const newZoom = Math.max(prev - 25, 100)
+      if (newZoom === 100) {
+        setPosition({ x: 0, y: 0 })
+      }
+      return newZoom
+    })
+  }
+
+  const handleMouseDown = (e) => {
+    if (zoom > 100) {
+      setIsDragging(true)
+      setDragStart({
+        x: e.clientX - position.x,
+        y: e.clientY - position.y
+      })
+    }
+  }
+
+  const handleMouseMove = (e) => {
+    if (isDragging && zoom > 100) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      })
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleTouchStart = (e) => {
+    if (zoom > 100 && e.touches.length === 1) {
+      setIsDragging(true)
+      setDragStart({
+        x: e.touches[0].clientX - position.x,
+        y: e.touches[0].clientY - position.y
+      })
+    }
+  }
+
+  const handleTouchMove = (e) => {
+    if (isDragging && zoom > 100 && e.touches.length === 1) {
+      setPosition({
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y
+      })
+    }
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
   }
 
   const sections = [
@@ -74,17 +129,24 @@ export default function EventMapPage() {
 
       {/* Map Container */}
       <div
-        className="relative w-full h-[calc(100vh-72px)] overflow-auto bg-black"
+        className="relative w-full h-[calc(100vh-72px)] overflow-hidden bg-black"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         style={{
-          scrollBehavior: 'smooth'
+          cursor: zoom > 100 ? (isDragging ? 'grabbing' : 'grab') : 'default'
         }}
       >
         <div
           className="inline-block min-w-full min-h-full flex items-center justify-center p-4"
           style={{
-            transform: `scale(${zoom / 100})`,
+            transform: `scale(${zoom / 100}) translate(${position.x}px, ${position.y}px)`,
             transformOrigin: 'center center',
-            transition: 'transform 0.3s ease'
+            transition: isDragging ? 'none' : 'transform 0.3s ease'
           }}
         >
           <img
