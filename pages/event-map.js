@@ -5,7 +5,13 @@ export default function EventMapPage() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{background: '#F3F0EE'}}>
+    <div className="min-h-screen relative overflow-hidden" style={{
+      backgroundImage: 'url(/bg/newbg.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh'
+    }}>
       {/* Header */}
       <div className="bg-white shadow-lg p-4 flex items-center justify-between">
         <button

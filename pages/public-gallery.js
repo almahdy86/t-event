@@ -67,7 +67,13 @@ export default function PublicGalleryPage() {
   const displayedPhotos = getDisplayedPhotos()
 
   return (
-    <div className="min-h-screen py-6 px-2" style={{background: '#F3F0EE'}}>
+    <div className="min-h-screen py-6 px-2" style={{
+      backgroundImage: 'url(/bg/newbg.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh'
+    }}>
       {/* Header */}
       <div className="w-full mb-6">
         <motion.div

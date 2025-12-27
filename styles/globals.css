@@ -93,7 +93,11 @@ body {
 
 body {
   color: #000000;
-  background: #F3F0EE;
+  background-image: url('/bg/newbg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   min-height: 100vh;
 }
 

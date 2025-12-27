@@ -118,7 +118,13 @@ export default function Home() {
 
   if (step === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{background: '#F3F0EE'}}>
+      <div className="min-h-screen flex items-center justify-center" style={{
+        backgroundImage: 'url(/bg/newbg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh'
+      }}>
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-black font-semibold">جارٍ التحميل...</p>
@@ -129,7 +135,13 @@ export default function Home() {
 
   if (step === 'redirect') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{background: '#F3F0EE'}}>
+      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+        backgroundImage: 'url(/bg/newbg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh'
+      }}>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -159,7 +171,13 @@ export default function Home() {
 
   if (step === 'success') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{background: '#F3F0EE'}}>
+      <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+        backgroundImage: 'url(/bg/newbg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh'
+      }}>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
