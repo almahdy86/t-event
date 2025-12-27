@@ -82,13 +82,10 @@ export default function IdentityMirrorsPage() {
     // رسم الفيديو على اللوحة
     context.drawImage(video, 0, 0)
 
-    // إضافة إطار التنفيذي
-    addTanfeethiFrame(context, canvas.width, canvas.height)
-
     // الحصول على البيانات
     const imageData = canvas.toDataURL('image/jpeg', 0.9)
     setPhotoData(imageData)
-    
+
     stopCamera()
     setStep('preview')
 
@@ -98,26 +95,6 @@ export default function IdentityMirrorsPage() {
     }
   }
 
-  const addTanfeethiFrame = (ctx, width, height) => {
-    // إضافة إطار بني فاتح
-    const frameWidth = 40
-    ctx.strokeStyle = '#8B6F47'
-    ctx.lineWidth = frameWidth
-    ctx.strokeRect(frameWidth / 2, frameWidth / 2, width - frameWidth, height - frameWidth)
-
-    // إضافة شعار في الأعلى
-    ctx.fillStyle = '#8B6F47'
-    ctx.font = 'bold 48px Arial'
-    ctx.textAlign = 'center'
-    ctx.fillText('التنفـيذي', width / 2, 80)
-
-    // إضافة رقم الموظف في الأسفل
-    if (employee) {
-      ctx.fillStyle = '#40E0D0'
-      ctx.font = 'bold 60px Arial'
-      ctx.fillText(`#${employee.employee_number}`, width / 2, height - 60)
-    }
-  }
 
   const handleUpload = async () => {
     if (!photoData || !employee) return
@@ -318,15 +295,19 @@ export default function IdentityMirrorsPage() {
             >
               إعادة التصوير
             </button>
-            
+
             <button
               onClick={handleUpload}
               disabled={isUploading}
-              className="flex-1 bg-tanfeethi-turquoise text-white font-bold py-4 rounded-xl hover:bg-tanfeethi-turquoise-light transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="flex-1 font-bold py-4 rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              style={{
+                background: '#ffffff',
+                color: '#ce7b5b'
+              }}
             >
               {isUploading ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-5 h-5 border-2 border-t-transparent rounded-full animate-spin" style={{borderColor: '#ce7b5b', borderTopColor: 'transparent'}}></div>
                   جارٍ الرفع...
                 </>
               ) : (

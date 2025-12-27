@@ -98,8 +98,8 @@ export default function PublicGalleryPage() {
             onClick={() => setFilter('all')}
             className="px-6 py-3 rounded-xl font-bold transition-all"
             style={{
-              background: filter === 'all' ? '#ffffff' : '#ce7b5b',
-              color: 'white',
+              background: filter === 'all' ? '#ce7b5b' : '#000000',
+              color: filter === 'all' ? '#000000' : '#ce7b5b',
               boxShadow: filter === 'all' ? '0 4px 12px rgba(206,123,91,0.3)' : 'none'
             }}
           >
@@ -110,8 +110,8 @@ export default function PublicGalleryPage() {
             onClick={() => setFilter('top')}
             className="px-6 py-3 rounded-xl font-bold transition-all"
             style={{
-              background: filter === 'top' ? '#ffffff' : '#ce7b5b',
-              color: 'white',
+              background: filter === 'top' ? '#ce7b5b' : '#000000',
+              color: filter === 'top' ? '#000000' : '#ce7b5b',
               boxShadow: filter === 'top' ? '0 4px 12px rgba(206,123,91,0.3)' : 'none'
             }}
           >
@@ -134,7 +134,7 @@ export default function PublicGalleryPage() {
               لا توجد صور بعد!
             </p>
             <p className="mt-2" style={{color: '#000000', opacity: 0.7}}>
-              كن أول من يشارك صورة 📸
+              كن أول من يشارك صورة 
             </p>
           </motion.div>
         ) : (
