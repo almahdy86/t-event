@@ -53,9 +53,9 @@ export default function AdminLoginPage() {
           {/* الشعار */}
           <div className="flex justify-center mb-8">
             <div className="w-24 h-24 relative">
-              <Image 
-                src="/logo.png" 
-                alt="التنفيذي" 
+              <Image
+                src="/logo.svg"
+                alt="التنفيذي"
                 fill
                 className="object-contain"
               />
@@ -75,7 +75,7 @@ export default function AdminLoginPage() {
                 اسم المستخدم
               </label>
               <div className="relative">
-                <User className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <User className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} strokeWidth={1.5} />
                 <input
                   type="text"
                   value={formData.username}
@@ -93,7 +93,7 @@ export default function AdminLoginPage() {
                 كلمة المرور
               </label>
               <div className="relative">
-                <Lock className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Lock className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} strokeWidth={1.5} />
                 <input
                   type="password"
                   value={formData.password}
@@ -115,7 +115,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:bg-[#AB8025] active:scale-95 disabled:opacity-50 disabled:transform-none"
+              className="w-full text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 hover:bg-[#bc785b] hover:text-black active:scale-95 disabled:opacity-50 disabled:transform-none"
               style={{background: '#000000'}}
             >
               {isLoading ? (

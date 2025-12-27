@@ -45,10 +45,10 @@ export default function HospitalityPage() {
           animate={{ scale: 1 }}
           className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mb-8"
         >
-          <Heart size={64} />
+          <Heart size={64} strokeWidth={1.5} />
         </motion.div>
 
-        <h2 className="text-4xl font-bold mb-4 text-center">
+        <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#bc785b'}}>
           فن الإكرام ✨
         </h2>
 
@@ -60,7 +60,7 @@ export default function HospitalityPage() {
 
         <div className="bg-white/20 rounded-2xl p-6 mb-8 w-full max-w-sm">
           {/* <div className="flex items-start gap-3 mb-4">
-            <MapPin size={24} className="flex-shrink-0 mt-1" />
+            <MapPin size={24} strokeWidth={1.5} className="flex-shrink-0 mt-1" />
             {/* <div>
               <h3 className="font-bold text-lg mb-2">موقع الفعالية</h3>
               <p className="opacity-90">المنطقة التفاعلية - الجانب الغربي من القاعة</p>
@@ -81,7 +81,7 @@ export default function HospitalityPage() {
         <motion.button
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push('/map')}
-          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#AB8025]"
+          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#bc785b] hover:text-black"
           style={{background: '#000000', color: '#FFFFFF'}}
         >
           عودة للخريطة
@@ -92,7 +92,7 @@ export default function HospitalityPage() {
           className="mt-6 text-white/80 hover:text-white flex items-center gap-2"
         >
           التالي: الصورة الجماعية
-          <ArrowRight size={20} />
+          <ArrowRight size={20} strokeWidth={1.5} />
         </button>
       </div>
     </div>

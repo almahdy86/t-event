@@ -32,13 +32,13 @@ export default function LeaderboardPage() {
   const getMedalIcon = (rank) => {
     switch (rank) {
       case 1:
-        return <Trophy className="w-12 h-12 text-yellow-400" />
+        return <Trophy className="w-12 h-12 text-yellow-400" strokeWidth={1.5} />
       case 2:
-        return <Medal className="w-12 h-12 text-gray-400" />
+        return <Medal className="w-12 h-12 text-gray-400" strokeWidth={1.5} />
       case 3:
-        return <Award className="w-12 h-12 text-amber-600" />
+        return <Award className="w-12 h-12 text-amber-600" strokeWidth={1.5} />
       default:
-        return <Star className="w-8 h-8 text-tanfeethi-turquoise" />
+        return <Star className="w-8 h-8 text-tanfeethi-turquoise" strokeWidth={1.5} />
     }
   }
 
@@ -62,7 +62,7 @@ export default function LeaderboardPage() {
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
         >
-          <Trophy className="w-16 h-16 text-white" />
+          <Trophy className="w-16 h-16 text-white" strokeWidth={1.5} />
         </motion.div>
       </div>
     )
@@ -76,7 +76,7 @@ export default function LeaderboardPage() {
           onClick={() => router.back()}
           className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors mb-6"
         >
-          <ArrowRight size={20} />
+          <ArrowRight size={20} strokeWidth={1.5} />
           رجوع
         </button>
 
@@ -85,8 +85,8 @@ export default function LeaderboardPage() {
           animate={{ y: 0, opacity: 1 }}
           className="text-center"
         >
-          <Trophy className="w-20 h-20 text-yellow-300 mx-auto mb-4" />
-          <h1 className="text-4xl font-black text-white mb-2">
+          <Trophy className="w-20 h-20 text-yellow-300 mx-auto mb-4" strokeWidth={1.5} />
+          <h1 className="text-4xl font-black mb-2" style={{color: '#bc785b'}}>
             🏆 لائحة المتصدرين
           </h1>
           <p className="text-white/90 text-lg">
@@ -103,7 +103,7 @@ export default function LeaderboardPage() {
             animate={{ scale: 1, opacity: 1 }}
             className="bg-white/10 backdrop-blur rounded-2xl p-12 text-center"
           >
-            <Trophy className="w-16 h-16 text-white/50 mx-auto mb-4" />
+            <Trophy className="w-16 h-16 text-white/50 mx-auto mb-4" strokeWidth={1.5} />
             <p className="text-white text-xl">
               لا توجد إجابات بعد!
             </p>
@@ -173,7 +173,7 @@ export default function LeaderboardPage() {
                   </h3>
                   <div className="flex items-center gap-4 text-gray-600">
                     <span className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" strokeWidth={1.5} />
                       رقم {entry.employee_number}
                     </span>
                     <span className="text-sm">

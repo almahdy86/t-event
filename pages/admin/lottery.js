@@ -94,13 +94,13 @@ export default function LotteryPage() {
   const getRankIcon = (rank) => {
     switch (rank) {
       case 1:
-        return <Trophy className="w-12 h-12 text-yellow-400" />
+        return <Trophy className="w-12 h-12 text-yellow-400" strokeWidth={1.5} />
       case 2:
-        return <Medal className="w-12 h-12 text-gray-400" />
+        return <Medal className="w-12 h-12 text-gray-400" strokeWidth={1.5} />
       case 3:
-        return <Award className="w-12 h-12 text-amber-600" />
+        return <Award className="w-12 h-12 text-amber-600" strokeWidth={1.5} />
       default:
-        return <Gift className="w-10 h-10 text-tanfeethi-turquoise" />
+        return <Gift className="w-10 h-10 text-tanfeethi-turquoise" strokeWidth={1.5} />
     }
   }
 
@@ -115,7 +115,7 @@ export default function LotteryPage() {
           onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.3)'}
           onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
         >
-          <ArrowRight size={20} />
+          <ArrowRight size={20} strokeWidth={1.5} />
           رجوع للوحة التحكم
         </button>
 
@@ -124,8 +124,8 @@ export default function LotteryPage() {
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-8"
         >
-          <Sparkles className="w-16 h-16 mx-auto mb-4" style={{color: '#CE7B5B'}} />
-          <h1 className="text-4xl font-black text-white mb-2">
+          <Sparkles className="w-16 h-16 mx-auto mb-4" strokeWidth={1.5} style={{color: '#CE7B5B'}} />
+          <h1 className="text-4xl font-black mb-2" style={{color: '#bc785b'}}>
             🎁 قرعة الفائزين
           </h1>
           <p className="text-white/90 text-lg">
@@ -164,7 +164,7 @@ export default function LotteryPage() {
           <button
             onClick={startDraw}
             disabled={isDrawing || eligibleEmployees.length === 0}
-            className="w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all hover:bg-[#AB8025]"
+            className="w-full mt-6 py-4 rounded-xl font-bold text-xl transition-all hover:bg-[#bc785b] hover:text-black"
             style={{
               background: isDrawing || eligibleEmployees.length === 0 ? '#9E9E9E' : '#000000',
               color: 'white',
@@ -218,7 +218,7 @@ export default function LotteryPage() {
           >
             <div className="px-6 py-4" style={{background: 'linear-gradient(90deg, #AB8025 0%, #CE7B5B 100%)'}}>
               <h2 className="text-2xl font-black text-white flex items-center gap-2">
-                <Trophy className="w-6 h-6" />
+                <Trophy className="w-6 h-6" strokeWidth={1.5} />
                 الفائزون
               </h2>
             </div>
@@ -269,7 +269,7 @@ export default function LotteryPage() {
                 </button>
                 <button
                   onClick={() => window.print()}
-                  className="flex-1 text-white py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
+                  className="flex-1 text-white py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
                   style={{background: '#000000'}}
                 >
                   طباعة النتائج

@@ -108,9 +108,9 @@ export default function PhotosManagement() {
               onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
               onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
             >
-              <ArrowRight size={24} />
+              <ArrowRight size={24} strokeWidth={1.5} />
             </button>
-            <h1 className="text-2xl font-bold">إدارة الصور</h1>
+            <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>إدارة الصور</h1>
           </div>
 
           {/* Filter Buttons */}
@@ -177,7 +177,7 @@ export default function PhotosManagement() {
                   />
                   {photo.is_approved && (
                     <div className="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                      <CheckCircle size={16} />
+                      <CheckCircle size={16} strokeWidth={1.5} />
                       معتمد
                     </div>
                   )}
@@ -211,28 +211,28 @@ export default function PhotosManagement() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => approvePhoto(photo.id)}
-                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#AB8025]"
+                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#bc785b] hover:text-black"
                         style={{background: '#000000'}}
                       >
-                        <CheckCircle size={18} />
+                        <CheckCircle size={18} strokeWidth={1.5} />
                         اعتماد
                       </button>
                       <button
                         onClick={() => rejectPhoto(photo.id)}
-                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#AB8025]"
+                        className="flex-1 text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#bc785b] hover:text-black"
                         style={{background: '#000000'}}
                       >
-                        <XCircle size={18} />
+                        <XCircle size={18} strokeWidth={1.5} />
                         رفض
                       </button>
                     </div>
                   ) : (
                     <button
                       onClick={() => deletePhoto(photo.id)}
-                      className="w-full text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#AB8025]"
+                      className="w-full text-white py-2 rounded-lg font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#bc785b] hover:text-black"
                       style={{background: '#000000'}}
                     >
-                      <Trash2 size={18} />
+                      <Trash2 size={18} strokeWidth={1.5} />
                       حذف
                     </button>
                   )}
@@ -264,7 +264,7 @@ export default function PhotosManagement() {
               onClick={() => setSelectedPhoto(null)}
               className="absolute top-4 right-4 bg-white text-gray-800 p-2 rounded-full hover:bg-gray-200"
             >
-              <XCircle size={24} />
+              <XCircle size={24} strokeWidth={1.5} />
             </button>
           </motion.div>
         </div>

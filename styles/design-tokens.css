@@ -12,8 +12,9 @@
   --color-text-on-button: #FFFFFF; /* أبيض للنص على الأزرار */
 
   /* Accent Colors */
-  --color-gold: #AB8025;           /* ذهبي داكن - لون النحاس للـ hover */
-  --color-copper: #AB8025;         /* لون النحاس */
+  --color-gold: #bc785b;           /* لون النحاس الوردي للـ hover */
+  --color-copper: #bc785b;         /* لون النحاس الوردي */
+  --color-heading: #bc785b;        /* لون العناوين */
 
   /* Primary palette (RGB format for alpha support) */
   --tanfeethi-brown-rgb: 206,123,91;

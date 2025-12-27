@@ -141,10 +141,10 @@ export default function EmployeesManagement() {
               onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
               onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
             >
-              <ArrowRight size={24} />
+              <ArrowRight size={24} strokeWidth={1.5} />
             </button>
             <div>
-              <h1 className="text-2xl font-bold">إدارة الموظفين</h1>
+              <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>إدارة الموظفين</h1>
               <p className="text-sm opacity-80">إجمالي: {employees.length} موظف</p>
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function EmployeesManagement() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} strokeWidth={1.5} />
               <input
                 type="text"
                 value={searchTerm}
@@ -198,7 +198,7 @@ export default function EmployeesManagement() {
         {/* Employees List */}
         {filteredEmployees.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-            <AlertCircle size={64} className="mx-auto mb-4 text-gray-300" />
+            <AlertCircle size={64} strokeWidth={1.5} className="mx-auto mb-4 text-gray-300" />
             <p className="text-gray-400 text-lg">
               {searchTerm || filterType !== 'all'
                 ? 'لا توجد نتائج للبحث'
@@ -252,7 +252,7 @@ export default function EmployeesManagement() {
                   onClick={() => deleteEmployee(employee.id, employee.full_name)}
                   className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-bold transition-colors flex items-center justify-center gap-2"
                 >
-                  <Trash2 size={18} />
+                  <Trash2 size={18} strokeWidth={1.5} />
                   حذف الموظف
                 </button>
               </motion.div>

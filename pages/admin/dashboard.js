@@ -140,7 +140,7 @@ export default function AdminDashboard() {
       <div className="text-white p-4 shadow-lg" style={{background: '#234024'}}>
         <div className="container mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">لوحة التحكم - التنفيذي</h1>
+            <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>لوحة التحكم - التنفيذي</h1>
             <p className="text-sm opacity-80">مرحباً، {admin.fullName || admin.username}</p>
           </div>
           <button
@@ -150,7 +150,7 @@ export default function AdminDashboard() {
             onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.3)'}
             onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
           >
-            <LogOut size={20} />
+            <LogOut size={20} strokeWidth={1.5} />
             تسجيل الخروج
           </button>
         </div>
@@ -162,34 +162,34 @@ export default function AdminDashboard() {
           <StatCard
             title="إجمالي الموظفين"
             value={stats.totalEmployees}
-            icon={<Users size={32} />}
+            icon={<Users size={32} strokeWidth={1.5} />}
             color="bg-blue-500"
           />
           <StatCard
             title="المتصلون حالياً"
             value={stats.onlineCount}
-            icon={<Activity size={32} />}
+            icon={<Activity size={32} strokeWidth={1.5} />}
             color="bg-green-500"
             isLive
           />
           <StatCard
             title="الصور المعتمدة"
             value={stats.totalPhotos}
-            icon={<ImageIcon size={32} />}
+            icon={<ImageIcon size={32} strokeWidth={1.5} />}
             color="bg-purple-500"
           />
           <StatCard
             title="الإجابات الصحيحة"
             value={stats.correctAnswers}
             subtitle={`من ${stats.totalAnswers}`}
-            icon={<CheckCircle size={32} />}
+            icon={<CheckCircle size={32} strokeWidth={1.5} />}
             color="bg-emerald-500"
           />
         </div>
 
         {/* Activities Control */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-6" style={{color: '#234024'}}>
+          <h2 className="text-2xl font-bold mb-6" style={{color: '#bc785b'}}>
             التحكم في الفعاليات
           </h2>
           
@@ -228,26 +228,26 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
           <ActionCard
             title="إدارة الموظفين"
-            icon={<Users size={40} />}
+            icon={<Users size={40} strokeWidth={1.5} />}
             color="bg-emerald-500"
             badge={stats.totalEmployees}
             onClick={() => router.push('/admin/employees')}
           />
           <ActionCard
             title="إرسال إشعار"
-            icon={<Bell size={40} />}
+            icon={<Bell size={40} strokeWidth={1.5} />}
             color="bg-blue-500"
             onClick={sendNotification}
           />
           <ActionCard
             title="إدارة الأسئلة"
-            icon={<Brain size={40} />}
+            icon={<Brain size={40} strokeWidth={1.5} />}
             color="bg-purple-500"
             onClick={() => router.push('/admin/questions')}
           />
           <ActionCard
             title="الصور المعلقة"
-            icon={<ImageIcon size={40} />}
+            icon={<ImageIcon size={40} strokeWidth={1.5} />}
             color="bg-orange-500"
             badge={stats.pendingPhotos}
             onClick={() => router.push('/admin/photos')}
@@ -258,7 +258,7 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <ActionCard
             title="قرعة الفائزين"
-            icon={<Gift size={40} />}
+            icon={<Gift size={40} strokeWidth={1.5} />}
             color="bg-gradient-to-r from-yellow-400 to-orange-500"
             onClick={() => router.push('/admin/lottery')}
           />
@@ -276,7 +276,7 @@ export default function AdminDashboard() {
             onClick={() => router.push('/admin/reset-data')}
             className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2"
           >
-            <Trash2 size={20} />
+            <Trash2 size={20} strokeWidth={1.5} />
             مسح جميع البيانات (تحضير للفعالية)
           </button>
         </div>

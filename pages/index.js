@@ -149,7 +149,7 @@ export default function Home() {
         >
           <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: '#234024'}}>
             <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
             </svg>
           </div>
           <h2 className="text-3xl font-bold text-black mb-2">
@@ -186,7 +186,7 @@ export default function Home() {
         >
           <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow" style={{background: '#234024'}}>
             <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
             </svg>
           </div>
 
@@ -249,7 +249,7 @@ export default function Home() {
       <div className="flex justify-center py-8">
         <div className="w-32 h-32 relative">
           <Image
-            src="/logo.png"
+            src="/logo.svg"
             alt="شعار التنفيذي"
             fill
             className="object-contain"
@@ -322,7 +322,7 @@ export default function Home() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#AB8025]"
+              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#bc785b] hover:text-black"
               style={{
                 background: '#000000',
                 color: '#FFFFFF'

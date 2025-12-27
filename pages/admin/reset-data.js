@@ -101,7 +101,7 @@ export default function ResetData() {
           className="text-center max-w-md"
         >
           <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: '#234024'}}>
-            <CheckCircle size={80} className="text-white" />
+            <CheckCircle size={80} strokeWidth={1.5} className="text-white" />
           </div>
           <h2 className="text-3xl font-bold text-black mb-4">
             تم مسح جميع البيانات بنجاح! ✓
@@ -111,7 +111,7 @@ export default function ResetData() {
           </p>
           <button
             onClick={() => router.push('/admin/dashboard')}
-            className="px-8 py-4 rounded-xl text-white font-bold transition-all hover:scale-105 hover:bg-[#AB8025]"
+            className="px-8 py-4 rounded-xl text-white font-bold transition-all hover:scale-105 hover:bg-[#bc785b] hover:text-black"
             style={{background: '#000000'}}
           >
             العودة للوحة التحكم
@@ -156,7 +156,7 @@ export default function ResetData() {
               className="p-2 rounded-lg transition-colors"
               style={{background: 'rgba(255,255,255,0.1)'}}
             >
-              <ArrowRight size={24} />
+              <ArrowRight size={24} strokeWidth={1.5} />
             </button>
             <h1 className="text-2xl font-bold">⚠️ مسح جميع البيانات</h1>
           </div>
@@ -171,7 +171,7 @@ export default function ResetData() {
           className="bg-red-50 border-2 border-red-500 rounded-2xl p-6 mb-6"
         >
           <div className="flex items-start gap-4 mb-4">
-            <AlertTriangle size={40} className="text-red-500 flex-shrink-0" />
+            <AlertTriangle size={40} strokeWidth={1.5} className="text-red-500 flex-shrink-0" />
             <div>
               <h2 className="text-2xl font-bold text-red-700 mb-2">
                 تحذير هام جداً!
@@ -244,7 +244,7 @@ export default function ResetData() {
               className="flex-1 py-4 rounded-xl text-white font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               style={{background: '#d32f2f'}}
             >
-              <Trash2 size={20} />
+              <Trash2 size={20} strokeWidth={1.5} />
               مسح جميع البيانات
             </button>
             <button

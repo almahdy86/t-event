@@ -226,8 +226,8 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .btn-primary:hover {
-  background-color: var(--color-copper);
-  color: #FFFFFF;
+  background-color: #bc785b;
+  color: #000000;
 }
 .btn-primary:active { transform: translateY(1px); }
 
@@ -245,8 +245,8 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .btn-secondary:hover {
-  background-color: var(--color-copper);
-  color: #FFFFFF;
+  background-color: #bc785b;
+  color: #000000;
 }
 .btn-secondary:active { transform: translateY(1px); }
 
@@ -264,9 +264,9 @@ body {
   gap: 8px;
 }
 .btn-ghost:hover {
-  background-color: var(--color-copper);
-  border-color: var(--color-copper);
-  color: #FFFFFF;
+  background-color: #bc785b;
+  border-color: #bc785b;
+  color: #000000;
 }
 
 /* Card component */

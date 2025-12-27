@@ -162,9 +162,9 @@ export default function QuestionsManagement() {
               onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
               onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
             >
-              <ArrowRight size={24} />
+              <ArrowRight size={24} strokeWidth={1.5} />
             </button>
-            <h1 className="text-2xl font-bold">إدارة الأسئلة</h1>
+            <h1 className="text-2xl font-bold" style={{color: '#bc785b'}}>إدارة الأسئلة</h1>
           </div>
           <button
             onClick={() => {
@@ -172,10 +172,10 @@ export default function QuestionsManagement() {
               setEditingQuestion(null)
               resetForm()
             }}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all hover:bg-[#AB8025]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all hover:bg-[#bc785b] hover:text-black"
             style={{background: '#000000', color: 'white'}}
           >
-            <Plus size={20} />
+            <Plus size={20} strokeWidth={1.5} />
             سؤال جديد
           </button>
         </div>
@@ -240,7 +240,7 @@ export default function QuestionsManagement() {
               <div className="flex gap-3">
                 <button
                   type="submit"
-                  className="flex-1 text-white py-3 rounded-lg font-bold transition-all hover:bg-[#AB8025]"
+                  className="flex-1 text-white py-3 rounded-lg font-bold transition-all hover:bg-[#bc785b] hover:text-black"
                   style={{background: '#000000'}}
                 >
                   {editingQuestion ? 'حفظ التعديلات' : 'إضافة السؤال'}
@@ -306,7 +306,7 @@ export default function QuestionsManagement() {
                         >
                           <div className="flex items-center gap-2">
                             {idx === question.correct_answer && (
-                              <CheckCircle size={16} className="text-green-600" />
+                              <CheckCircle size={16} strokeWidth={1.5} className="text-green-600" />
                             )}
                             <span>{option}</span>
                           </div>
@@ -331,13 +331,13 @@ export default function QuestionsManagement() {
                     onClick={() => editQuestion(question)}
                     className="px-6 bg-blue-500 text-white py-2 rounded-lg font-bold hover:bg-blue-600"
                   >
-                    <Edit2 size={18} />
+                    <Edit2 size={18} strokeWidth={1.5} />
                   </button>
                   <button
                     onClick={() => deleteQuestion(question.id)}
                     className="px-6 bg-red-500 text-white py-2 rounded-lg font-bold hover:bg-red-600"
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={18} strokeWidth={1.5} />
                   </button>
                 </div>
               </motion.div>

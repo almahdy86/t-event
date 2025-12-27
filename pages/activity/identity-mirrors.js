@@ -198,7 +198,7 @@ export default function IdentityMirrorsPage() {
             className="w-32 h-32 rounded-full flex items-center justify-center mb-8"
             style={{background: '#000000'}}
           >
-            <Camera size={64} color="#FFFFFF" />
+            <Camera size={64} strokeWidth={1.5} color="#FFFFFF" />
           </motion.div>
 
           <motion.h2
@@ -229,10 +229,10 @@ export default function IdentityMirrorsPage() {
             transition={{ delay: 0.5 }}
             whileTap={{ scale: 0.95 }}
             onClick={startCamera}
-            className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all flex items-center gap-3 hover:bg-[#AB8025]"
+            className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all flex items-center gap-3 hover:bg-[#bc785b] hover:text-black"
             style={{background: '#000000', color: '#FFFFFF'}}
           >
-            <Camera size={28} />
+            <Camera size={28} strokeWidth={1.5} />
             ابدأ التصوير
           </motion.button>
 
@@ -245,7 +245,7 @@ export default function IdentityMirrorsPage() {
             style={{color: '#f9f5f7ff'}}
           >
             التالي: تحدي بلا أخطاء
-            <ArrowRight size={20} />
+            <ArrowRight size={20} strokeWidth={1.5} />
           </motion.button>
         </div>
       </div>
@@ -328,7 +328,7 @@ export default function IdentityMirrorsPage() {
                 </>
               ) : (
                 <>
-                  <Upload size={20} />
+                  <Upload size={20} strokeWidth={1.5} />
                   مشاركة
                 </>
               )}
@@ -348,7 +348,7 @@ export default function IdentityMirrorsPage() {
           transition={{ type: 'spring' }}
           className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-8"
         >
-          <Check size={80} className="text-green-500" />
+          <Check size={80} strokeWidth={1.5} className="text-green-500" />
         </motion.div>
 
         <motion.h2
@@ -375,7 +375,7 @@ export default function IdentityMirrorsPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
           onClick={() => router.push('/map')}
-          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#AB8025]"
+          className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#bc785b] hover:text-black"
           style={{background: '#000000', color: '#FFFFFF'}}
         >
           العودة للخريطة

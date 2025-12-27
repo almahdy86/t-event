@@ -105,9 +105,9 @@ export default function GalleryPage() {
               className="p-2 rounded-lg transition-colors text-white"
               style={{background: 'rgba(255,255,255,0.2)'}}
             >
-              <ArrowRight size={24} />
+              <ArrowRight size={24} strokeWidth={1.5} />
             </button>
-            <h1 className="text-3xl font-bold flex items-center gap-3 text-white">
+            <h1 className="text-3xl font-bold flex items-center gap-3" style={{color: '#bc785b'}}>
               {/* <Camera size={32} strokeWidth={2.5} /> */}
               معرض الصور المشاركة
             </h1>
@@ -126,7 +126,7 @@ export default function GalleryPage() {
       <div className="container mx-auto p-6">
         {photos.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-            <Camera size={64} className="mx-auto text-gray-300 mb-4" />
+            <Camera size={64} strokeWidth={1.5} className="mx-auto text-gray-300 mb-4" />
             <p className="text-gray-400 text-xl">لا توجد صور معتمدة بعد</p>
             <p className="text-gray-400 mt-2">عد لاحقاً لمشاهدة الصور المشاركة</p>
           </div>
@@ -148,10 +148,10 @@ export default function GalleryPage() {
         {/* Top 3 Section */}
         {photos.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3">
-              <Trophy className="text-yellow-500" size={40} />
+            <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3" style={{color: '#bc785b'}}>
+              <Trophy className="text-yellow-500" size={40} strokeWidth={1.5} />
               الأكثر إعجاباً
-              <Trophy className="text-yellow-500" size={40} />
+              <Trophy className="text-yellow-500" size={40} strokeWidth={1.5} />
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -218,7 +218,7 @@ export default function GalleryPage() {
                   }}
                   className="bg-red-500 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-red-600 transition-colors"
                 >
-                  <Heart size={24} fill="currentColor" />
+                  <Heart size={24} strokeWidth={1.5} fill="currentColor" />
                   {selectedPhoto.likes_count || 0}
                 </button>
               </div>
@@ -274,7 +274,7 @@ function PhotoCard({ photo, index, isLiked, onLike, onClick, isTopRanked = false
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >
-          <Heart size={24} fill={isLiked ? 'currentColor' : 'none'} />
+          <Heart size={24} strokeWidth={1.5} fill={isLiked ? 'currentColor' : 'none'} />
           <span className="text-xl">{photo.likes_count || 0}</span>
         </motion.button>
       </div>

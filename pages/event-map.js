@@ -19,10 +19,10 @@ export default function EventMapPage() {
           className="flex items-center gap-2"
           style={{color: '#000000'}}
         >
-          <ArrowRight size={20} />
+          <ArrowRight size={20} strokeWidth={1.5} />
           <span className="font-bold">رجوع</span>
         </button>
-        <h1 className="text-xl font-bold" style={{color: '#000000'}}>
+        <h1 className="text-xl font-bold" style={{color: '#bc785b'}}>
           🗺️ خريطة الفعالية
         </h1>
         {/* <button

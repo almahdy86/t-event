@@ -139,10 +139,10 @@ export default function ZeroErrorChallengePage() {
             animate={{ scale: 1 }}
             className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mb-8"
           >
-            <Trophy size={64} />
+            <Trophy size={64} strokeWidth={1.5} />
           </motion.div>
 
-          <h2 className="text-4xl font-bold mb-4 text-center">
+          <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#bc785b'}}>
             تحدي بلا أخطاء! 🎯
           </h2>
 
@@ -162,7 +162,7 @@ export default function ZeroErrorChallengePage() {
             className="mt-8 text-white/80 hover:text-white flex items-center gap-2"
           >
             التالي: فن الإكرام
-            <ArrowRight size={20} />
+            <ArrowRight size={20} strokeWidth={1.5} />
           </button>
         </div>
       </div>
@@ -182,7 +182,7 @@ export default function ZeroErrorChallengePage() {
       {/* Header */}
       <div className="p-4 flex items-center justify-between" style={{background: 'rgba(171,128,37,0.3)', backdropFilter: 'blur(10px)'}}>
         <div className="flex items-center gap-2 text-white">
-          <Clock size={24} />
+          <Clock size={24} strokeWidth={1.5} />
           <span className="text-2xl font-bold">
             {timeLeft}s
           </span>
@@ -249,10 +249,10 @@ export default function ZeroErrorChallengePage() {
                   </div>
                   
                   {isCorrect && (
-                    <CheckCircle size={28} className="text-white" />
+                    <CheckCircle size={28} strokeWidth={1.5} className="text-white" />
                   )}
                   {isWrong && (
-                    <XCircle size={28} className="text-white" />
+                    <XCircle size={28} strokeWidth={1.5} className="text-white" />
                   )}
                 </div>
               </motion.button>

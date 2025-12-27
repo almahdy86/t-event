@@ -209,7 +209,7 @@ export default function MapPage() {
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 relative">
               <Image
-                src="/logo.png"
+                src="/logo.svg"
                 alt="التنفيذي"
                 fill
                 className="object-contain"
@@ -231,7 +231,7 @@ export default function MapPage() {
               style={{background: '#d32f2f'}}
               title="تسجيل الخروج"
             >
-              <LogOut size={20} className="text-white" />
+              <LogOut size={20} strokeWidth={1.5} className="text-white" />
             </button>
           </div>
         </div>
@@ -261,13 +261,13 @@ export default function MapPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={() => router.push('/event-map')}
-          className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 hover:bg-[#AB8025] active:scale-95"
+          className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 hover:bg-[#bc785b] hover:text-black active:scale-95"
           style={{background: '#000000', color: '#FFFFFF'}}
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full flex items-center justify-center"
                  style={{background: 'rgba(0,0,0,0.2)'}}>
-              <MapPin size={32} />
+              <MapPin size={32} strokeWidth={1.5} />
             </div>
 
             <div className="flex-1 text-right">
@@ -298,7 +298,7 @@ export default function MapPage() {
                 <button
                   onClick={() => isActive && router.push(activity.route)}
                   disabled={!isActive}
-                  className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${isActive ? 'hover:bg-[#AB8025]' : ''}`}
+                  className={`w-full p-6 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 ${isActive ? 'hover:bg-[#bc785b] hover:text-black' : ''}`}
                   style={{
                     background: isActive ? '#000000' : 'rgba(255,255,255,0.1)',
                     color: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.3)',
@@ -310,7 +310,7 @@ export default function MapPage() {
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-full flex items-center justify-center"
                          style={{background: isActive ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.05)'}}>
-                      <Icon size={32} />
+                      <Icon size={32} strokeWidth={1.5} />
                     </div>
 
                     <div className="flex-1 text-right">
@@ -322,7 +322,7 @@ export default function MapPage() {
 
                     {isActive && (
                       <div className="animate-pulse">
-                        <MapPin size={24} />
+                        <MapPin size={24} strokeWidth={1.5} />
                       </div>
                     )}
                   </div>
@@ -339,10 +339,10 @@ export default function MapPage() {
         animate={{ scale: 1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => router.push('/gallery')}
-        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#AB8025]"
+        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#bc785b] hover:text-black"
         style={{background: '#000000'}}
       >
-        <Camera size={28} strokeWidth={2.5} />
+        <Camera size={28} strokeWidth={1.5} />
       </motion.button>
 
       {/* معرض الصور */}
@@ -465,7 +465,7 @@ function GalleryGrid({ employeeId }) {
   if (photos.length === 0) {
     return (
       <div className="text-center py-16 text-gray-500">
-        <Camera size={64} className="mx-auto mb-4 opacity-30" />
+        <Camera size={64} strokeWidth={1.5} className="mx-auto mb-4 opacity-30" />
         <p>لا توجد صور بعد</p>
         <p className="text-sm mt-2">كن أول من يشارك صورة!</p>
       </div>
@@ -500,6 +500,7 @@ function GalleryGrid({ employeeId }) {
               >
                 <Heart
                   size={20}
+                  strokeWidth={1.5}
                   fill={userLikes.has(photo.id) ? 'currentColor' : 'none'}
                   className={userLikes.has(photo.id) ? 'text-red-500' : 'text-gray-400'}
                 />

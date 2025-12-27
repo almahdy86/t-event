@@ -47,7 +47,7 @@ export default function FinalePage() {
             className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
             style={{background: 'rgba(255,255,255,0.2)', color: 'white'}}
           >
-            <ArrowRight size={20} />
+            <ArrowRight size={20} strokeWidth={1.5} />
             رجوع
           </button>
         </div>
@@ -59,8 +59,8 @@ export default function FinalePage() {
             transition={{ duration: 1 }}
             className="text-center text-white"
           >
-            <Users size={100} className="mx-auto mb-6" />
-            <h1 className="text-4xl font-bold">
+            <Users size={100} strokeWidth={1.5} className="mx-auto mb-6" />
+            <h1 className="text-4xl font-bold" style={{color: '#bc785b'}}>
               حان وقت الصورة الجماعية! 📸
             </h1>
           </motion.div>
@@ -86,7 +86,7 @@ export default function FinalePage() {
           className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
           style={{background: 'rgba(255,255,255,0.2)'}}
         >
-          <ArrowRight size={20} />
+          <ArrowRight size={20} strokeWidth={1.5} />
           رجوع
         </button>
       </div>
@@ -125,7 +125,7 @@ export default function FinalePage() {
           transition={{ delay: 0.5 }}
           className="bg-white/20 backdrop-blur rounded-3xl p-8 max-w-md"
         >
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4" style={{color: '#bc785b'}}>
             ابحث عن رقمك! 🎯
           </h2>
           <p className="text-xl leading-relaxed">

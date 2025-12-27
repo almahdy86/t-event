@@ -81,8 +81,8 @@ export default function PublicGalleryPage() {
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-8"
         >
-          <Camera className="w-16 h-16 mx-auto mb-4" style={{color: '#CE7B5B'}} />
-          <h1 className="text-4xl font-black mb-2" style={{color: '#000000'}}>
+          <Camera className="w-16 h-16 mx-auto mb-4" strokeWidth={1.5} style={{color: '#CE7B5B'}} />
+          <h1 className="text-4xl font-black mb-2" style={{color: '#bc785b'}}>
             📸 معرض صور الفعالية
           </h1>
           <p className="text-lg" style={{color: '#000000'}}>
@@ -94,26 +94,26 @@ export default function PublicGalleryPage() {
         <div className="flex gap-4 justify-center mb-6">
           <button
             onClick={() => setFilter('all')}
-            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
+            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
             style={{
               background: filter === 'all' ? '#000000' : '#9C7DDE',
               color: 'white',
               boxShadow: filter === 'all' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
           >
-            <Camera className="inline-block w-5 h-5 ml-2" />
+            <Camera className="inline-block w-5 h-5 ml-2" strokeWidth={1.5} />
             جميع الصور ({photos.length})
           </button>
           <button
             onClick={() => setFilter('top')}
-            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
+            className="px-6 py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
             style={{
               background: filter === 'top' ? '#000000' : '#9C7DDE',
               color: 'white',
               boxShadow: filter === 'top' ? '0 4px 12px rgba(0,0,0,0.3)' : 'none'
             }}
           >
-            <Trophy className="inline-block w-5 h-5 ml-2" />
+            <Trophy className="inline-block w-5 h-5 ml-2" strokeWidth={1.5} />
             الأكثر إعجاباً
           </button>
         </div>
@@ -127,7 +127,7 @@ export default function PublicGalleryPage() {
             animate={{ scale: 1, opacity: 1 }}
             className="bg-white rounded-2xl p-12 text-center shadow-lg"
           >
-            <Camera className="w-16 h-16 mx-auto mb-4" style={{color: '#9C7DDE'}} />
+            <Camera className="w-16 h-16 mx-auto mb-4" strokeWidth={1.5} style={{color: '#9C7DDE'}} />
             <p className="text-xl" style={{color: '#000000'}}>
               لا توجد صور بعد!
             </p>
@@ -163,7 +163,7 @@ export default function PublicGalleryPage() {
                   )}
                   {photo.likes_count > 0 && (
                     <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full flex items-center gap-1 text-sm">
-                      <Heart className="w-3 h-3 fill-white" />
+                      <Heart className="w-3 h-3 fill-white" strokeWidth={1.5} />
                       <span className="font-bold">{photo.likes_count}</span>
                     </div>
                   )}
@@ -180,7 +180,7 @@ export default function PublicGalleryPage() {
                         رقم {photo.employee_number}
                       </p>
                     </div>
-                    <Heart className="w-6 h-6 flex-shrink-0" style={{color: '#CE7B5B', opacity: 0.3}} />
+                    <Heart className="w-6 h-6 flex-shrink-0" strokeWidth={1.5} style={{color: '#CE7B5B', opacity: 0.3}} />
                   </div>
                 </div>
               </motion.div>
@@ -219,7 +219,7 @@ export default function PublicGalleryPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{background: '#ffebee'}}>
-                  <Heart className="w-6 h-6 fill-red-500" style={{color: '#ef5350'}} />
+                  <Heart className="w-6 h-6 fill-red-500" strokeWidth={1.5} style={{color: '#ef5350'}} />
                   <span className="text-xl font-bold" style={{color: '#ef5350'}}>
                     {selectedPhoto.likes_count}
                   </span>
@@ -227,7 +227,7 @@ export default function PublicGalleryPage() {
               </div>
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="w-full text-white py-3 rounded-xl font-bold transition-all hover:bg-[#AB8025]"
+                className="w-full text-white py-3 rounded-xl font-bold transition-all hover:bg-[#bc785b] hover:text-black"
                 style={{background: '#000000'}}
               >
                 إغلاق
