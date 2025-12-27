@@ -131,7 +131,7 @@ export default function ZeroErrorChallengePage() {
           >
             ← رجوع
           </button>
-          <h1 className="font-bold text-xl" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
+          <h1 className="font-bold text-xl absolute left-1/2 transform -translate-x-1/2" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
           <div className="w-8"></div>
         </div>
 
@@ -200,7 +200,7 @@ export default function ZeroErrorChallengePage() {
             </span>
           </div>
         </div>
-        <h1 className="font-bold text-xl" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
+        <h1 className="font-bold text-xl absolute left-1/2 transform -translate-x-1/2" style={{color: 'white'}}>تحدي بلا أخطاء</h1>
         <div className="px-3 py-1 rounded-full font-bold" style={{background: 'rgba(255,255,255,0.2)', color: 'white'}}>
           #{employee.employee_number}
         </div>

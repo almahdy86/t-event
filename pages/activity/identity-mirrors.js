@@ -180,7 +180,7 @@ export default function IdentityMirrorsPage() {
         }}
       >
         <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
-        <div className="p-4 flex items-center justify-between shadow relative z-10" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
+        <div className="p-4 flex items-center justify-between shadow relative z-10" style={{background: '#000000', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
           <button
             onClick={() => router.push('/map')}
             className="flex items-center gap-2 font-bold"
@@ -189,7 +189,7 @@ export default function IdentityMirrorsPage() {
             <ArrowRight size={24} strokeWidth={1.5} />
             <span>رجوع</span>
           </button>
-          <h1 className="font-bold text-xl" style={{color: 'white'}}>مرايا الهوية</h1>
+          <h1 className="font-bold text-xl absolute left-1/2 transform -translate-x-1/2" style={{color: 'white'}}>مرايا الهوية</h1>
           <div className="w-8"></div>
         </div>
 

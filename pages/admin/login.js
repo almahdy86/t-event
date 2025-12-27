@@ -127,10 +127,10 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#ce7b5b] hover:text-black"
+              className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:opacity-90"
               style={{
-                background: '#000000',
-                color: '#ce7b5b'
+                background: '#ce7b5b',
+                color: 'white'
               }}
             >
               {isLoading ? (

@@ -37,7 +37,7 @@ export default function HospitalityPage() {
         >
           → رجوع
         </button>
-        <h1 className="font-bold text-xl" style={{color: 'white'}}>فن الإكرام</h1>
+        <h1 className="font-bold text-xl absolute left-1/2 transform -translate-x-1/2" style={{color: 'white'}}>فن الإكرام</h1>
         <div className="w-8"></div>
       </div>
 
