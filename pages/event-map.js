@@ -123,7 +123,7 @@ export default function EventMapPage() {
           style={{background: '#ce7b5b', color: 'white'}}
         >
           <Info size={18} strokeWidth={1.5} />
-          <span className="text-sm font-bold">دليل</span>
+          <span className="text-sm font-bold">دليل الخريطة</span>
         </button>
       </div>
 
