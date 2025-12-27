@@ -194,9 +194,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-3xl font-bold text-black mb-4"
+            className="text-3xl font-bold text-white mb-4"
           >
-            مرحباً بك في فعالية التنفيذي! 🎉
+            مرحباً بك في فعالية التنفيذي! 
           </motion.h2>
 
           <motion.div
@@ -205,8 +205,8 @@ export default function Home() {
             transition={{ delay: 0.5 }}
             className="mb-6"
           >
-            <p className="text-xl text-black mb-2">{employee?.full_name}</p>
-            <p className="text-lg text-black mb-4">{employee?.job_title}</p>
+            <p className="text-xl text-white mb-2">{employee?.full_name}</p>
+            <p className="text-lg text-white mb-4">{employee?.job_title}</p>
           </motion.div>
 
           <motion.div
@@ -225,7 +225,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="text-black"
+            className="text-white"
           >
             احفظ هذا الرقم جيداً!
             <br />
@@ -264,16 +264,16 @@ export default function Home() {
       >
         <div className="mb-8 p-8 rounded-3xl" style={{background: 'rgba(0,0,0,0.85)', border: '1px solid rgba(201,169,97,0.3)'}}>
           <h1 className="text-3xl font-bold text-center mb-2" style={{color: 'white'}}>
-            أهلاً بك! 👋
+            أهلاً بك! 
           </h1>
           <p className="text-center mb-8" style={{color: 'rgba(255,255,255,0.7)'}}>
             يرجى تأكيد بياناتك للمتابعة
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block font-semibold mb-2" style={{color: 'white'}}>
-                الاسم الثلاثي
+                الاسم 
               </label>
               <input
                 type="text"
@@ -281,11 +281,11 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 className="w-full px-4 py-4 rounded-xl focus:outline-none text-lg transition-colors"
                 style={{
-                  border: '2px solid #C9A961',
-                  background: 'rgba(255,255,255,0.1)',
+                  border: '2px solid #bc785b',
+                  background: 'rgba(255, 255, 255, 0.02)',
                   color: 'white'
                 }}
-                placeholder="أدخل اسمك الكامل"
+                placeholder="أدخل اسمك "
                 disabled={isSubmitting}
               />
             </div>
@@ -325,7 +325,7 @@ export default function Home() {
               className="w-full py-4 rounded-full font-bold text-xl transition-all disabled:opacity-50 hover:bg-[#bc785b] hover:text-black"
               style={{
                 background: '#000000',
-                color: '#FFFFFF'
+                color: '#bc785b'
               }}
             >
               {isSubmitting ? (

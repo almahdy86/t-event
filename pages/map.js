@@ -262,7 +262,7 @@ export default function MapPage() {
           animate={{ opacity: 1, y: 0 }}
           onClick={() => router.push('/event-map')}
           className="w-full p-6 rounded-2xl shadow-xl mb-6 transition-all transform hover:scale-105 hover:bg-[#bc785b] hover:text-black active:scale-95"
-          style={{background: '#000000', color: '#FFFFFF'}}
+          style={{background: '#000000', color: '#bc785b' }}
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full flex items-center justify-center"
@@ -339,7 +339,7 @@ export default function MapPage() {
         animate={{ scale: 1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => router.push('/gallery')}
-        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#bc785b] hover:text-black"
+        className="fixed bottom-6 left-6 w-16 h-16 text-white rounded-full shadow-2xl flex items-center justify-center z-40 transition-all hover:scale-110 hover:bg-[#bc785b] hover:text-white"
         style={{background: '#000000'}}
       >
         <Camera size={28} strokeWidth={1.5} />
