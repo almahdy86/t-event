@@ -185,9 +185,10 @@ export default function ZeroErrorChallengePage() {
         <div className="flex items-center gap-3" style={{color: 'white'}}>
           <button
             onClick={() => router.push('/map')}
-            className="hover:opacity-70 transition-opacity"
+            className="hover:opacity-70 transition-opacity flex items-center gap-2 font-bold"
           >
-            <ArrowLeft size={24} strokeWidth={1.5} />
+            <ArrowRight size={24} strokeWidth={1.5} />
+            <span>رجوع</span>
           </button>
           <div className="flex items-center gap-2">
             <Clock size={24} strokeWidth={1.5} />
