@@ -146,7 +146,7 @@ export default function ZeroErrorChallengePage() {
           </motion.div>
 
           <h2 className="text-4xl font-bold mb-4 text-center" style={{color: '#ce7b5b'}}>
-            تحدي بلا أخطاء! 🎯
+            تحدي بلا أخطاء! 
           </h2>
 
           <p className="text-xl text-center mb-8 opacity-90">

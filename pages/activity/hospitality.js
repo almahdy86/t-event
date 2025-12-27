@@ -85,7 +85,7 @@ export default function HospitalityPage() {
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push('/map')}
           className="font-bold text-xl px-12 py-4 rounded-full shadow-2xl transition-all hover:bg-[#ce7b5b] hover:text-black"
-          style={{background: '#000000', color: '#ce7b5b'}}
+          style={{background: '#ffffff', color: '#ce7b5b'}}
         >
           عودة للخريطة
         </motion.button>
