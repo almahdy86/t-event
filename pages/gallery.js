@@ -96,7 +96,7 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-cover bg-center bg-fixed relative" style={{backgroundImage: 'url(/bg/newbg.png)'}}>
-      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="fixed inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
       <div className="p-6 shadow-lg sticky top-0 z-10 relative" style={{background: '#000000'}}>
         <div className="container mx-auto">

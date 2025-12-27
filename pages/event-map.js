@@ -114,7 +114,7 @@ export default function EventMapPage() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
-      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
       <div className="shadow-lg p-4 flex items-center justify-between relative z-10" style={{background: '#000000'}}>
         <button

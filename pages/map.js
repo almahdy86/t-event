@@ -203,7 +203,7 @@ export default function MapPage() {
         backgroundAttachment: 'fixed'
       }}
     >
-      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="fixed inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header ثابت */}
       <div className="shadow-lg sticky top-0 z-50 relative" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
         <div className="flex items-center justify-between p-4">

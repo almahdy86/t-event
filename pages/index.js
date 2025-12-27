@@ -126,7 +126,7 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         <div className="text-center relative z-10">
           <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-black font-semibold">جارٍ التحميل...</p>
@@ -145,7 +145,7 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -183,7 +183,7 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -252,7 +252,7 @@ export default function Home() {
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       <div className="flex justify-center py-8 relative z-10">
         <div className="w-32 h-32 relative">
           <Image

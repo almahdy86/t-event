@@ -179,7 +179,7 @@ export default function IdentityMirrorsPage() {
           backgroundRepeat: 'repeat'
         }}
       >
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         <div className="p-4 flex items-center justify-between shadow relative z-10" style={{background: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(201,169,97,0.3)'}}>
           <button
             onClick={() => router.push('/map')}

@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       <div className="flex justify-center py-8 relative z-10">
         <div className="w-32 h-32 relative">
           <Image

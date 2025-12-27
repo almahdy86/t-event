@@ -137,7 +137,7 @@ export default function AdminDashboard() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
-      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="fixed inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
       <div className="p-4 shadow-lg relative z-10" style={{background: '#000000'}}>
         <div className="container mx-auto flex items-center justify-between">

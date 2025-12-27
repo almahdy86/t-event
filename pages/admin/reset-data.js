@@ -79,7 +79,7 @@ export default function ResetData() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         <div className="text-center relative z-10">
           <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-black font-semibold">جارٍ التحميل...</p>
@@ -98,7 +98,7 @@ export default function ResetData() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -135,7 +135,7 @@ export default function ResetData() {
         backgroundAttachment: 'fixed',
         minHeight: '100vh'
       }}>
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         <div className="text-center relative z-10">
           <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-black font-semibold text-xl">جارٍ مسح البيانات...</p>
@@ -154,7 +154,7 @@ export default function ResetData() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
-      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="fixed inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
       <div className="text-white p-4 shadow-lg relative z-10" style={{background: '#d32f2f'}}>
         <div className="container mx-auto flex items-center justify-between">

@@ -40,7 +40,7 @@ export default function FinalePage() {
           backgroundRepeat: 'repeat'
         }}
       >
-        <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
         {/* زر الرجوع */}
         <div className="p-4 relative z-10">
           <button
@@ -80,7 +80,7 @@ export default function FinalePage() {
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="absolute inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="absolute inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* زر الرجوع */}
       <div className="p-4 z-20 relative">
         <button

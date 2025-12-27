@@ -75,7 +75,7 @@ export default function PublicGalleryPage() {
       backgroundAttachment: 'fixed',
       minHeight: '100vh'
     }}>
-      <div className="fixed inset-0 bg-white pointer-events-none" style={{opacity: 0.4}}></div>
+      <div className="fixed inset-0 bg-black pointer-events-none" style={{opacity: 0.4}}></div>
       {/* Header */}
       <div className="w-full mb-6 relative z-10">
         <motion.div
