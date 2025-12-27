@@ -135,7 +135,7 @@ export default function GalleryPage() {
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-12 text-center">
             <Camera size={64} strokeWidth={1.5} className="mx-auto mb-4" style={{color: '#ce7b5b'}} />
             <p className="text-xl" style={{color: '#ce7b5b'}}>لا توجد صور معتمدة بعد</p>
-            <p className="mt-2 text-white">عد لاحقاً لمشاهدة الصور المشاركة</p>
+            <p className="mt-2 text-black">عد لاحقاً لمشاهدة الصور المشاركة</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
