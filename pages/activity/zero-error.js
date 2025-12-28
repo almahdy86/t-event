@@ -155,8 +155,8 @@ export default function ZeroErrorChallengePage() {
             وكن من الفائزين بالجوائز
           </p>
 
-          <div className="bg-white/50 rounded-2xl p-6 w-full max-w-sm">
-            <h3 className="font-bold text-lg mb-3">⏰ انتظر بدء التحدي</h3>
+          <div className="bg-white/20 backdrop-blur rounded-3xl p-8 max-w-md">
+            <h3 className="font-bold text-lg mb-3"> انتظر بدء التحدي</h3>
             <p className="opacity-90">سيتم عرض السؤال قريباً على جميع المشاركين</p>
           </div>
 
@@ -165,7 +165,7 @@ export default function ZeroErrorChallengePage() {
             className="mt-8 text-white/80 hover:text-white flex items-center gap-2"
           >
             التالي: فن الإكرام
-            <ArrowRight size={20} strokeWidth={1.5} />
+            <ArrowLeft size={20} strokeWidth={1.5} />
           </button>
         </div>
       </div>
@@ -190,7 +190,7 @@ export default function ZeroErrorChallengePage() {
             onClick={() => router.push('/map')}
             className="hover:opacity-70 transition-opacity flex items-center gap-2 font-bold"
           >
-            <ArrowRight size={24} strokeWidth={1.5} />
+            <ArrowLeft size={24} strokeWidth={1.5} />
             <span>رجوع</span>
           </button>
           <div className="flex items-center gap-2">
