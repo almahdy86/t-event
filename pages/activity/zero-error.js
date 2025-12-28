@@ -155,7 +155,7 @@ export default function ZeroErrorChallengePage() {
             وكن من الفائزين بالجوائز
           </p>
 
-          <div className="bg-white/20 rounded-2xl p-6 w-full max-w-sm">
+          <div className="bg-white/50 rounded-2xl p-6 w-full max-w-sm">
             <h3 className="font-bold text-lg mb-3">⏰ انتظر بدء التحدي</h3>
             <p className="opacity-90">سيتم عرض السؤال قريباً على جميع المشاركين</p>
           </div>
