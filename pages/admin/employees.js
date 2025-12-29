@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
-import { ArrowRight, Trash2, Search, Users, AlertCircle } from 'lucide-react'
+import { ArrowRight, Trash2, Search, Users, AlertCircle, Download } from 'lucide-react'
 
 export default function EmployeesManagement() {
   const router = useRouter()
@@ -10,6 +10,7 @@ export default function EmployeesManagement() {
   const [searchTerm, setSearchTerm] = useState('')
   const [filterType, setFilterType] = useState('all')
   const [loading, setLoading] = useState(true)
+  const [exporting, setExporting] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('admin_token')
@@ -87,6 +88,36 @@ export default function EmployeesManagement() {
     }
   }
 
+  const exportData = async () => {
+    try {
+      setExporting(true)
+      const token = localStorage.getItem('admin_token')
+
+      const response = await fetch('/api/admin/export', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+
+      if (!response.ok) {
+        throw new Error('فشل التصدير')
+      }
+
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `employees-export-${Date.now()}.zip`
+      document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(url)
+      document.body.removeChild(a)
+    } catch (error) {
+      console.error('خطأ في التصدير:', error)
+      alert('فشل تصدير البيانات')
+    } finally {
+      setExporting(false)
+    }
+  }
+
   const getTypeLabel = (type) => {
     switch(type) {
       case 'مجلس_الإدارة': return 'مجلس الإدارة'
@@ -152,6 +183,28 @@ export default function EmployeesManagement() {
               <p className="text-sm opacity-80">إجمالي: {employees.length} موظف</p>
             </div>
           </div>
+
+          {/* Export Button */}
+          <button
+            onClick={exportData}
+            disabled={exporting || employees.length === 0}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{background: exporting ? '#ce7b5b' : '#ce7b5b'}}
+            onMouseEnter={(e) => !exporting && (e.target.style.background = '#b86a4f')}
+            onMouseLeave={(e) => !exporting && (e.target.style.background = '#ce7b5b')}
+          >
+            {exporting ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                جارٍ التصدير...
+              </>
+            ) : (
+              <>
+                <Download size={20} strokeWidth={1.5} />
+                تصدير البيانات
+              </>
+            )}
+          </button>
         </div>
       </div>
 
