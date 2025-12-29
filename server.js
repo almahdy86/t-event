@@ -10,6 +10,8 @@ const multer = require('multer')
 const sharp = require('sharp')
 const fs = require('fs')
 const path = require('path')
+const archiver = require('archiver')
+const XLSX = require('xlsx')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = '0.0.0.0'  // للعمل في Railway
@@ -877,6 +879,102 @@ app.prepare().then(() => {
     } catch (error) {
       console.error('Error in employee self-deletion:', error)
       res.status(500).json({ success: false, message: error.message })
+    }
+  })
+
+  // Export employees data and photos as ZIP
+  server.get('/api/admin/export', async (req, res) => {
+    try {
+      // جلب جميع الموظفين مع صورهم
+      const employeesResult = await pool.query(`
+        SELECT
+          e.id,
+          e.uid,
+          e.employee_number,
+          e.full_name,
+          e.job_title,
+          e.created_at,
+          COALESCE(json_agg(
+            json_build_object(
+              'id', sp.id,
+              'image_url', sp.image_url,
+              'created_at', sp.created_at
+            )
+            ORDER BY sp.created_at DESC
+          ) FILTER (WHERE sp.id IS NOT NULL), '[]') as photos
+        FROM employees e
+        LEFT JOIN shared_photos sp ON e.id = sp.employee_id AND sp.is_approved = TRUE
+        GROUP BY e.id, e.uid, e.employee_number, e.full_name, e.job_title, e.created_at
+        ORDER BY e.employee_number ASC
+      `)
+
+      const employees = employeesResult.rows
+
+      // إنشاء بيانات Excel
+      const excelData = employees.map(emp => ({
+        'الرقم': emp.employee_number,
+        'الاسم الكامل': emp.full_name,
+        'المسمى الوظيفي': emp.job_title,
+        'UID': emp.uid,
+        'تاريخ التسجيل': new Date(emp.created_at).toLocaleDateString('ar-SA'),
+        'عدد الصور': emp.photos.length
+      }))
+
+      // إنشاء ملف Excel
+      const worksheet = XLSX.utils.json_to_sheet(excelData)
+      const workbook = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'الموظفين')
+      const excelBuffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' })
+
+      // إعداد ZIP archive
+      const archive = archiver('zip', { zlib: { level: 9 } })
+
+      res.setHeader('Content-Type', 'application/zip')
+      res.setHeader('Content-Disposition', `attachment; filename=employees-export-${Date.now()}.zip`)
+
+      archive.pipe(res)
+
+      // إضافة ملف Excel
+      archive.append(excelBuffer, { name: 'employees.xlsx' })
+
+      // إضافة الصور
+      for (const emp of employees) {
+        if (emp.photos && emp.photos.length > 0) {
+          for (let i = 0; i < emp.photos.length; i++) {
+            const photo = emp.photos[i]
+
+            // التعامل مع الصور المخزنة كـ base64
+            if (photo.image_url && photo.image_url.startsWith('data:image')) {
+              const base64Data = photo.image_url.split(',')[1]
+              const imageBuffer = Buffer.from(base64Data, 'base64')
+
+              const sanitizedName = emp.full_name.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g, '_')
+              const fileName = `${emp.employee_number}-${sanitizedName}-${i + 1}.jpg`
+
+              archive.append(imageBuffer, { name: `photos/${fileName}` })
+            }
+            // التعامل مع الصور المخزنة كملفات محلية
+            else if (photo.image_url && photo.image_url.startsWith('/uploads/')) {
+              const filename = photo.image_url.replace('/uploads/', '')
+              const filepath = path.join(uploadsDir, filename)
+
+              if (fs.existsSync(filepath)) {
+                const sanitizedName = emp.full_name.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g, '_')
+                const ext = path.extname(filename)
+                const fileName = `${emp.employee_number}-${sanitizedName}-${i + 1}${ext}`
+
+                archive.file(filepath, { name: `photos/${fileName}` })
+              }
+            }
+          }
+        }
+      }
+
+      await archive.finalize()
+      console.log('✅ Export completed successfully')
+    } catch (error) {
+      console.error('❌ Error in export:', error)
+      res.status(500).json({ success: false, message: 'خطأ في تصدير البيانات' })
     }
   })
 
